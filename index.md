@@ -6,14 +6,14 @@ title: 目录
 ## 笔记
 
 ### Python
-- [装饰器](notes/python/decorator.md)
-- [生成器](notes/python/generator.md)
+- [装饰器](notes/python/decorator)
+- [生成器](notes/python/generator)
 
 ### Git
-- [常用命令](notes/git/commands.md)
+- [常用命令](notes/git/commands)
 
 ### 杂项
-- [待整理](notes/misc/index.md)
+- [待整理](notes/misc/index)
 
 ---
 
