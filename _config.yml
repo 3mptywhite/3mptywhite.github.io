@@ -1,0 +1,31 @@
+title: 我的笔记
+description: 个人笔记与博客
+baseurl: ""
+url: ""
+
+# 使用 GitHub Pages 内置 minima 主题
+theme: minima
+
+# 笔记集合（独立于博客文章）
+collections:
+  notes:
+    output: true
+    permalink: /notes/:path/
+
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: post
+  - scope:
+      path: "_notes"
+    values:
+      layout: page
+
+# 导航
+header_pages:
+  - index.md
+  - about.md
+
+# 时区
+timezone: Asia/Shanghai
