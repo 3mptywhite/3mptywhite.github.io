@@ -1,6 +1,6 @@
 title: 我的笔记
 description: 个人笔记与博客
-baseurl: "/blog"
+baseurl: ""
 url: "https://frankhumingtao.github.io"
 
 # 使用 GitHub Pages 内置 minima 主题
