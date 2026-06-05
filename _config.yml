@@ -1,31 +1,62 @@
-title: 我的笔记
+title: Frank 的笔记本
 description: 个人笔记与博客
-baseurl: ""
+author: Frank
 url: "https://frankhumingtao.github.io"
+baseurl: ""
 
-# 使用 GitHub Pages 内置 minima 主题
-theme: minima
+remote_theme: sighingnow/jekyll-gitbook
 
-# 笔记集合（独立于博客文章）
+# 目录 (TOC)
+toc:
+  enabled: true
+  h_min: 1
+  h_max: 3
+
+# Markdown 渲染
+markdown: kramdown
+kramdown:
+  auto_ids: true
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    guess_lang: true
+
+syntax_highlighter_style: colorful
+
+# 固定链接
+permalink: /posts/:year-:month-:day-:title/
+
+# 集合
 collections:
-  notes:
+  pages:
     output: true
-    permalink: /notes/:path/
+    sort_by: date
+    permalink: /:collection/:path/
+  others:
+    output: true
+    sort_by: date
+    permalink: /:collection/:path/
 
-defaults:
-  - scope:
-      path: "_posts"
-    values:
-      layout: post
-  - scope:
-      path: "_notes"
-    values:
-      layout: page
+ordered_collections:
+  - posts
+  - pages
+  - others
 
-# 导航
-header_pages:
-  - index.md
-  - about.md
+page_width: 800px
 
-# 时区
+destination: ./_site
+incremental: false
+regenerate: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-readme-index
+  - jemoji
+
+exclude:
+  - _drafts
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
 timezone: Asia/Shanghai
