@@ -3,20 +3,17 @@ layout: home
 title: Frank 的笔记本
 ---
 
-欢迎，这里是我的个人笔记和博客。
+## 数学
 
-## 笔记目录
+- [微积分](math/calculus)
+- [概率论](math/probability)
+- [随笔](math/essays)
 
-{% for page in site.pages %}
-- [{{ page.title }}]({{ page.url | relative_url }})
-{% endfor %}
+## AI
 
-## 最近文章
+- [AI 笔记](ai)
+- [概率论](probability)
 
-{% for post in site.posts limit:5 %}
-- [{{ post.title }}]({{ post.url | relative_url }}) — *{{ post.date | date: "%Y-%m-%d" }}*
-{% endfor %}
+## 草稿
 
-{% if site.posts.size == 0 %}
-> 还没有文章，去 `_posts/` 目录下新建 `yyyy-mm-dd-标题.md` 写第一篇吧。
-{% endif %}
+> 你的文章会出现在这里。

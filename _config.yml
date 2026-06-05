@@ -1,5 +1,5 @@
 title: Frank 的笔记本
-description: 个人笔记与博客
+description: 个人笔记
 author: Frank
 url: "https://frankhumingtao.github.io"
 baseurl: ""
@@ -23,24 +23,27 @@ kramdown:
 
 syntax_highlighter_style: colorful
 
-# 固定链接
-permalink: /posts/:year-:month-:day-:title/
-
 # 集合
 collections:
   pages:
     output: true
     sort_by: date
     permalink: /:collection/:path/
-  others:
+  math:
     output: true
-    sort_by: date
+    permalink: /:collection/:path/
+  ai:
+    output: true
+    permalink: /:collection/:path/
+  drafts:
+    output: true
     permalink: /:collection/:path/
 
 ordered_collections:
-  - posts
   - pages
-  - others
+  - math
+  - ai
+  - drafts
 
 page_width: 800px
 
@@ -54,7 +57,6 @@ plugins:
   - jemoji
 
 exclude:
-  - _drafts
   - Gemfile
   - Gemfile.lock
   - README.md
