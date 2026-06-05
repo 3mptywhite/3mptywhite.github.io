@@ -16,30 +16,3 @@ nav_order: 0
   </div>
 </div>
 
----
-
-## 笔记
-
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
-
-<a href="./math/" style="display: block; padding: 16px; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; color: inherit;">
-  <strong>📐 数学</strong>
-  <p style="margin: 4px 0 0; font-size: 0.9em; color: #666;">微积分 · 概率论 · 随笔</p>
-</a>
-
-<a href="./ai/" style="display: block; padding: 16px; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; color: inherit;">
-  <strong>🤖 AI</strong>
-  <p style="margin: 4px 0 0; font-size: 0.9em; color: #666;">AI 相关笔记</p>
-</a>
-
-<a href="./drafts/" style="display: block; padding: 16px; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; color: inherit;">
-  <strong>📝 草稿</strong>
-  <p style="margin: 4px 0 0; font-size: 0.9em; color: #666;">未完成的笔记</p>
-</a>
-
-<a href="./_pages/about/" style="display: block; padding: 16px; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; color: inherit;">
-  <strong>🙂 关于</strong>
-  <p style="margin: 4px 0 0; font-size: 0.9em; color: #666;">了解更多</p>
-</a>
-
-</div>
