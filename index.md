@@ -1,19 +1,9 @@
 ---
-layout: home
+layout: default
 title: Frank 的笔记本
+nav_order: 0
 ---
 
-## 数学
+欢迎，这里是我的个人笔记。
 
-- [微积分](math/calculus)
-- [概率论](math/probability)
-- [随笔](math/essays)
-
-## AI
-
-- [AI 笔记](ai)
-- [概率论](probability)
-
-## 草稿
-
-> 你的文章会出现在这里。
+左侧侧边栏可以快速导航到各个分类。

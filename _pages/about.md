@@ -1,8 +1,7 @@
 ---
-layout: post
+layout: default
 title: 关于
-date: 2026-06-05
-author: Frank
+nav_order: 99
 ---
 
-这里会放关于我的简单介绍。先占个位。
+关于我。

@@ -1,64 +1,44 @@
 title: Frank 的笔记本
 description: 个人笔记
-author: Frank
 url: "https://frankhumingtao.github.io"
 baseurl: ""
 
-remote_theme: sighingnow/jekyll-gitbook
+remote_theme: just-the-docs/just-the-docs
 
-# 目录 (TOC)
-toc:
-  enabled: true
-  h_min: 1
-  h_max: 3
+color_scheme: light
 
-# Markdown 渲染
+# 搜索
+search_enabled: true
+
+# 辅助功能
+aux_links:
+  "GitHub":
+    - "https://github.com/FrankHumingtao/FrankHumingtao.github.io"
+
+# Markdown
 markdown: kramdown
 kramdown:
-  auto_ids: true
   input: GFM
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    guess_lang: true
-
-syntax_highlighter_style: colorful
 
 # 集合
 collections:
   pages:
     output: true
-    sort_by: date
-    permalink: /:collection/:path/
-  math:
-    output: true
-    permalink: /:collection/:path/
-  ai:
-    output: true
-    permalink: /:collection/:path/
-  drafts:
-    output: true
     permalink: /:collection/:path/
 
-ordered_collections:
-  - pages
-  - math
-  - ai
-  - drafts
-
-page_width: 800px
-
-destination: ./_site
-incremental: false
-regenerate: true
-
-plugins:
-  - jekyll-feed
-  - jekyll-readme-index
-  - jemoji
-
+# 排除
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
 
-timezone: Asia/Shanghai
+# 默认布局
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+plugins:
+  - jekyll-feed
