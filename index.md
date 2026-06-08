@@ -1,7 +1,7 @@
 ---
 layout: default
-title: 关于
-nav_order: 0
+title: 首页
+nav_exclude: true
 ---
 
 <div style="display: flex; gap: 32px; align-items: center; flex-wrap: wrap;">
