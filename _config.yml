@@ -5,7 +5,7 @@ baseurl: ""
 
 remote_theme: just-the-docs/just-the-docs
 
-color_scheme: light
+color_scheme: custom
 
 # 搜索
 search_enabled: true
