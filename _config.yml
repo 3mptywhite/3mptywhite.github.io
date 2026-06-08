@@ -1,6 +1,6 @@
 title: " "
 description: 个人笔记
-url: "https://frankhumingtao.github.io"
+url: "https://3mptywhite.github.io"
 baseurl: ""
 
 remote_theme: just-the-docs/just-the-docs
@@ -13,7 +13,7 @@ search_enabled: false
 # 辅助功能
 aux_links:
   "GitHub":
-    - "https://github.com/FrankHumingtao/FrankHumingtao.github.io"
+    - "https://github.com/3mptywhite/3mptywhite.github.io"
 
 # Markdown
 markdown: kramdown
