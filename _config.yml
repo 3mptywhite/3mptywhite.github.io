@@ -13,7 +13,11 @@ search_enabled: false
 # 辅助功能
 aux_links:
   "GitHub":
-    - "https://github.com/3mptywhite/3mptywhite.github.io"
+    - "https://github.com/3mptywhite"
+  "知乎":
+    - "https://www.zhihu.com/people/littlefat-17"
+  "B站":
+    - "https://space.bilibili.com/52475013"
 
 # Markdown
 markdown: kramdown
