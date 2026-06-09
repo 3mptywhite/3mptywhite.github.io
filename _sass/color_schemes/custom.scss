@@ -3,17 +3,22 @@ $btn-primary-color: #2d6eba;
 $sidebar-color: #f8fbff;
 $nav-child-link-color: #2d6eba;
 
+.aux-nav-list {
+  align-items: center;
+  height: 100%;
+}
+
 .aux-icon-link {
   align-items: center;
   border-radius: 3px;
   display: inline-flex;
-  height: 1.95rem;
+  height: 2.1rem;
   justify-content: center;
   line-height: 1;
   opacity: 0.78;
   padding: 0 0.15rem;
   transition: opacity 0.15s ease, transform 0.15s ease;
-  width: 1.95rem;
+  width: 2.1rem;
 }
 
 .aux-icon-link:hover {
@@ -23,12 +28,12 @@ $nav-child-link-color: #2d6eba;
 
 .aux-icon {
   display: block;
-  height: 1.18rem;
-  width: 1.18rem;
+  height: 1.28rem;
+  width: 1.28rem;
 }
 
 .aux-icon-wide {
-  width: 1.34rem;
+  width: 1.45rem;
 }
 
 .profile-photo-wrap {
@@ -51,10 +56,4 @@ $nav-child-link-color: #2d6eba;
 .profile-photo {
   display: block;
   filter: saturate(0.88) contrast(1.03);
-}
-
-@media (min-width: 50rem) {
-  .main-header .aux-nav {
-    margin-top: 1.75rem;
-  }
 }
