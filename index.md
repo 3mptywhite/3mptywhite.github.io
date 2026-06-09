@@ -27,7 +27,7 @@ nav_order: 0
 </div>
 
 <span class="profile-photo-wrap">
-  <img src="https://obsidiannote01-1328204036.cos.ap-shanghai.myqcloud.com/b05f5c2b-b144-4674-b9df-228aa6c524ef.png?imageSlim" width="180" class="profile-photo">
+  <img src="https://obsidiannote01-1328204036.cos.ap-shanghai.myqcloud.com/image-20260609201632254.png?imageSlim" width="180" class="profile-photo">
 </span>
 
 </div>
