@@ -8,6 +8,11 @@ $nav-child-link-color: #2d6eba;
   height: 100%;
 }
 
+.aux-nav-list-item {
+  align-items: center;
+  display: inline-flex;
+}
+
 .aux-icon-link {
   align-items: center;
   border-radius: 3px;
