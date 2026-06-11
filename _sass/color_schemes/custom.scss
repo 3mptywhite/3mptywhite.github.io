@@ -6,6 +6,7 @@ $nav-child-link-color: #2d6eba;
 .brand-title {
   align-items: center;
   display: inline-flex;
+  gap: 0.55rem;
   min-width: 0;
 }
 
@@ -14,9 +15,13 @@ $nav-child-link-color: #2d6eba;
   flex: 0 0 auto;
 }
 
-.brand-wordmark {
-  height: 2.35rem;
-  width: auto;
+.brand-mark {
+  height: 1.7rem;
+  width: 1.7rem;
+}
+
+.brand-name {
+  min-width: 0;
 }
 
 .aux-nav-list {
