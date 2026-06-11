@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" role="img" aria-labelledby="title desc">
+  <title id="title">3mptywhite inline wordmark</title>
+  <desc id="desc">A single-line bold transparent wordmark that reads 3mptywhite.</desc>
+  <text
+    x="4"
+    y="51"
+    fill="#0B0D12"
+    font-family="Arial Black, Impact, system-ui, sans-serif"
+    font-size="48"
+    font-weight="900"
+    letter-spacing="-3.2"
+    stroke="#0B0D12"
+    stroke-width="1.25"
+    paint-order="stroke fill"
+  >3mptywhite</text>
+</svg>
