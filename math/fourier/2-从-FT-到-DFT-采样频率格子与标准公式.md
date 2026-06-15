@@ -3,7 +3,7 @@ layout: default
 title: 2. 从 FT 到 DFT：采样、频率格子与标准公式
 parent: 傅里叶
 grand_parent: 数学
-nav_order: 6
+nav_order: 7
 mathjax: true
 ---
 
