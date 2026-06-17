@@ -16,6 +16,52 @@
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 {% endif %}
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var blocks = Array.prototype.slice.call(
+      document.querySelectorAll('pre > code.language-mermaid, code.language-mermaid')
+    );
+
+    if (!blocks.length) {
+      return;
+    }
+
+    function renderMermaid() {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default',
+        securityLevel: 'strict'
+      });
+
+      blocks.forEach(function (block) {
+        var source = block.textContent;
+        var container = document.createElement('div');
+        container.className = 'mermaid';
+        container.textContent = source;
+
+        var pre = block.closest('pre');
+        var wrapper = pre && pre.parentElement && pre.parentElement.classList.contains('highlight')
+          ? pre.parentElement.parentElement
+          : pre;
+
+        (wrapper || block).replaceWith(container);
+      });
+
+      mermaid.run();
+    }
+
+    if (window.mermaid) {
+      renderMermaid();
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    script.onload = renderMermaid;
+    document.head.appendChild(script);
+  });
+</script>
+
 <style>
   .aux-nav .aux-nav-list {
     align-items: center !important;
