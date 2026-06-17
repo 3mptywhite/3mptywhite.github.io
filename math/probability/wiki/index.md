@@ -56,8 +56,10 @@ mathjax: true
 19. [分布律 PMF](./concepts/分布律-PMF.html)
 20. [两点分布](./concepts/两点分布.html)
 21. [泊松分布](./concepts/泊松分布.html)
-22. [连续型随机变量](./concepts/连续型随机变量.html)
-23. [概率密度 PDF](./concepts/概率密度-PDF.html)
+22. [超几何分布](./concepts/超几何分布.html)
+23. [几何分布](./concepts/几何分布.html)
+24. [连续型随机变量](./concepts/连续型随机变量.html)
+25. [概率密度 PDF](./concepts/概率密度-PDF.html)
 
 ## 页面模板
 
@@ -80,6 +82,5 @@ mathjax: true
 
 下一步学习重点：
 
-1. 泊松分布
-2. 几何分布
-3. 连续型随机变量和概率密度
+1. 连续型随机变量
+2. 概率密度

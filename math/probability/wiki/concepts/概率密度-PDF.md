@@ -3,7 +3,7 @@ layout: default
 title: 概率密度 PDF
 parent: 概率论概念 Wiki
 grand_parent: 概率论
-nav_order: 24
+nav_order: 26
 mathjax: true
 ---
 # 概率密度 PDF
