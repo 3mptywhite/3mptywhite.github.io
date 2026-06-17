@@ -1,20 +1,85 @@
 <link rel="icon" href="{{ '/assets/images/logo-mark.svg' | relative_url }}" type="image/svg+xml">
 
-{% if page.mathjax %}
 <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  document.addEventListener('DOMContentLoaded', function () {
+    var content = document.querySelector('.main-content') || document.body;
+    var text = content ? content.textContent : '';
+    var hasMath = /\\\(|\\\[|\$\$/.test(text);
+
+    if (!hasMath) {
+      return;
     }
-  };
+
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        typeset: false,
+        ready: function () {
+          MathJax.startup.defaultReady();
+          MathJax.typesetPromise();
+        }
+      }
+    };
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  });
 </script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var blocks = Array.prototype.slice.call(
+      document.querySelectorAll('pre > code.language-mermaid, code.language-mermaid')
+    );
+
+    if (!blocks.length) {
+      return;
+    }
+
+    function renderMermaid() {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default',
+        securityLevel: 'strict'
+      });
+
+      blocks.forEach(function (block) {
+        var source = block.textContent;
+        var container = document.createElement('div');
+        container.className = 'mermaid';
+        container.textContent = source;
+
+        var pre = block.closest('pre');
+        var wrapper = pre && pre.parentElement && pre.parentElement.classList.contains('highlight')
+          ? pre.parentElement.parentElement
+          : pre;
+
+        (wrapper || block).replaceWith(container);
+      });
+
+      mermaid.run();
+    }
+
+    if (window.mermaid) {
+      renderMermaid();
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    script.onload = renderMermaid;
+    document.head.appendChild(script);
+  });
+</script>
 
 <style>
   .aux-nav .aux-nav-list {
