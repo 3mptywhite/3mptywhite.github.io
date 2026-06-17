@@ -61,6 +61,7 @@ mathjax: true
 24. [几何分布](./concepts/几何分布.html)
 25. [连续型随机变量](./concepts/连续型随机变量.html)
 26. [概率密度 PDF](./concepts/概率密度-PDF.html)
+27. [指数分布](./concepts/指数分布.html)
 
 ## 页面模板
 
