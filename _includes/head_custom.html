@@ -129,9 +129,10 @@
     outline.className = 'article-outline';
     outline.setAttribute('aria-label', '文章大纲');
 
+    var pageTitle = content.querySelector('h1');
     var title = document.createElement('div');
     title.className = 'article-outline-title';
-    title.textContent = '本文目录';
+    title.textContent = pageTitle ? pageTitle.textContent.trim() : '本文目录';
 
     var list = document.createElement('ul');
     list.className = 'article-outline-list';
@@ -151,7 +152,6 @@
     outline.appendChild(title);
     outline.appendChild(list);
 
-    var pageTitle = content.querySelector('h1');
     if (pageTitle && content.contains(pageTitle)) {
       pageTitle.parentElement.insertBefore(outline, pageTitle.nextSibling);
     } else {
@@ -285,13 +285,7 @@
     }
 
     .article-outline a {
-      border-left: 2px solid transparent;
-      padding: 0.08rem 0 0.08rem 0.6rem;
-    }
-
-    .article-outline a:hover,
-    .article-outline a.is-active {
-      border-left-color: #1f5fbf;
+      padding: 0.08rem 0;
     }
   }
 
