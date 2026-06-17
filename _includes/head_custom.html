@@ -210,6 +210,32 @@
     width: 1.45rem;
   }
 
+  .side-bar {
+    scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+  }
+
+  .side-bar:hover {
+    scrollbar-color: rgba(139, 149, 165, 0.28) transparent;
+  }
+
+  .side-bar::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .side-bar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .side-bar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  .side-bar:hover::-webkit-scrollbar-thumb {
+    background: rgba(139, 149, 165, 0.28);
+  }
+
   .main-content h2,
   .main-content h3 {
     scroll-margin-top: 5rem;
