@@ -19,6 +19,10 @@ $nav-child-link-color: #2d6eba;
   width: 1.7rem;
 }
 
+.brand-name {
+  min-width: 0;
+}
+
 .brand-wordmark {
   height: 2.1rem;
   max-width: min(14rem, calc(100vw - 4rem));
