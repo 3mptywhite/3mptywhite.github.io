@@ -299,6 +299,16 @@
     scroll-margin-top: 5rem;
   }
 
+  .main-content .highlight,
+  .main-content pre {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .main-content .highlight {
+    overflow-x: auto;
+  }
+
   .article-outline {
     display: none;
   }
@@ -344,7 +354,7 @@
     color: #4c78b8;
   }
 
-  @media (min-width: 90rem) {
+  @media (min-width: 102rem) {
     .main {
       position: relative;
     }
@@ -359,7 +369,7 @@
       overflow: auto;
       padding: 0;
       position: fixed;
-      right: max(1.5rem, calc((100vw - 78rem) / 2));
+      right: max(1.5rem, calc((100vw - 101.5rem) / 2 + 1.5rem));
       top: 5.5rem;
       width: 13.5rem;
     }
@@ -373,7 +383,7 @@
     }
   }
 
-  @media (min-width: 96rem) {
+  @media (min-width: 102rem) {
     .main-content-wrap {
       padding-right: 16rem;
     }
