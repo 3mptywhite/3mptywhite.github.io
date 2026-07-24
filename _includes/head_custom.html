@@ -1,4 +1,62 @@
+<script>
+  (function () {
+    var theme = 'light';
+
+    try {
+      var savedTheme = localStorage.getItem('color-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      theme = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : (prefersDark ? 'dark' : 'light');
+    } catch (error) {
+      theme = 'light';
+    }
+
+    document.documentElement.setAttribute('data-color-theme', theme);
+
+    if (window.jtd && typeof window.jtd.setTheme === 'function') {
+      window.jtd.setTheme(theme === 'dark' ? 'custom-dark' : 'custom');
+    }
+  })();
+</script>
+
 <link rel="icon" href="{{ '/assets/images/favicon-top.svg?v=6' | relative_url }}" type="image/svg+xml">
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var toggle = document.getElementById('theme-toggle');
+
+    if (!toggle) {
+      return;
+    }
+
+    function updateToggle(theme) {
+      var label = theme === 'dark' ? '切换到浅色模式' : '切换到深色模式';
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    var currentTheme = document.documentElement.getAttribute('data-color-theme') || 'light';
+    updateToggle(currentTheme);
+
+    toggle.addEventListener('click', function () {
+      var nextTheme = document.documentElement.getAttribute('data-color-theme') === 'dark'
+        ? 'light'
+        : 'dark';
+
+      document.documentElement.setAttribute('data-color-theme', nextTheme);
+      window.jtd.setTheme(nextTheme === 'dark' ? 'custom-dark' : 'custom');
+
+      try {
+        localStorage.setItem('color-theme', nextTheme);
+      } catch (error) {
+        // The selected theme still applies for the current page.
+      }
+
+      updateToggle(nextTheme);
+    });
+  });
+</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
