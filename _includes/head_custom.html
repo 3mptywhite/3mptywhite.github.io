@@ -1,6 +1,22 @@
 <script>
   (function () {
     var theme = 'light';
+    var themeAssetVersion = '{{ site.time | date: "%s" }}';
+
+    window.applySiteTheme = function (nextTheme) {
+      if (!window.jtd || typeof window.jtd.setTheme !== 'function') {
+        return;
+      }
+
+      window.jtd.setTheme(nextTheme === 'dark' ? 'custom-dark' : 'custom');
+
+      var stylesheet = document.querySelector('link[rel="stylesheet"]');
+
+      if (stylesheet) {
+        var stylesheetPath = stylesheet.getAttribute('href').split('?')[0];
+        stylesheet.setAttribute('href', stylesheetPath + '?v=' + themeAssetVersion);
+      }
+    };
 
     try {
       var savedTheme = localStorage.getItem('color-theme');
@@ -14,9 +30,7 @@
 
     document.documentElement.setAttribute('data-color-theme', theme);
 
-    if (window.jtd && typeof window.jtd.setTheme === 'function') {
-      window.jtd.setTheme(theme === 'dark' ? 'custom-dark' : 'custom');
-    }
+    window.applySiteTheme(theme);
   })();
 </script>
 
@@ -45,7 +59,7 @@
         : 'dark';
 
       document.documentElement.setAttribute('data-color-theme', nextTheme);
-      window.jtd.setTheme(nextTheme === 'dark' ? 'custom-dark' : 'custom');
+      window.applySiteTheme(nextTheme);
 
       try {
         localStorage.setItem('color-theme', nextTheme);
