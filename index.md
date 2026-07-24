@@ -9,11 +9,11 @@ nav_order: 0
 <div style="flex: 1; min-width: 200px;">
 
 <p style="font-size: 1.3em; font-weight: 600; margin: 0 0 8px;">
-  胡洺滔
+  emptywhite
 </p>
 
 <p style="font-size: 1.0em; color: #888; margin: 0 0 20px;">
-  技术美术 / 腾讯
+  技术美术 / 游戏鸟类厂
 </p>
 
 <p style="font-size: 1.0em; line-height: 1.8; margin: 0;">
@@ -27,7 +27,7 @@ nav_order: 0
 </div>
 
 <span class="profile-photo-wrap">
-  <img src="https://obsidiannote01-1328204036.cos.ap-shanghai.myqcloud.com/20260609202027962.png?imageSlim" width="180" class="profile-photo">
+  <img src="/assets/images/github-avatar.png" width="180" class="profile-photo" alt="emptywhite 的头像">
 </span>
 
 </div>
