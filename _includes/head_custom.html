@@ -472,12 +472,8 @@
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle {
-    background: linear-gradient(
-      to right,
-      rgba(76, 120, 184, 0.075),
-      rgba(76, 120, 184, 0.018)
-    );
-    border-right: 1px solid rgba(76, 120, 184, 0.2);
+    background: transparent;
+    border-right: 0;
     color: #486b95;
     height: 5.25rem;
     opacity: 0.88;
@@ -486,31 +482,18 @@
 
   [data-color-theme="dark"].sidebar-is-collapsed
     .sidebar-collapse-toggle {
-    background: linear-gradient(
-      to right,
-      rgba(120, 181, 255, 0.08),
-      rgba(120, 181, 255, 0.018)
-    );
-    border-right-color: rgba(120, 181, 255, 0.21);
+    background: transparent;
     color: #c1c8d2;
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle:hover {
-    background: linear-gradient(
-      to right,
-      rgba(76, 120, 184, 0.13),
-      rgba(76, 120, 184, 0.025)
-    );
+    background: transparent;
     opacity: 1;
   }
 
   [data-color-theme="dark"].sidebar-is-collapsed
     .sidebar-collapse-toggle:hover {
-    background: linear-gradient(
-      to right,
-      rgba(120, 181, 255, 0.14),
-      rgba(120, 181, 255, 0.025)
-    );
+    background: transparent;
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle span {
@@ -944,14 +927,40 @@
       height: 1px;
       left: 1rem;
       pointer-events: none;
-      position: absolute;
+      position: fixed;
       right: 1rem;
       top: 3.75rem;
       z-index: 25;
     }
 
+    body::after {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+      content: "";
+      height: 3.75rem;
+      left: 0;
+      pointer-events: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      transition: background-color 0.2s ease;
+      z-index: 24;
+    }
+
     [data-color-theme="dark"] body::before {
       background: rgba(174, 184, 197, 0.22);
+    }
+
+    [data-color-theme="dark"] body::after {
+      background: rgba(18, 18, 18, 0.9);
+    }
+
+    .main-header {
+      background: transparent;
+      position: sticky;
+      top: 0;
+      z-index: 26;
     }
 
     .side-bar {
