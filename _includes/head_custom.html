@@ -425,12 +425,12 @@
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    color: #66758a;
+    color: #5f7390;
     cursor: pointer;
     display: none;
-    height: 3.75rem;
+    height: 5.25rem;
     justify-content: center;
-    opacity: 0.48;
+    opacity: 0.82;
     padding: 0;
     position: fixed;
     transform: translateY(-50%);
@@ -438,15 +438,16 @@
       background-color 0.18s ease,
       border-color 0.18s ease,
       color 0.18s ease,
+      height 0.18s ease,
       left 0.28s ease,
       opacity 0.18s ease,
       width 0.18s ease;
-    width: 1.75rem;
+    width: 2.75rem;
     z-index: 20;
   }
 
   [data-color-theme="dark"] .sidebar-collapse-toggle {
-    color: #9aa4b2;
+    color: #aeb8c6;
   }
 
   .sidebar-collapse-toggle:hover {
@@ -461,29 +462,28 @@
   }
 
   .sidebar-collapse-toggle span {
-    border-bottom: 1.75px solid currentColor;
-    border-left: 1.75px solid currentColor;
+    border-width: 0 0 2.5px 2.5px;
+    border-style: solid;
+    border-color: currentColor;
     display: block;
-    height: 0.44rem;
-    margin-left: 0.18rem;
+    height: 0.625rem;
+    margin-left: 0.25rem;
     transform: rotate(45deg);
     transition: margin 0.2s ease, transform 0.28s ease;
-    width: 0.44rem;
+    width: 0.625rem;
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle {
     background: transparent;
     border-right: 0;
-    color: #486b95;
     height: 5.25rem;
-    opacity: 0.88;
+    opacity: 0.82;
     width: 2.75rem;
   }
 
   [data-color-theme="dark"].sidebar-is-collapsed
     .sidebar-collapse-toggle {
     background: transparent;
-    color: #c1c8d2;
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle:hover {
@@ -497,11 +497,8 @@
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle span {
-    border-width: 0 0 2.5px 2.5px;
-    height: 0.625rem;
     margin-left: -0.25rem;
     transform: rotate(225deg);
-    width: 0.625rem;
   }
 
   .main-content h2,
