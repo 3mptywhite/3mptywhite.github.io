@@ -935,12 +935,23 @@
   @media (min-width: 50rem) {
     .site-header,
     .main-header {
-      border-bottom: 1px solid rgba(72, 91, 112, 0.14);
+      border-bottom: 0;
     }
 
-    [data-color-theme="dark"] .site-header,
-    [data-color-theme="dark"] .main-header {
-      border-bottom-color: rgba(174, 184, 197, 0.22);
+    body::before {
+      background: rgba(72, 91, 112, 0.14);
+      content: "";
+      height: 1px;
+      left: 1rem;
+      pointer-events: none;
+      position: absolute;
+      right: 1rem;
+      top: 3.75rem;
+      z-index: 25;
+    }
+
+    [data-color-theme="dark"] body::before {
+      background: rgba(174, 184, 197, 0.22);
     }
 
     .side-bar {
