@@ -397,7 +397,7 @@
     padding: 0;
     position: fixed;
     transform: translateY(-50%);
-    transition: color 0.18s ease, left 0.28s ease, opacity 0.18s ease;
+    transition: color 0.18s ease, opacity 0.18s ease;
     width: 1.75rem;
     z-index: 20;
   }
@@ -493,10 +493,14 @@
     font-weight: 600;
   }
 
-  .main-content > p,
+  .main-content > p:not(:has(mjx-container[display="true"])),
   .main-content > ul,
   .main-content > ol,
-  .main-content > blockquote {
+  .main-content > blockquote,
+  .main-content > main > p:not(:has(mjx-container[display="true"])),
+  .main-content > main > ul,
+  .main-content > main > ol,
+  .main-content > main > blockquote {
     max-width: 58rem;
   }
 
@@ -674,7 +678,7 @@
 
     .sidebar-collapse-toggle {
       display: inline-flex;
-      left: 14.75rem;
+      left: 0;
       top: clamp(8rem, 34vh, 22rem);
     }
 
@@ -683,19 +687,6 @@
       transform: translateX(-100%);
     }
 
-    .sidebar-is-collapsed .sidebar-collapse-toggle {
-      left: 0;
-    }
-  }
-
-  @media (min-width: 66.5rem) {
-    .sidebar-collapse-toggle {
-      left: max(15.75rem, calc((100vw - 91.5rem) / 2 + 15.75rem));
-    }
-
-    .sidebar-is-collapsed .sidebar-collapse-toggle {
-      left: 0;
-    }
   }
 
   @media (hover: none) and (min-width: 102rem) {
