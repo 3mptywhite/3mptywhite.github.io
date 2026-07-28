@@ -224,6 +224,63 @@
 
     var links = Array.prototype.slice.call(outline.querySelectorAll('a'));
 
+    var interactivePointer = window.matchMedia &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (interactivePointer) {
+      var pointerFrame = null;
+
+      outline.addEventListener('pointermove', function (event) {
+        if (pointerFrame) {
+          cancelAnimationFrame(pointerFrame);
+        }
+
+        pointerFrame = requestAnimationFrame(function () {
+          var outlineRect = outline.getBoundingClientRect();
+          var nearestLink = null;
+          var nearestDistance = Infinity;
+
+          outline.style.setProperty(
+            '--outline-pointer-y',
+            Math.max(0, Math.min(outlineRect.height, event.clientY - outlineRect.top)) + 'px'
+          );
+          outline.classList.add('is-pointer-active');
+
+          links.forEach(function (link) {
+            var linkRect = link.getBoundingClientRect();
+            var distance = Math.abs(
+              event.clientY - (linkRect.top + linkRect.height / 2)
+            );
+
+            if (distance < nearestDistance) {
+              nearestDistance = distance;
+              nearestLink = link;
+            }
+          });
+
+          links.forEach(function (link) {
+            link.classList.toggle(
+              'is-pointer-near',
+              link === nearestLink && nearestDistance < 56
+            );
+          });
+        });
+      });
+
+      outline.addEventListener('pointerleave', function () {
+        if (pointerFrame) {
+          cancelAnimationFrame(pointerFrame);
+          pointerFrame = null;
+        }
+
+        outline.classList.remove('is-pointer-active');
+        links.forEach(function (link) {
+          link.classList.remove('is-pointer-near');
+        });
+      });
+    }
+
     if (!('IntersectionObserver' in window)) {
       return;
     }
@@ -587,7 +644,37 @@
   }
 
   .article-outline {
+    --outline-accent-rgb: 76, 120, 184;
+    --outline-pointer-y: 50%;
     display: none;
+  }
+
+  [data-color-theme="dark"] .article-outline {
+    --outline-accent-rgb: 120, 181, 255;
+  }
+
+  .article-outline::after {
+    background: radial-gradient(
+      8rem circle at calc(100% - 0.25rem) var(--outline-pointer-y),
+      rgba(var(--outline-accent-rgb), 0.11),
+      transparent 72%
+    );
+    content: "";
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 0.24s ease;
+    z-index: 0;
+  }
+
+  .article-outline.is-pointer-active::after {
+    opacity: 1;
+  }
+
+  .article-outline > * {
+    position: relative;
+    z-index: 1;
   }
 
   .article-outline-title {
@@ -600,7 +687,8 @@
     overflow: hidden;
     text-align: right;
     text-overflow: ellipsis;
-    transition: opacity 0.16s ease 0s;
+    transform: translateX(0.25rem);
+    transition: opacity 0.18s ease 0s, transform 0.22s ease;
     white-space: nowrap;
   }
 
@@ -634,6 +722,8 @@
     justify-content: flex-start;
     overflow-wrap: anywhere;
     text-align: right;
+    transform: translateX(0);
+    transition: color 0.18s ease, opacity 0.18s ease, transform 0.22s ease;
     white-space: nowrap;
     text-decoration: none;
     width: 100%;
@@ -644,7 +734,8 @@
     overflow: hidden;
     pointer-events: none;
     text-overflow: ellipsis;
-    transition: opacity 0.16s ease 0s;
+    transform: translateX(0.25rem);
+    transition: opacity 0.18s ease 0s, transform 0.22s ease;
   }
 
   .article-outline a::before {
@@ -668,8 +759,20 @@
   }
 
   .article-outline a:hover,
+  .article-outline a.is-pointer-near,
   .article-outline a.is-active {
     color: #4c78b8;
+  }
+
+  [data-color-theme="dark"] .article-outline a:hover,
+  [data-color-theme="dark"] .article-outline a.is-pointer-near,
+  [data-color-theme="dark"] .article-outline a.is-active {
+    color: #78b5ff;
+  }
+
+  .article-outline a:hover,
+  .article-outline a.is-pointer-near {
+    transform: translateX(-0.35rem);
   }
 
   @media (min-width: 66.5rem) {
@@ -727,6 +830,13 @@
     .article-outline:focus-within .article-outline-link-label {
       opacity: 1;
       transition-delay: 0.08s;
+    }
+
+    .article-outline:hover .article-outline-title,
+    .article-outline:focus-within .article-outline-title,
+    .article-outline:hover .article-outline-link-label,
+    .article-outline:focus-within .article-outline-link-label {
+      transform: translateX(0);
     }
 
     .article-outline-title {
