@@ -419,6 +419,10 @@
     background: rgba(139, 149, 165, 0.28);
   }
 
+  .site-footer {
+    display: none;
+  }
+
   .sidebar-collapse-toggle {
     align-items: center;
     background: transparent;
@@ -1104,7 +1108,7 @@
       display: inline-flex;
       height: 2.75rem;
       left: calc(24rem - 3rem);
-      opacity: 1;
+      opacity: 0;
       top: 3.75rem;
       width: 2.75rem;
       z-index: 27;
@@ -1112,6 +1116,10 @@
 
     [data-color-theme="dark"] .sidebar-collapse-toggle {
       background: #121212;
+    }
+
+    body:has(.side-bar:hover) .sidebar-collapse-toggle {
+      opacity: 1;
     }
 
     .sidebar-collapse-toggle:hover {
