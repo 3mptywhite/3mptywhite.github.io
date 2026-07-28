@@ -1099,9 +1099,21 @@
     }
 
     .sidebar-collapse-toggle {
+      border-radius: 0.75rem;
       display: inline-flex;
-      left: 24rem;
-      top: clamp(8rem, 34vh, 22rem);
+      height: 2.75rem;
+      left: calc(24rem - 3rem);
+      opacity: 0.58;
+      top: 1.875rem;
+      width: 2.75rem;
+    }
+
+    .sidebar-collapse-toggle:hover {
+      background: rgba(45, 110, 186, 0.06);
+    }
+
+    [data-color-theme="dark"] .sidebar-collapse-toggle:hover {
+      background: rgba(120, 181, 255, 0.07);
     }
 
     .sidebar-is-collapsed .side-bar {
@@ -1110,7 +1122,12 @@
     }
 
     .sidebar-is-collapsed .sidebar-collapse-toggle {
+      border-radius: 0;
+      height: 5.25rem;
       left: 0;
+      opacity: 0.82;
+      top: clamp(8rem, 34vh, 22rem);
+      width: 2.75rem;
     }
 
   }
