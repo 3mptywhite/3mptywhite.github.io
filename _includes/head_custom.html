@@ -645,7 +645,23 @@
 
   @media (min-width: 66.5rem) {
     .side-bar + .main {
-      margin-left: max(16.5rem, calc((100vw - 75rem) / 2));
+      margin-left: max(16.5rem, calc((100vw - 58rem) / 2));
+      max-width: 58rem;
+      width: calc(100vw - 16.5rem);
+    }
+
+    .main-content-wrap {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  @media (min-width: 91.5rem) {
+    .breadcrumb-nav,
+    .main-content > main > h1 {
+      margin-left: -8.5rem;
+      max-width: 75rem;
+      width: 75rem;
     }
   }
 
@@ -703,7 +719,7 @@
 
   @media (min-width: 102rem) {
     .main-content-wrap {
-      padding-right: 5rem;
+      padding-right: 0;
     }
   }
 
@@ -780,7 +796,7 @@
     }
 
     .main-content-wrap {
-      padding-right: 2rem;
+      padding-right: 0;
     }
   }
 
