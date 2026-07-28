@@ -519,10 +519,17 @@
     width: 100%;
   }
 
+  .main-content .highlighter-rouge,
   .main-content .highlight,
-  .main-content pre {
+  .main-content pre,
+  .main-content .table-wrapper {
     box-sizing: border-box;
-    max-width: 100%;
+    max-width: 58rem;
+  }
+
+  .main-content .highlighter-rouge,
+  .main-content .table-wrapper {
+    width: 100%;
   }
 
   .main-content pre {
@@ -540,6 +547,14 @@
 
   .main-content .highlight {
     overflow-x: auto;
+  }
+
+  .main-content .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .main-content .table-wrapper > table {
+    min-width: 100%;
   }
 
   .article-outline {
