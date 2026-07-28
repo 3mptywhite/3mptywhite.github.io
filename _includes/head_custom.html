@@ -935,7 +935,12 @@
   @media (min-width: 50rem) {
     .site-header,
     .main-header {
-      border-bottom: 0;
+      border-bottom: 1px solid rgba(72, 91, 112, 0.14);
+    }
+
+    [data-color-theme="dark"] .site-header,
+    [data-color-theme="dark"] .main-header {
+      border-bottom-color: rgba(174, 184, 197, 0.22);
     }
 
     .side-bar {
