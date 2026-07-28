@@ -460,6 +460,35 @@
     opacity: 1;
   }
 
+  .sidebar-collapse-toggle::before {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      currentColor 18%,
+      currentColor 41%,
+      transparent 41%,
+      transparent 59%,
+      currentColor 59%,
+      currentColor 82%,
+      transparent
+    );
+    content: "";
+    height: 8rem;
+    left: 50%;
+    opacity: 0.26;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: height 0.28s ease, opacity 0.18s ease;
+    width: 1px;
+  }
+
+  .sidebar-collapse-toggle:hover::before,
+  .sidebar-collapse-toggle:focus-visible::before {
+    opacity: 0.48;
+  }
+
   .sidebar-collapse-toggle span {
     border-bottom: 1.75px solid currentColor;
     border-left: 1.75px solid currentColor;
@@ -472,12 +501,8 @@
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle {
-    background: linear-gradient(
-      to right,
-      rgba(76, 120, 184, 0.075),
-      rgba(76, 120, 184, 0.018)
-    );
-    border-right: 1px solid rgba(76, 120, 184, 0.2);
+    background: transparent;
+    border-right: 0;
     color: #486b95;
     height: 5.25rem;
     opacity: 0.88;
@@ -486,31 +511,23 @@
 
   [data-color-theme="dark"].sidebar-is-collapsed
     .sidebar-collapse-toggle {
-    background: linear-gradient(
-      to right,
-      rgba(120, 181, 255, 0.08),
-      rgba(120, 181, 255, 0.018)
-    );
-    border-right-color: rgba(120, 181, 255, 0.21);
+    background: transparent;
     color: #c1c8d2;
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle:hover {
-    background: linear-gradient(
-      to right,
-      rgba(76, 120, 184, 0.13),
-      rgba(76, 120, 184, 0.025)
-    );
+    background: transparent;
     opacity: 1;
   }
 
   [data-color-theme="dark"].sidebar-is-collapsed
     .sidebar-collapse-toggle:hover {
-    background: linear-gradient(
-      to right,
-      rgba(120, 181, 255, 0.14),
-      rgba(120, 181, 255, 0.025)
-    );
+    background: transparent;
+  }
+
+  .sidebar-is-collapsed .sidebar-collapse-toggle::before {
+    height: 9rem;
+    opacity: 0.34;
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle span {
