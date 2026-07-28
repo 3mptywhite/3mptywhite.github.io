@@ -462,15 +462,34 @@
   }
 
   .sidebar-collapse-toggle span {
-    border-width: 0 0 2.5px 2.5px;
-    border-style: solid;
-    border-color: currentColor;
     display: block;
-    height: 0.625rem;
+    height: 0.75rem;
     margin-left: 0.25rem;
-    transform: rotate(45deg);
+    position: relative;
+    transform: scaleX(1);
     transition: margin 0.2s ease, transform 0.28s ease;
+    width: 0.75rem;
+  }
+
+  .sidebar-collapse-toggle span::before,
+  .sidebar-collapse-toggle span::after {
+    background: currentColor;
+    border-radius: 999px;
+    content: "";
+    height: 2.5px;
+    left: 0.0625rem;
+    position: absolute;
+    top: 50%;
+    transform-origin: left center;
     width: 0.625rem;
+  }
+
+  .sidebar-collapse-toggle span::before {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  .sidebar-collapse-toggle span::after {
+    transform: translateY(-50%) rotate(45deg);
   }
 
   .sidebar-is-collapsed .sidebar-collapse-toggle {
@@ -498,7 +517,7 @@
 
   .sidebar-is-collapsed .sidebar-collapse-toggle span {
     margin-left: -0.25rem;
-    transform: rotate(225deg);
+    transform: scaleX(-1);
   }
 
   .main-content h2,
