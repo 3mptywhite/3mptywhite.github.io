@@ -79,6 +79,16 @@
   display: block;
 }
 
+[data-color-theme="dark"] .aux-icon-link,
+[data-color-theme="dark"] .theme-toggle {
+  opacity: 0.5;
+}
+
+[data-color-theme="dark"] .aux-icon-link:hover,
+[data-color-theme="dark"] .theme-toggle:hover {
+  opacity: 0.78;
+}
+
 .aux-icon {
   display: block;
   height: 1.28rem;

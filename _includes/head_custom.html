@@ -563,7 +563,7 @@
 
   .article-outline-title {
     color: #8b95a5;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0;
     margin-bottom: 0.6rem;
@@ -583,7 +583,7 @@
 
   .article-outline-item {
     line-height: 1.35;
-    margin: 0.4rem 0;
+    margin: 0.48rem 0;
   }
 
   .article-outline-item::before {
@@ -600,7 +600,7 @@
     color: #9aa3b1;
     display: flex;
     flex-direction: row-reverse;
-    font-size: 0.9rem;
+    font-size: 1.125rem;
     gap: 0.7rem;
     justify-content: flex-start;
     overflow-wrap: anywhere;
@@ -645,9 +645,9 @@
 
   @media (min-width: 66.5rem) {
     .side-bar + .main {
-      margin-left: max(19rem, calc((100vw - 58rem) / 2));
+      margin-left: max(24rem, calc((100vw - 58rem) / 2));
       max-width: 58rem;
-      width: calc(100vw - 19rem);
+      width: calc(100vw - 24rem);
     }
 
     .main-content-wrap {
@@ -656,7 +656,7 @@
     }
   }
 
-  @media (min-width: 102rem) {
+  @media (min-width: 108rem) {
     .main {
       position: relative;
     }
@@ -689,7 +689,7 @@
 
     .article-outline:hover,
     .article-outline:focus-within {
-      width: 16rem;
+      width: 20rem;
     }
 
     .article-outline:hover .article-outline-title,
@@ -709,7 +709,7 @@
     }
   }
 
-  @media (min-width: 102rem) {
+  @media (min-width: 108rem) {
     .main-content-wrap {
       padding-right: 0;
     }
@@ -727,10 +727,10 @@
         linear-gradient(
           to right,
           #f8fbff 0,
-          #f8fbff calc(19rem - 1px),
-          rgba(72, 91, 112, 0.12) calc(19rem - 1px),
-          rgba(72, 91, 112, 0.12) 19rem,
-          transparent 19rem
+          #f8fbff calc(24rem - 1px),
+          rgba(72, 91, 112, 0.12) calc(24rem - 1px),
+          rgba(72, 91, 112, 0.12) 24rem,
+          transparent 24rem
         );
       border-right: 0;
       transition: transform 0.28s ease;
@@ -740,17 +740,17 @@
       background:
         linear-gradient(
           to right,
-          #27262b 0,
-          #27262b calc(19rem - 1px),
-          #44434d calc(19rem - 1px),
-          #44434d 19rem,
-          transparent 19rem
+          #121212 0,
+          #121212 calc(24rem - 1px),
+          #2b2b2b calc(24rem - 1px),
+          #2b2b2b 24rem,
+          transparent 24rem
         );
     }
 
     .site-nav,
     .site-footer {
-      width: 19rem;
+      width: 24rem;
     }
 
     .site-nav .nav-list-link {
@@ -762,7 +762,7 @@
 
     .sidebar-collapse-toggle {
       display: inline-flex;
-      left: 19rem;
+      left: 24rem;
       top: clamp(8rem, 34vh, 22rem);
     }
 
@@ -777,7 +777,7 @@
 
   }
 
-  @media (hover: none) and (min-width: 102rem) {
+  @media (hover: none) and (min-width: 108rem) {
     .article-outline {
       background: transparent;
       border: 0;
