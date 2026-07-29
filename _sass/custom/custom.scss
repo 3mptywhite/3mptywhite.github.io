@@ -164,7 +164,7 @@
 
 .main-content.article-page .article-title {
   color: #17202a;
-  font-size: clamp(3.35rem, 2.2rem + 3.2vw, 5.9rem);
+  font-size: clamp(3.35rem, calc(2.2rem + 3.2vw), 5.9rem);
   font-weight: 500;
   letter-spacing: -0.055em;
   line-height: 1.03;
@@ -228,7 +228,7 @@
 .article-page > main > h1:first-of-type + p {
   color: #4b5563;
   font-family: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
-  font-size: clamp(1.25rem, 1.12rem + 0.35vw, 1.5rem);
+  font-size: clamp(1.25rem, calc(1.12rem + 0.35vw), 1.5rem);
   line-height: 1.75;
   margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
 }
