@@ -1,5 +1,6 @@
 ---
 layout: default
+date: 2026-06-17
 title: 为什么写作 X~B(1,p)：分布记号和参数的含义
 parent: 概率论学习札记
 grand_parent: 概率论

@@ -1,5 +1,6 @@
 ---
 layout: default
+date: 2026-07-27
 title: Midjourney 官方生图参数整理
 parent: Midjourney
 grand_parent: AIGC

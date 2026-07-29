@@ -1,5 +1,6 @@
 ---
 layout: default
+date: 2026-06-17
 title: 为什么指数分布里会出现 N(x) 和 lambda x
 parent: 概率论学习札记
 grand_parent: 概率论

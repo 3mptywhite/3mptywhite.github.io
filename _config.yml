@@ -2,6 +2,11 @@ title: 3mptywhite
 description: 个人笔记
 url: "https://3mptywhite.github.io"
 baseurl: ""
+lang: zh-CN
+
+author:
+  name: 3mptywhite
+  avatar: /assets/images/github-avatar.png
 
 remote_theme: just-the-docs/just-the-docs
 

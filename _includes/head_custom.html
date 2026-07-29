@@ -189,7 +189,7 @@
     outline.className = 'article-outline';
     outline.setAttribute('aria-label', '文章大纲');
 
-    var pageTitle = content.querySelector('h1');
+    var pageTitle = content.querySelector('.article-title') || content.querySelector('h1');
     var title = document.createElement('div');
     title.className = 'article-outline-title';
     title.textContent = pageTitle ? pageTitle.textContent.trim() : '本文目录';
@@ -216,7 +216,9 @@
     outline.appendChild(title);
     outline.appendChild(list);
 
-    if (pageTitle && content.contains(pageTitle)) {
+    if (content.classList.contains('article-page')) {
+      content.appendChild(outline);
+    } else if (pageTitle && content.contains(pageTitle)) {
       pageTitle.parentElement.insertBefore(outline, pageTitle.nextSibling);
     } else {
       content.insertBefore(outline, content.firstChild);

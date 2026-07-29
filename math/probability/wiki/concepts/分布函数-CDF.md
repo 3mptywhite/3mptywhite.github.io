@@ -1,5 +1,6 @@
 ---
 layout: default
+date: 2026-06-17
 title: 分布函数 CDF
 parent: 概率论概念 Wiki
 grand_parent: 概率论

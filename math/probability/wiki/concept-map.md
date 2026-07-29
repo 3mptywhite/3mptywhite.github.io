@@ -1,5 +1,6 @@
 ---
 layout: default
+date: 2026-06-17
 title: 概率论概念地图
 parent: 概率论概念 Wiki
 grand_parent: 概率论
