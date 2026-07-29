@@ -1,74 +1,89 @@
-.brand-title {
-  align-items: center;
-  display: inline-flex;
-  min-width: 0;
-  width: 100%;
-}
-
-.brand-logo {
-  display: block;
-  flex: 0 0 auto;
-}
-
-.brand-mark {
-  height: 1.7rem;
-  width: 1.7rem;
-}
-
-.brand-name {
-  color: #1f5fa8;
-  font-family: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
-  font-size: 1.45rem;
+.site-wordmark {
+  color: #1f2933;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0;
-  min-width: 0;
-}
-
-.brand-wordmark {
-  height: 1.7rem;
-  max-width: min(14rem, calc(100vw - 4rem));
-  width: auto;
+  letter-spacing: -0.035em;
+  transition: color 0.16s ease, opacity 0.16s ease;
 }
 
 .site-title:hover {
   background-image: none;
 }
 
-.header-about-link {
+[data-color-theme="dark"] .site-wordmark {
+  color: #f0f2f5;
+}
+
+.site-title:hover .site-wordmark {
+  color: #2d6eba;
+}
+
+[data-color-theme="dark"] .site-title:hover .site-wordmark {
+  color: #a9d2ff;
+}
+
+.header-primary-nav {
+  align-items: center;
+  display: flex;
+  gap: 0.15rem;
+  height: 100%;
+  padding-left: 0.65rem;
+  white-space: nowrap;
+}
+
+.header-primary-link {
   align-items: center;
   color: #667085;
   display: inline-flex;
-  font-size: 0.875rem;
-  gap: 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
   height: 100%;
-  letter-spacing: 0.03em;
-  padding: 0 1rem;
+  letter-spacing: 0.01em;
+  padding: 0 0.7rem;
+  position: relative;
   text-decoration: none;
   transition: color 0.16s ease;
 }
 
-.header-about-link:hover,
-.header-about-link:focus-visible,
-.header-about-link.is-active {
-  color: #2d6eba;
-}
-
-.header-about-mark {
+.header-primary-link::after {
   background: currentColor;
-  border-radius: 50%;
-  height: 0.32rem;
-  opacity: 0.72;
-  width: 0.32rem;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  left: 0.7rem;
+  opacity: 0;
+  position: absolute;
+  right: 0.7rem;
+  transform: scaleX(0.4);
+  transition: opacity 0.16s ease, transform 0.16s ease;
 }
 
-[data-color-theme="dark"] .header-about-link {
-  color: #939ba8;
+.header-primary-link:hover,
+.header-primary-link:focus-visible {
+  color: #344054;
 }
 
-[data-color-theme="dark"] .header-about-link:hover,
-[data-color-theme="dark"] .header-about-link:focus-visible,
-[data-color-theme="dark"] .header-about-link.is-active {
-  color: #a9d2ff;
+.header-primary-link.is-active {
+  color: #1f2933;
+}
+
+.header-primary-link.is-active::after {
+  opacity: 0.75;
+  transform: scaleX(1);
+}
+
+[data-color-theme="dark"] .header-primary-link {
+  color: #8f98a5;
+}
+
+[data-color-theme="dark"] .header-primary-link:hover,
+[data-color-theme="dark"] .header-primary-link:focus-visible {
+  color: #d6dae0;
+}
+
+[data-color-theme="dark"] .header-primary-link.is-active {
+  color: #f0f2f5;
 }
 
 .aux-nav-list {
@@ -350,10 +365,6 @@
 }
 
 @media (max-width: 49.99rem) {
-  .header-about-link {
-    display: none;
-  }
-
   .main-content.about-page > main {
     padding-top: 1.5rem;
   }
@@ -386,5 +397,22 @@
 
   .article-page > main > h2 {
     margin-top: 4rem;
+  }
+}
+
+@media (min-width: 50rem) and (max-width: 72rem) {
+  .header-primary-link {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .header-primary-link::after {
+    left: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .header-primary-link:nth-child(4),
+  .header-primary-link:nth-child(5) {
+    display: none;
   }
 }
