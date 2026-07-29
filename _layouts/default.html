@@ -8,10 +8,14 @@ layout: table_wrappers
 {% assign is_article = false %}
 {% if page.article == true %}
   {% assign is_article = true %}
-{% elsif page.article != false and page.name != "index.md" and page.title %}
+{% elsif page.article != false and page.date %}
   {% assign is_article = true %}
 {% endif %}
-<body{% if is_article %} class="article-view"{% endif %}>
+{% assign is_collection = false %}
+{% if is_article == false and page.has_children == true %}
+  {% assign is_collection = true %}
+{% endif %}
+<body{% if is_article %} class="article-view"{% elsif is_collection %} class="collection-view"{% endif %}>
   <a class="skip-to-main" href="#main-content">跳到正文</a>
   {% include icons/icons.html %}
   {% if page.nav_enabled == true %}
@@ -24,10 +28,10 @@ layout: table_wrappers
   <div class="main" id="top">
     {% include components/header.html %}
     <div class="main-content-wrap">
-      {% unless is_article %}
+      {% if is_article == false and is_collection == false %}
         {% include components/breadcrumbs.html %}
-      {% endunless %}
-      <div id="main-content" class="main-content{% if is_article %} article-page{% endif %}">
+      {% endif %}
+      <div id="main-content" class="main-content{% if is_article %} article-page{% elsif is_collection %} collection-page{% endif %}">
         {% if is_article %}
           {% assign article_category = page.grand_parent | default: page.parent %}
           {% assign author_name = page.author | default: site.author.name | default: site.title %}
@@ -58,6 +62,13 @@ layout: table_wrappers
               <span class="article-meta-separator" aria-hidden="true"></span>
               <span>约 {{ reading_minutes }} 分钟阅读</span>
             </div>
+          </header>
+        {% elsif is_collection %}
+          <header class="collection-hero">
+            {% if page.parent %}
+              <p class="collection-kicker">{{ page.parent }}</p>
+            {% endif %}
+            <h1 class="collection-title">{{ page.title }}</h1>
           </header>
         {% endif %}
         <main>
