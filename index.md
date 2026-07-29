@@ -2,6 +2,7 @@
 layout: default
 title: 关于
 nav_order: 0
+about_page: true
 ---
 
 <div style="display: flex; gap: 32px; align-items: center; flex-wrap: wrap;">

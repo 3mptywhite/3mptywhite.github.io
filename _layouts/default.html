@@ -15,7 +15,11 @@ layout: table_wrappers
 {% if is_article == false and page.has_children == true %}
   {% assign is_collection = true %}
 {% endif %}
-<body{% if is_article %} class="article-view"{% elsif is_collection %} class="collection-view"{% endif %}>
+{% assign is_about = false %}
+{% if page.about_page == true %}
+  {% assign is_about = true %}
+{% endif %}
+<body{% if is_article %} class="article-view"{% elsif is_collection %} class="collection-view"{% elsif is_about %} class="about-view"{% endif %}>
   <a class="skip-to-main" href="#main-content">跳到正文</a>
   {% include icons/icons.html %}
   {% if page.nav_enabled == true %}
@@ -31,7 +35,7 @@ layout: table_wrappers
       {% if is_article == false and is_collection == false %}
         {% include components/breadcrumbs.html %}
       {% endif %}
-      <div id="main-content" class="main-content{% if is_article %} article-page{% elsif is_collection %} collection-page{% endif %}">
+      <div id="main-content" class="main-content{% if is_article %} article-page{% elsif is_collection %} collection-page{% elsif is_about %} about-page{% endif %}">
         {% if is_article %}
           {% assign article_category = page.grand_parent | default: page.parent %}
           {% assign author_name = page.author | default: site.author.name | default: site.title %}

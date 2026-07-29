@@ -1,0 +1,14 @@
+<div id="main-header" class="main-header">
+  <a
+    href="{{ '/' | relative_url }}"
+    class="header-about-link{% if page.about_page %} is-active{% endif %}"
+    {% if page.about_page %}aria-current="page"{% endif %}
+  >
+    <span aria-hidden="true" class="header-about-mark"></span>
+    <span>关于</span>
+  </a>
+  {% include header_custom.html %}
+  {% if site.aux_links %}
+    {% include components/aux_nav.html %}
+  {% endif %}
+</div>
