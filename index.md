@@ -9,8 +9,8 @@ about_page: true
 
 <div style="flex: 1; min-width: 200px;">
 
-<p style="font-size: 1.3em; font-weight: 600; margin: 0 0 8px;">
-  emptywhite
+<p class="about-profile-name">
+  3mptywhite
 </p>
 
 <p style="font-size: 1.0em; color: #888; margin: 0 0 20px;">
@@ -28,7 +28,7 @@ about_page: true
 </div>
 
 <span class="profile-photo-wrap">
-  <img src="/assets/images/github-avatar.png" width="180" class="profile-photo" alt="emptywhite 的头像">
+  <img src="/assets/images/github-avatar.png" width="180" class="profile-photo" alt="3mptywhite 的头像">
 </span>
 
 </div>

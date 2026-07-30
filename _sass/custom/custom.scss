@@ -318,7 +318,20 @@
 }
 
 .main-content.about-page > main {
-  padding-top: clamp(2.25rem, 4vw, 3.5rem);
+  padding-top: clamp(8rem, 12vw, 11rem);
+}
+
+.about-profile-name {
+  color: #202832;
+  font-size: clamp(2.15rem, calc(1.8rem + 1vw), 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+[data-color-theme="dark"] .about-profile-name {
+  color: #f0f2f5;
 }
 
 .main-content.article-page {
@@ -513,7 +526,7 @@
   }
 
   .main-content.about-page > main {
-    padding-top: 1.5rem;
+    padding-top: 4rem;
   }
 
   .article-page .article-hero,
