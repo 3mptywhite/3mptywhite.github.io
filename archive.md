@@ -7,7 +7,7 @@ has_toc: false
 archive_page: true
 ---
 
-{% assign articles = site.pages | where_exp: "item", "item.date" | sort: "date" | reverse %}
+{% assign articles = site.html_pages | where_exp: "item", "item.date" | sort: "date" | reverse %}
 {% assign current_year = "" %}
 
 <header class="index-page-hero">

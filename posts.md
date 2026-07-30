@@ -7,7 +7,7 @@ has_toc: false
 posts_page: true
 ---
 
-{% assign articles = site.pages | where_exp: "item", "item.date" | sort: "date" | reverse %}
+{% assign articles = site.html_pages | where_exp: "item", "item.date" | sort: "date" | reverse %}
 
 <header class="index-page-hero">
   <p class="index-page-kicker">WRITING</p>

@@ -1,6 +1,11 @@
 <div id="main-header" class="main-header">
   <nav class="header-primary-nav" aria-label="站点页面">
     <a
+      href="{{ '/' | relative_url }}"
+      class="header-primary-link{% if page.about_page %} is-active{% endif %}"
+      {% if page.about_page %}aria-current="page"{% endif %}
+    >关于</a>
+    <a
       href="{{ '/posts/' | relative_url }}"
       class="header-primary-link{% if page.posts_page %} is-active{% endif %}"
       {% if page.posts_page %}aria-current="page"{% endif %}
@@ -10,11 +15,6 @@
       class="header-primary-link{% if page.archive_page %} is-active{% endif %}"
       {% if page.archive_page %}aria-current="page"{% endif %}
     >Archive</a>
-    <a
-      href="{{ '/' | relative_url }}"
-      class="header-primary-link{% if page.about_page %} is-active{% endif %}"
-      {% if page.about_page %}aria-current="page"{% endif %}
-    >关于</a>
   </nav>
   {% include header_custom.html %}
   {% if site.aux_links %}
