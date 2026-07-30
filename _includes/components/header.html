@@ -1,30 +1,20 @@
 <div id="main-header" class="main-header">
-  <nav class="header-primary-nav" aria-label="主要页面">
+  <nav class="header-primary-nav" aria-label="站点页面">
+    <a
+      href="{{ '/posts/' | relative_url }}"
+      class="header-primary-link{% if page.posts_page %} is-active{% endif %}"
+      {% if page.posts_page %}aria-current="page"{% endif %}
+    >Posts</a>
+    <a
+      href="{{ '/archive/' | relative_url }}"
+      class="header-primary-link{% if page.archive_page %} is-active{% endif %}"
+      {% if page.archive_page %}aria-current="page"{% endif %}
+    >Archive</a>
     <a
       href="{{ '/' | relative_url }}"
       class="header-primary-link{% if page.about_page %} is-active{% endif %}"
       {% if page.about_page %}aria-current="page"{% endif %}
     >关于</a>
-    <a
-      href="{{ '/math/' | relative_url }}"
-      class="header-primary-link{% if page.url contains '/math/' %} is-active{% endif %}"
-      {% if page.url contains '/math/' %}aria-current="page"{% endif %}
-    >数学</a>
-    <a
-      href="{{ '/rendering/' | relative_url }}"
-      class="header-primary-link{% if page.url contains '/rendering/' %} is-active{% endif %}"
-      {% if page.url contains '/rendering/' %}aria-current="page"{% endif %}
-    >图形渲染</a>
-    <a
-      href="{{ '/ai/' | relative_url }}"
-      class="header-primary-link{% if page.url contains '/ai/' %} is-active{% endif %}"
-      {% if page.url contains '/ai/' %}aria-current="page"{% endif %}
-    >AI</a>
-    <a
-      href="{{ '/aigc/' | relative_url }}"
-      class="header-primary-link{% if page.url contains '/aigc/' %} is-active{% endif %}"
-      {% if page.url contains '/aigc/' %}aria-current="page"{% endif %}
-    >AIGC</a>
   </nav>
   {% include header_custom.html %}
   {% if site.aux_links %}
