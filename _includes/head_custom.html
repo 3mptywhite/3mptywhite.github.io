@@ -938,13 +938,22 @@
   }
 
   /* Keep sidebar labels on one line at every viewport width. */
+  .site-nav,
+  .site-nav .nav-list,
+  .site-nav .nav-list-item {
+    min-width: 0;
+  }
+
   .site-nav .nav-list-link {
     box-sizing: border-box;
-    display: block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: block !important;
+    max-width: calc(100% - 0.75rem) !important;
+    overflow: hidden !important;
+    overflow-wrap: normal !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    width: calc(100% - 0.75rem) !important;
+    word-break: normal !important;
   }
 
   @media (min-width: 50rem) {
