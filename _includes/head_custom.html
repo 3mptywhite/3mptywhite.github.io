@@ -937,6 +937,16 @@
     }
   }
 
+  /* Keep sidebar labels on one line at every viewport width. */
+  .site-nav .nav-list-link {
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   @media (min-width: 50rem) {
     .site-header,
     .main-header {
