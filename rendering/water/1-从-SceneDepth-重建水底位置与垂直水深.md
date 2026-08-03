@@ -1,7 +1,7 @@
 ---
 layout: default
 date: 2026-07-27
-title: 1 从 SceneDepth 重建水底位置与垂直水深
+title: 从 SceneDepth 重建水底位置与垂直水深
 parent: 水的渲染
 grand_parent: 图形渲染
 nav_order: 1
