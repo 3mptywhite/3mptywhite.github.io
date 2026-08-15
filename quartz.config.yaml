@@ -3,7 +3,7 @@
 # Optimized for Obsidian vaults with full OFM support and shortest link resolution.
 configuration:
   pageTitle: 3mptywhite
-  pageTitleSuffix: " · 数字花园"
+  pageTitleSuffix: " · 笔记"
   enableSPA: true
   enablePopovers: true
   analytics: null
