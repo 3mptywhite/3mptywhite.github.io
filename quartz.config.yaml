@@ -32,11 +32,11 @@ configuration:
         highlight: rgba(37, 99, 235, 0.10)
         textHighlight: "#bfdbfe80"
       darkMode:
-        light: "#0b1120"
-        lightgray: "#1e293b"
-        gray: "#64748b"
-        darkgray: "#cbd5e1"
-        dark: "#f8fafc"
+        light: "#090909"
+        lightgray: "#1f1f1f"
+        gray: "#737373"
+        darkgray: "#d4d4d4"
+        dark: "#fafafa"
         secondary: "#60a5fa"
         tertiary: "#38bdf8"
         highlight: rgba(96, 165, 250, 0.12)
@@ -157,6 +157,9 @@ plugins:
     enabled: true
   - source: "@quartz-community/folder-page"
     enabled: true
+    options:
+      showFolderCount: false
+      showSubfolders: true
   - source: "@quartz-community/tag-page"
     enabled: true
   - source: "@quartz-community/explorer"
@@ -177,7 +180,7 @@ plugins:
   - source: "@quartz-community/backlinks"
     enabled: false
   - source: "@quartz-community/article-title"
-    enabled: false
+    enabled: true
     layout:
       position: beforeBody
       priority: 10
@@ -269,16 +272,25 @@ layout:
         beforeBody: []
         left: []
         right: []
-    content: {}
+    content:
+      exclude:
+        - "@quartz-community/article-title"
     folder:
       exclude:
-        - reader-mode
+        - "@quartz-community/reader-mode"
+        - "@quartz-community/content-meta"
+        - "@quartz-community/note-properties"
+        - "@quartz-community/breadcrumbs"
       positions:
         right: []
     tag:
       exclude:
-        - reader-mode
+        - "@quartz-community/reader-mode"
       positions:
         right: []
-    canvas: {}
-    bases: {}
+    canvas:
+      exclude:
+        - "@quartz-community/article-title"
+    bases:
+      exclude:
+        - "@quartz-community/article-title"

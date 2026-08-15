@@ -7,8 +7,6 @@ has_children: true
 nav_order: 1
 mathjax: true
 ---
-# 概率论概念 Wiki
-
 这个目录是学习用的本地概念 wiki。它不按文章整理，而是按“概念名词”整理。
 
 当前初版只使用两类材料：
