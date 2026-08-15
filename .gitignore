@@ -1,6 +1,13 @@
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-vendor/
-Gemfile.lock
+.DS_Store
+node_modules/
+public/
+prof/
+tsconfig.tsbuildinfo
+.quartz-cache/
+.quartz/
+quartz/cli/tui/dist/
+.turbo/
+
+# `content/` 本身就是 Obsidian 仓库；个人工作区状态不进入博客源码。
+content/.obsidian/
+content/private/

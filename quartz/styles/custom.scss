@@ -1,0 +1,10 @@
+@use "./variables.scss" as *;
+
+// 保持内容优先，只做克制的可读性调整。
+.center article {
+  line-height: 1.8;
+}
+
+.center article > h1:first-child {
+  letter-spacing: -0.025em;
+}
