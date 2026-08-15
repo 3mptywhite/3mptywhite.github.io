@@ -1,10 +1,62 @@
 @use "./variables.scss" as *;
 
-// 保持内容优先，只做克制的可读性调整。
+// 内容优先的两栏布局：目录与正文。
+@media all and ($desktop) {
+  .page {
+    max-width: 1060px;
+  }
+
+  .page > #quartz-body {
+    grid-template-columns: 220px minmax(0, 760px);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "grid-sidebar-left grid-header"
+      "grid-sidebar-left grid-center"
+      "grid-sidebar-left grid-footer";
+    column-gap: 4rem;
+  }
+
+  .sidebar.right {
+    display: none;
+  }
+}
+
+.page > #quartz-body .sidebar {
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.page-title a {
+  color: var(--dark);
+}
+
+.explorer-content ul li > a,
+.folder-container div > a,
+.folder-container div > button span {
+  font-weight: 400;
+}
+
 .center article {
   line-height: 1.8;
 }
 
 .center article > h1:first-child {
   letter-spacing: -0.025em;
+}
+
+.center article a.internal {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.center article a.internal:hover {
+  text-decoration-color: var(--secondary);
 }

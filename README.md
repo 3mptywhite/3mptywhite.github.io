@@ -1,6 +1,6 @@
-# 3mptywhite 的 Obsidian 笔记博客
+# Obsidian 笔记博客
 
-这个仓库同时是博客源码和 Obsidian 内容仓库。网站由 Quartz 5 生成，Markdown、Wiki 链接、反向链接、搜索、关系图和 `.canvas` 都会自动发布到 <https://3mptywhite.github.io/>。
+这个仓库同时是博客源码和 Obsidian 内容仓库。网站由 Quartz 5 生成，Markdown、Wiki 链接、搜索和 `.canvas` 都会自动发布到 <https://3mptywhite.github.io/>。
 
 ## 最简单的日常维护
 

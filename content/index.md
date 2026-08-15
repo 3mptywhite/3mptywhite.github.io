@@ -1,13 +1,11 @@
 ---
-title: 3mptywhite
-description: 个人笔记
+title: 笔记
+description: 技术美术、数学与生成式 AI 的个人笔记
 ---
 
-# 3mptywhite
+# 笔记
 
-技术美术 / 游戏鸟类厂
-
-对 AI、绘画感兴趣。这里记录学习笔记和随想。
+技术美术、实时渲染、数学基础与生成式 AI 的学习记录。
 
 ## 内容
 
@@ -16,5 +14,6 @@ description: 个人笔记
 - [[rendering/index|图形渲染]]
 - [[ai/index|AI]]
 - [[aigc/index|AIGC]]
+- [[about|关于]]
 
-左侧目录按 Obsidian 仓库自动生成；可以使用搜索、页面关系图和反向链接继续浏览。
+左侧目录由 Obsidian 仓库自动生成，也可以直接搜索笔记。
