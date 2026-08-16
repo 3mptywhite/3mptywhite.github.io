@@ -90,14 +90,21 @@
 // 左栏：站点名、主题切换、搜索、文件树。
 .page-title {
   margin: 0 0 0.75rem;
-  font-size: 1.15rem;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+  font-family: var(--codeFont);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
 }
 
 .page-title a {
   color: var(--dark);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.page-title a:hover {
+  color: var(--secondary);
 }
 
 .sidebar.left > .flex-component {
