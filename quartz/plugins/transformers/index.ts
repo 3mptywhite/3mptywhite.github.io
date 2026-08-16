@@ -1,1 +1,1 @@
-export {}
+export { LatexDelimiterCompat, normalizeLatexDelimiters } from "./latexDelimiterCompat"
