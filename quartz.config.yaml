@@ -2,7 +2,7 @@
 # Template: obsidian
 # Optimized for Obsidian vaults with full OFM support and shortest link resolution.
 configuration:
-  pageTitle: emptywhite’s note
+  pageTitle: 3mptywhite’s notes
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
