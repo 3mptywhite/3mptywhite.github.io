@@ -1,5 +1,5 @@
 ---
-title: 笔记
+title: emptywhite’s note
 description: 技术美术、数学与生成式 AI 的个人笔记
 ---
 
