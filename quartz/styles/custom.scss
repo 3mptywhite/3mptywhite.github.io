@@ -90,21 +90,23 @@
 // 左栏：站点名、主题切换、搜索、文件树。
 .page-title {
   margin: 0 0 0.75rem;
-  font-family: var(--codeFont);
-  font-size: 1.05rem;
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -0.025em;
+  line-height: 0;
 }
 
 .page-title a {
-  color: var(--dark);
-  text-decoration: none;
-  transition: color 120ms ease;
+  display: block;
+  width: 13rem;
+  max-width: 100%;
+  aspect-ratio: 842.177 / 148.669;
+  overflow: hidden;
+  background: url("/assets/images/logo-wordmark.svg") left center / contain no-repeat;
+  text-indent: -9999px;
+  white-space: nowrap;
+  transition: opacity 120ms ease;
 }
 
 .page-title a:hover {
-  color: var(--secondary);
+  opacity: 0.76;
 }
 
 .sidebar.left > .flex-component {
