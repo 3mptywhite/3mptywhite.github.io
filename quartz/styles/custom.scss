@@ -1,32 +1,56 @@
 @use "./variables.scss" as *;
 
-// 内容优先的两栏布局：目录与正文。
+// 参考 Math & Matter 的稳定三栏阅读结构，保留本站配色。
 @media all and ($desktop) {
   .page {
-    max-width: 1060px;
+    max-width: 1320px;
   }
 
   .page > #quartz-body {
-    grid-template-columns: 220px minmax(0, 760px);
+    grid-template-columns: 240px minmax(0, 760px) 220px;
     grid-template-rows: auto auto auto;
     grid-template-areas:
-      "grid-sidebar-left grid-header"
-      "grid-sidebar-left grid-center"
-      "grid-sidebar-left grid-footer";
-    column-gap: 4rem;
+      "grid-sidebar-left grid-header grid-sidebar-right"
+      "grid-sidebar-left grid-center grid-sidebar-right"
+      "grid-sidebar-left grid-footer grid-sidebar-right";
+    column-gap: 3rem;
   }
 
-  .sidebar.right {
-    display: none;
+  .sidebar.left {
+    isolation: isolate;
+  }
+
+  .sidebar.left::before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    content: "";
+    border-right: 1px solid var(--lightgray);
+    background: color-mix(in srgb, var(--lightgray) 42%, var(--light));
+  }
+}
+
+@media all and ($tablet) {
+  .page > #quartz-body {
+    grid-template-columns: 220px minmax(0, 1fr);
+    column-gap: 2rem;
   }
 }
 
 .page > #quartz-body .sidebar {
   gap: 1rem;
+  padding-top: 3.5rem;
+}
+
+.page > #quartz-body .page-header {
+  margin-top: 3.5rem;
 }
 
 .page-title {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   letter-spacing: -0.02em;
 }
 
@@ -45,6 +69,16 @@
 }
 
 .center article > h1:first-child {
+  margin-top: 0;
+  font-size: 2.15rem;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.page-header .article-title {
+  margin: 0 0 1.5rem;
+  font-size: 2.15rem;
+  line-height: 1.25;
   letter-spacing: -0.025em;
 }
 
@@ -59,4 +93,50 @@
 
 .center article a.internal:hover {
   text-decoration-color: var(--secondary);
+}
+
+.toc button.toc-header h3 {
+  color: var(--darkgray);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.toc ul.toc-content.overflow > li > a {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.center > hr {
+  margin: 3rem 0 1rem;
+}
+
+.center > hr:has(+ .page-footer:empty),
+.page-footer:empty {
+  display: none;
+}
+
+.page > #quartz-body .page-footer {
+  margin-top: 0;
+}
+
+.page-footer .content-meta {
+  margin: 0;
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+@media all and ($mobile) {
+  .page > #quartz-body .sidebar {
+    padding-top: 1.5rem;
+  }
+
+  .page > #quartz-body .page-header {
+    margin-top: 2.5rem;
+  }
+
+  .center article > h1:first-child,
+  .page-header .article-title {
+    font-size: 1.8rem;
+  }
 }

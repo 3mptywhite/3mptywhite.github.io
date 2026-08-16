@@ -186,10 +186,13 @@ plugins:
       priority: 10
   - source: "@quartz-community/content-meta"
     enabled: true
+    options:
+      showReadingTime: false
+      showComma: false
     layout:
-      position: beforeBody
-      priority: 20
-      condition: not-index
+      position: afterBody
+      priority: 90
+      condition: article-only
   - source: "@quartz-community/tag-list"
     enabled: false
     layout:
@@ -207,13 +210,13 @@ plugins:
       priority: 30
       group: toolbar
   - source: "@quartz-community/reader-mode"
-    enabled: true
+    enabled: false
     layout:
       position: left
       priority: 35
       group: toolbar
   - source: "@quartz-community/breadcrumbs"
-    enabled: true
+    enabled: false
     layout:
       position: beforeBody
       priority: 5
@@ -243,7 +246,7 @@ plugins:
     options: {}
     order: 50
   - source: "@quartz-community/note-properties"
-    enabled: true
+    enabled: false
     options:
       includeAll: false
       includedProperties:
