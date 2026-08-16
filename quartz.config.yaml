@@ -80,6 +80,12 @@ plugins:
     order: 40
   - source: "@quartz-community/table-of-contents"
     enabled: true
+    options:
+      maxDepth: 3
+      minEntries: 1
+      showByDefault: true
+      collapseByDefault: false
+      layout: modern
     order: 50
     layout:
       position: right
@@ -164,16 +170,54 @@ plugins:
     enabled: true
   - source: "@quartz-community/explorer"
     enabled: true
+    options:
+      title: 导航
+      folderDefaultState: collapsed
+      folderClickBehavior: link
+      useSavedState: true
     layout:
       position: left
       priority: 50
   - source: "@quartz-community/graph"
-    enabled: false
+    enabled: true
+    options:
+      localGraph:
+        drag: true
+        zoom: true
+        depth: -1
+        scale: 1.05
+        repelForce: 0.45
+        centerForce: 0.3
+        linkDistance: 32
+        fontSize: 0.62
+        opacityScale: 1
+        showTags: false
+        removeTags: []
+        focusOnHover: false
+        enableRadial: false
+      globalGraph:
+        drag: true
+        zoom: true
+        depth: -1
+        scale: 0.9
+        repelForce: 0.5
+        centerForce: 0.2
+        linkDistance: 30
+        fontSize: 0.6
+        opacityScale: 1
+        showTags: false
+        removeTags: []
+        focusOnHover: true
+        enableRadial: true
+    layout:
+      position: right
+      priority: 10
+      condition: article-only
   - source: "@quartz-community/search"
     enabled: true
     layout:
       position: left
-      priority: 20
+      priority: 30
       group: toolbar
       groupOptions:
         grow: true
@@ -207,7 +251,7 @@ plugins:
     enabled: true
     layout:
       position: left
-      priority: 30
+      priority: 20
       group: toolbar
   - source: "@quartz-community/reader-mode"
     enabled: false
@@ -246,7 +290,7 @@ plugins:
     options: {}
     order: 50
   - source: "@quartz-community/note-properties"
-    enabled: false
+    enabled: true
     options:
       includeAll: false
       includedProperties:
@@ -254,7 +298,7 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true
       delimiters: "---"
       language: yaml
     order: 5
@@ -267,17 +311,14 @@ layout:
   groups:
     toolbar:
       priority: 35
-      direction: row
-      gap: 0.5rem
+      direction: column
+      gap: 0.75rem
   byPageType:
     "404":
       positions:
         beforeBody: []
         left: []
         right: []
-    content:
-      exclude:
-        - "@quartz-community/article-title"
     folder:
       exclude:
         - "@quartz-community/reader-mode"

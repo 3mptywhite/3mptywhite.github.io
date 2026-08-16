@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Midjourney
-parent: AIGC
+parent: "[[aigc/index|AIGC]]"
 has_children: true
 nav_order: 1
 ---

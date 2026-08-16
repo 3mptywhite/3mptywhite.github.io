@@ -1,85 +1,199 @@
 @use "./variables.scss" as *;
 
-// 参考 Math & Matter 的稳定三栏阅读结构，保留本站配色。
+// Obsidian Publish 式阅读骨架：中间固定阅读宽度，两侧随视口扩展。
 @media all and ($desktop) {
   .page {
-    max-width: 1320px;
+    max-width: none;
+    margin: 0;
   }
 
   .page > #quartz-body {
-    grid-template-columns: 240px minmax(0, 760px) 220px;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 800px) minmax(300px, 1fr);
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "grid-sidebar-left grid-header grid-sidebar-right"
       "grid-sidebar-left grid-center grid-sidebar-right"
       "grid-sidebar-left grid-footer grid-sidebar-right";
-    column-gap: 3rem;
+    column-gap: 0;
+    row-gap: 0;
   }
 
-  .sidebar.left {
+  .page > #quartz-body .sidebar.left {
     isolation: isolate;
+    width: 280px;
+    justify-self: end;
+    padding: 2rem 18px;
   }
 
-  .sidebar.left::before {
+  .page > #quartz-body .sidebar.left::before {
     position: absolute;
     z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0 0 0 auto;
     width: 100vw;
     content: "";
     border-right: 1px solid var(--lightgray);
-    background: color-mix(in srgb, var(--lightgray) 42%, var(--light));
+    background: color-mix(in srgb, var(--lightgray) 58%, var(--light));
+  }
+
+  :root[saved-theme="dark"] .page > #quartz-body .sidebar.left::before {
+    background: var(--light);
+  }
+
+  .page > #quartz-body .center,
+  .page > #quartz-body > footer {
+    box-sizing: border-box;
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+
+  .page > #quartz-body .sidebar.right {
+    width: 348px;
+    justify-self: start;
+    padding: 2rem 24px;
+  }
+
+  .explorer > .desktop-explorer {
+    display: none;
   }
 }
 
 @media all and ($tablet) {
   .page > #quartz-body {
     grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "grid-sidebar-left grid-header"
+      "grid-sidebar-left grid-center"
+      "grid-sidebar-left grid-footer";
     column-gap: 2rem;
+  }
+
+  .page > #quartz-body .sidebar.right {
+    display: none;
+  }
+
+  .page > #quartz-body .center,
+  .page > #quartz-body > footer {
+    box-sizing: border-box;
+    padding-right: 2rem;
   }
 }
 
 .page > #quartz-body .sidebar {
   gap: 1rem;
-  padding-top: 3.5rem;
 }
 
 .page > #quartz-body .page-header {
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
 }
 
+// 左栏：站点名、主题切换、搜索、文件树。
 .page-title {
-  font-size: 1.4rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 .page-title a {
   color: var(--dark);
 }
 
-.explorer-content ul li > a,
-.folder-container div > a,
-.folder-container div > button span {
+.sidebar.left > .flex-component {
+  width: 100%;
+  align-items: stretch;
+}
+
+.sidebar.left > .flex-component > div {
+  width: 100%;
+  align-self: stretch !important;
+}
+
+.sidebar.left .darkmode {
+  width: 48px;
+  height: 22px;
+  border: 1px solid var(--lightgray);
+  border-radius: 999px;
+  background: var(--light);
+}
+
+.sidebar.left .darkmode svg {
+  top: 3px;
+  left: 26px;
+  width: 14px;
+  height: 14px;
+}
+
+:root[saved-theme="dark"] .sidebar.left .darkmode svg {
+  left: 6px;
+}
+
+.sidebar.left .search-button {
+  box-sizing: border-box;
+  width: 100%;
+  height: 34px;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 0 9px;
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  background: var(--light);
+  color: var(--gray);
+}
+
+.sidebar.left .search-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.sidebar.left .search-button p {
+  color: var(--gray);
+  font-size: 0.85rem;
   font-weight: 400;
 }
 
-.center article {
-  line-height: 1.8;
+.explorer-content {
+  margin-top: 0.2rem;
 }
 
-.center article > h1:first-child {
-  margin-top: 0;
-  font-size: 2.15rem;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
+.explorer-content ul li > a,
+.folder-container div > a,
+.folder-container div > button span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.45rem;
 }
 
+.explorer-content ul li > a {
+  opacity: 0.68;
+}
+
+.explorer-content ul li > a.active {
+  opacity: 1;
+}
+
+.explorer-content .folder-outer > ul {
+  border-left-color: color-mix(in srgb, var(--lightgray) 78%, transparent);
+}
+
+// 正文：靠近 Obsidian Publish 的克制排版。
 .page-header .article-title {
-  margin: 0 0 1.5rem;
-  font-size: 2.15rem;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.center article {
+  line-height: 1.7;
+}
+
+.center article h1,
+.center article h2 {
+  padding-bottom: 0.42em;
+  border-bottom: 1px solid var(--lightgray);
 }
 
 .center article a.internal {
@@ -95,18 +209,59 @@
   text-decoration-color: var(--secondary);
 }
 
+// 右栏：当前笔记关系图与页内目录。
+.graph > h3,
 .toc button.toc-header h3 {
   color: var(--darkgray);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.graph > .graph-outer {
+  height: 260px;
+  margin: 0.75rem 0 0;
+  border-color: var(--lightgray);
+  border-radius: 8px;
+  background: var(--light);
+}
+
+.toc {
+  margin-top: 1.9rem;
+}
+
+.toc button.toc-header .fold {
+  display: none;
+}
+
+.toc ul.toc-content.overflow {
+  margin-top: 0.75rem;
+}
+
+.toc ul.toc-content.overflow > li {
+  margin: 0.38rem 0;
 }
 
 .toc ul.toc-content.overflow > li > a {
+  color: var(--darkgray);
   font-size: 0.9rem;
   font-weight: 400;
+  line-height: 1.35;
 }
 
+// 文件夹页只承担目录作用，不在列表中重复展示文章日期。
+.page-listing li.section-li > .section {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-listing li.section-li > .section > .meta,
+.page-listing li.section-li > .section > .tags {
+  display: none;
+}
+
+// 文末只保留发布日期。
 .center > hr {
   margin: 3rem 0 1rem;
 }
@@ -121,22 +276,53 @@
 }
 
 .page-footer .content-meta {
-  margin: 0;
+  margin: 0 0 2.5rem;
   color: var(--gray);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 @media all and ($mobile) {
   .page > #quartz-body .sidebar {
-    padding-top: 1.5rem;
+    padding-top: 1.25rem;
   }
 
   .page > #quartz-body .page-header {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
   }
 
-  .center article > h1:first-child,
   .page-header .article-title {
-    font-size: 1.8rem;
+    font-size: 1.85rem;
+  }
+
+  .sidebar.left > .flex-component {
+    width: auto;
+    flex-direction: row !important;
+    align-items: center;
+  }
+
+  .sidebar.left > .flex-component > div {
+    width: auto;
+  }
+
+  .sidebar.left .search-button {
+    width: 34px;
+    padding: 0 9px;
+  }
+
+  .sidebar.left .search-button p {
+    display: none;
+  }
+
+  .sidebar.left .darkmode {
+    width: 34px;
+    border: 0;
+    background: transparent;
+  }
+
+  .sidebar.left .darkmode svg,
+  :root[saved-theme="dark"] .sidebar.left .darkmode svg {
+    left: 7px;
+    width: 18px;
+    height: 18px;
   }
 }

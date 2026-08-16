@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 水的渲染
-parent: 图形渲染
+parent: "[[rendering/index|图形渲染]]"
 has_children: true
 nav_order: 1
 mathjax: true

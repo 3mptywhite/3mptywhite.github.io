@@ -2,13 +2,11 @@
 layout: default
 date: 2026-07-27
 title: 从 SceneDepth 重建水底位置与垂直水深
-parent: 水的渲染
-grand_parent: 图形渲染
+parent: "[[rendering/water/index|水的渲染]]"
+grand_parent: "[[rendering/index|图形渲染]]"
 nav_order: 1
 mathjax: true
 ---
-
-# 从 SceneDepth 重建水底位置与垂直水深
 
 在水材质中，我们经常会用 `SceneDepth - PixelDepth` 估计水深。这个做法很直接，但得到的是屏幕深度方向上的差值，并不一定等于水面到水底的垂直距离。
 

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: 概率论概念 Wiki
-parent: 概率论
-grand_parent: 数学
+parent: "[[math/probability/index|概率论]]"
+grand_parent: "[[math/index|数学]]"
 has_children: true
 nav_order: 1
 mathjax: true

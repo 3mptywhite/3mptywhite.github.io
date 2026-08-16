@@ -2,13 +2,11 @@
 layout: default
 date: 2026-06-08
 title: 2. 从 FT 到 DFT：采样、频率格子与标准公式
-parent: 傅里叶
-grand_parent: 数学
+parent: "[[math/fourier/index|傅里叶]]"
+grand_parent: "[[math/index|数学]]"
 nav_order: 7
 mathjax: true
 ---
-
-# 从 FT 到 DFT：采样、频率格子与标准公式
 
 这一篇只解决一个问题：为什么傅里叶变换会在数字世界里变成 DFT。
 

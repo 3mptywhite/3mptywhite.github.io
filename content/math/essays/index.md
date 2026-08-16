@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 随笔
-parent: 数学
+parent: "[[math/index|数学]]"
 nav_order: 3
 ---
 

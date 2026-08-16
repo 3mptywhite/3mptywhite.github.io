@@ -2,12 +2,11 @@
 layout: default
 date: 2026-06-17
 title: 为什么指数分布里会出现 N(x) 和 lambda x
-parent: 概率论学习札记
-grand_parent: 概率论
+parent: "[[math/probability/notes/index|概率论学习札记]]"
+grand_parent: "[[math/probability/index|概率论]]"
 nav_order: 5
 mathjax: true
 ---
-# 为什么指数分布里会出现 N(x) 和 lambda x
 
 ## 触发问题
 

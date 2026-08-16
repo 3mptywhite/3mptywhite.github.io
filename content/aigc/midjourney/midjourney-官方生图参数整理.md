@@ -2,12 +2,10 @@
 layout: default
 date: 2026-07-27
 title: Midjourney 官方生图参数整理
-parent: Midjourney
-grand_parent: AIGC
+parent: "[[aigc/midjourney/index|Midjourney]]"
+grand_parent: "[[aigc/index|AIGC]]"
 nav_order: 1
 ---
-
-# Midjourney 官方生图参数整理
 
 整理当前静态图片生成中常用的 Midjourney 参数、版本兼容性和网页功能。
 

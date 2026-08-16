@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 傅里叶
-parent: 数学
+parent: "[[math/index|数学]]"
 has_children: true
 nav_order: 3
 mathjax: true

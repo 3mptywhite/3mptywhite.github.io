@@ -2,12 +2,11 @@
 layout: default
 date: 2026-06-17
 title: 概率论概念地图
-parent: 概率论概念 Wiki
-grand_parent: 概率论
+parent: "[[math/probability/wiki/index|概率论概念 Wiki]]"
+grand_parent: "[[math/probability/index|概率论]]"
 nav_order: 1
 mathjax: true
 ---
-# 概率论概念地图
 
 这张图用来直观看概念之间的逻辑关系。它不是完整知识树，而是当前学习进度内的主干地图。
 
