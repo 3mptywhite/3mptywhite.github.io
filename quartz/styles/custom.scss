@@ -335,3 +335,221 @@
     height: 18px;
   }
 }
+// 首页 / About：头像与自我介绍构成主视觉，内容入口承接到三类笔记。
+.about-profile {
+  position: relative;
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(150px, 188px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: center;
+  margin: 0.35rem 0 3rem;
+  padding: clamp(1.35rem, 3.5vw, 2.25rem);
+  overflow: hidden;
+  border: 1px solid var(--lightgray);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--secondary) 10%, transparent),
+      transparent 52%
+    ),
+    var(--light);
+}
+
+.about-portrait {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.about-portrait::before {
+  position: absolute;
+  z-index: -1;
+  inset: -10px;
+  content: "";
+  border: 1px solid color-mix(in srgb, var(--secondary) 34%, var(--lightgray));
+  border-radius: 22px;
+  transform: rotate(-3deg);
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--lightgray);
+  border-radius: 16px;
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--dark) 13%, transparent);
+}
+
+.about-intro {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.about-intro .about-kicker {
+  margin: 0 0 0.7rem;
+  color: var(--secondary);
+  font-family: var(--codeFont);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.about-intro h2 {
+  margin: 0 0 0.8rem;
+  padding: 0;
+  border: 0;
+  font-size: clamp(1.65rem, 4vw, 2.15rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.about-intro p {
+  margin: 0.65rem 0;
+}
+
+.about-intro .about-lead {
+  color: var(--dark);
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.about-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0.18rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 36%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--secondary) 7%, var(--light));
+  color: var(--secondary);
+  font-size: 0.86rem;
+  font-weight: 550;
+  text-decoration: none;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.about-links a:hover {
+  border-color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 13%, var(--light));
+  transform: translateY(-1px);
+}
+
+.about-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1.35rem 0 2.5rem;
+}
+
+.about-focus-card {
+  display: flex;
+  min-width: 0;
+  min-height: 132px;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--lightgray) 24%, var(--light));
+  color: var(--darkgray);
+  text-decoration: none;
+  transition:
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.about-focus-card:hover {
+  border-color: color-mix(in srgb, var(--secondary) 60%, var(--lightgray));
+  transform: translateY(-2px);
+}
+
+.about-focus-card .about-focus-index {
+  color: var(--secondary);
+  font-family: var(--codeFont);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.about-focus-card strong {
+  color: var(--dark);
+  font-size: 1rem;
+}
+
+.about-focus-card > span:last-child {
+  color: var(--darkgray);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+// 首页嵌入 About 正文，隐藏嵌入层自身重复的标题与来源链接。
+body[data-slug="index"] article .transclude {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body[data-slug="index"] article .transclude > h1,
+body[data-slug="index"] article .transclude > .transclude-src,
+body[data-slug="index"] article .markdown-preview-view > p:empty {
+  display: none;
+}
+
+@media all and ($mobile) {
+  .about-profile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.25rem;
+    padding: 1.3rem;
+    text-align: center;
+  }
+
+  .about-intro {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .about-intro h2,
+  .about-intro p {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    text-wrap: wrap;
+  }
+
+  .about-portrait {
+    width: min(58vw, 178px);
+    margin: 0 auto;
+  }
+
+  .about-links {
+    justify-content: center;
+  }
+
+  .about-focus-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-focus-card {
+    min-height: 0;
+  }
+}
