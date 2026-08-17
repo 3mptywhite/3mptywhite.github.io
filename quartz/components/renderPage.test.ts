@@ -324,4 +324,20 @@ describe("pageResources", () => {
       `expected contentIndex fetch without /quartz/ prefix in serve mode, got: ${inlineJsServe.script}`,
     )
   })
+
+  test("content index fetch revalidates stale browser caches after a deployment", async () => {
+    const result = pageResources("." as FullSlug, emptyResources)
+    const inlineJs = result.js.find((j) => j.contentType === "inline" && "script" in j)
+    assert.ok(inlineJs && "script" in inlineJs)
+
+    const fetchFromBrowserCache = async (_url: string, init?: RequestInit) => ({
+      json: async () =>
+        init?.cache === "no-cache" ? { version: "current" } : { version: "stale" },
+    })
+    const loadContentIndex = new Function("fetch", `${inlineJs.script}; return fetchData`) as (
+      fetchImpl: typeof fetchFromBrowserCache,
+    ) => Promise<{ version: string }>
+
+    assert.deepStrictEqual(await loadContentIndex(fetchFromBrowserCache), { version: "current" })
+  })
 })
