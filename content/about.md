@@ -19,23 +19,3 @@ description: emteehu 的个人简介，以及技术美术、实时渲染、数�
     </nav>
   </div>
 </div>
-
-## 我在记录
-
-<div class="about-focus-grid">
-  <a class="about-focus-card" href="/rendering/">
-    <span class="about-focus-index">01</span>
-    <strong>实时渲染</strong>
-    <span>水体、PBR 与材质实现中的关键机制。</span>
-  </a>
-  <a class="about-focus-card" href="/math/">
-    <span class="about-focus-index">02</span>
-    <strong>数学基础</strong>
-    <span>傅里叶、概率与图形学相关的推导笔记。</span>
-  </a>
-  <a class="about-focus-card" href="/aigc/">
-    <span class="about-focus-index">03</span>
-    <strong>生成式 AI</strong>
-    <span>图像生成工具、参数与工作方法的整理。</span>
-  </a>
-</div>

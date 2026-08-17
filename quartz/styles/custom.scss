@@ -335,7 +335,7 @@
     height: 18px;
   }
 }
-// 首页 / About：头像与自我介绍构成主视觉，内容入口承接到三类笔记。
+// 首页 / About：头像与自我介绍构成主视觉，最近发布承接后续阅读。
 .about-profile {
   position: relative;
   display: grid;
@@ -345,7 +345,7 @@
   grid-template-columns: minmax(150px, 188px) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 2.75rem);
   align-items: center;
-  margin: 0.35rem 0 3rem;
+  margin: 1.4rem 0 3rem;
   padding: clamp(1.35rem, 3.5vw, 2.25rem);
   overflow: hidden;
   border: 1px solid var(--lightgray);
@@ -452,51 +452,86 @@
   transform: translateY(-1px);
 }
 
-.about-focus-grid {
+body[data-slug="index"] .recent-notes > ul.recent-ul {
+  counter-reset: recent-card;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.85rem;
-  margin: 1.35rem 0 2.5rem;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  list-style: none;
 }
 
-.about-focus-card {
+body[data-slug="index"] .recent-notes > h3 {
+  margin: 0 0 1.35rem;
+  padding: 0 0 0.7rem;
+  border-bottom: 1px solid var(--lightgray);
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+body[data-slug="index"] .recent-notes > ul.recent-ul > li.recent-li {
+  counter-increment: recent-card;
+  min-width: 0;
+  margin: 0;
+}
+
+body[data-slug="index"] .recent-notes .recent-li .section {
+  position: relative;
   display: flex;
+  box-sizing: border-box;
+  height: 100%;
   min-width: 0;
   min-height: 132px;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
+  gap: 0.55rem;
+  padding: 2.55rem 1rem 1rem;
   border: 1px solid var(--lightgray);
   border-radius: 12px;
   background: color-mix(in srgb, var(--lightgray) 24%, var(--light));
-  color: var(--darkgray);
-  text-decoration: none;
   transition:
     border-color 140ms ease,
     transform 140ms ease;
 }
 
-.about-focus-card:hover {
-  border-color: color-mix(in srgb, var(--secondary) 60%, var(--lightgray));
-  transform: translateY(-2px);
-}
-
-.about-focus-card .about-focus-index {
+body[data-slug="index"] .recent-notes .recent-li .section::before {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  content: counter(recent-card, decimal-leading-zero);
   color: var(--secondary);
   font-family: var(--codeFont);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
 }
 
-.about-focus-card strong {
-  color: var(--dark);
-  font-size: 1rem;
+body[data-slug="index"] .recent-notes .recent-li .section:hover {
+  border-color: color-mix(in srgb, var(--secondary) 60%, var(--lightgray));
+  transform: translateY(-2px);
 }
 
-.about-focus-card > span:last-child {
-  color: var(--darkgray);
-  font-size: 0.84rem;
-  line-height: 1.55;
+body[data-slug="index"] .recent-notes .recent-li .desc h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+body[data-slug="index"] .recent-notes .recent-li .desc h3 > a {
+  color: var(--dark);
+  background: transparent;
+  text-decoration: none;
+}
+
+body[data-slug="index"] .recent-notes .recent-li .section:hover .desc h3 > a {
+  color: var(--secondary);
+}
+
+body[data-slug="index"] .recent-notes .recent-li .meta {
+  margin: auto 0 0 !important;
+  color: var(--gray);
+  font-family: var(--codeFont);
+  font-size: 0.72rem;
+  opacity: 1 !important;
 }
 
 // 首页嵌入 About 正文，隐藏嵌入层自身重复的标题与来源链接。
@@ -545,11 +580,11 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
     justify-content: center;
   }
 
-  .about-focus-grid {
+  body[data-slug="index"] .recent-notes > ul.recent-ul {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .about-focus-card {
+  body[data-slug="index"] .recent-notes .recent-li .section {
     min-height: 0;
   }
 }
