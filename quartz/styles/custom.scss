@@ -643,6 +643,12 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
 // Canvas 节点详情侧栏：节点内容按正常字号展示，不受画布缩放影响。
 .canvas-page .canvas-container {
   --canvas-node-inspector-width: clamp(340px, 38vw, 620px);
+  background-color: color-mix(in srgb, var(--light) 86%, var(--lightgray));
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--gray) 46%, transparent) 0.8px,
+    transparent 0.9px
+  );
 }
 
 .canvas-page .canvas-node-inspector {
@@ -808,24 +814,30 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
 .canvas-page .canvas-node:not(.canvas-node-group) {
   border-color: color-mix(
     in srgb,
-    var(--canvas-node-color, var(--lightgray)) 74%,
-    var(--light)
+    var(--canvas-node-color, var(--lightgray)) 82%,
+    var(--gray)
   );
   border-radius: 8px;
   background: color-mix(
     in srgb,
-    var(--canvas-node-color, var(--lightgray)) 12%,
+    var(--canvas-node-color, var(--lightgray)) 18%,
     var(--light)
   );
   box-shadow:
-    0 1px 2px rgb(0 0 0 / 18%),
-    inset 0 1px rgb(255 255 255 / 3%);
+    0 2px 7px rgb(0 0 0 / 24%),
+    inset 0 1px rgb(255 255 255 / 4%);
+}
+
+.canvas-page
+  .canvas-node:not(.canvas-node-group):not([style*="--canvas-node-color"]) {
+  border-color: color-mix(in srgb, var(--gray) 64%, var(--lightgray));
+  background: color-mix(in srgb, var(--lightgray) 48%, var(--light));
 }
 
 .canvas-page .canvas-node:not(.canvas-node-group):hover {
   box-shadow:
-    0 3px 10px rgb(0 0 0 / 22%),
-    inset 0 1px rgb(255 255 255 / 4%);
+    0 5px 15px rgb(0 0 0 / 28%),
+    inset 0 1px rgb(255 255 255 / 5%);
 }
 
 // 连线降低亮度并使用圆角端点；箭头尖端略微缩小，避免压住卡片边框。
