@@ -624,6 +624,17 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
   margin: 0;
 }
 
+// 与 Obsidian Canvas 对齐：默认不显示左键拖拽手势，只在按住中键时平移。
+.canvas-page .canvas-container,
+.canvas-page .canvas-container:active {
+  cursor: default;
+}
+
+.canvas-page .canvas-container.is-middle-panning,
+.canvas-page .canvas-container.is-middle-panning:active {
+  cursor: grabbing;
+}
+
 @media all and ($mobile) {
   .about-profile {
     grid-template-columns: minmax(0, 1fr);
