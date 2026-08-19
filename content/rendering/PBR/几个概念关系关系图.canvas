@@ -1,24 +1,24 @@
 {
 	"nodes":[
-		{"id":"974fef113916abc8","type":"text","text":"# Flux\n\n\n\n$$ \n\\Phi \n$$","x":-280,"y":-100,"width":190,"height":180,"color":"5"},
+		{"id":"974fef113916abc8","type":"text","text":"# Flux\n\n\n\n$$ \n\\Phi \n$$","x":-280,"y":-100,"width":190,"height":120,"color":"5"},
 		{"id":"18f1a5c38e68a866","type":"text","text":"\n\n$$\nE(\\text{p}) = \\lim_{\\Delta A\\rightarrow 0}\\frac{\\Delta \\Phi(\\text{p})}{\\Delta A} = \\frac{\\text{d}\\Phi(\\text{p})}{\\text{d}A}\n$$\n---\n\n\n$$  \n\\Phi = \\int_{A} E(\\text{p})\\text{d}A  \n$$\n\n  \n\n\n","x":-889,"y":160,"width":289,"height":199},
 		{"id":"47d325a183baaed4","type":"text","text":"# Irradiance\n\n\n\n$$ \nE\n$$","x":-844,"y":520,"width":200,"height":126,"color":"5"},
 		{"id":"6416247984b013c5","type":"text","text":"$$ \n\nL = \\frac{\\text{d}^2\\Phi}{\\text{d}\\omega\\text{d}A^{\\perp}}\n\n$$","x":-310,"y":473,"width":250,"height":113},
-		{"id":"c2cd0e2721169f5d","type":"text","text":"# Radiance\n\n$$ L$$","x":-310,"y":1000,"width":250,"height":180,"color":"5"},
-		{"id":"ed9115d14b7e2355","type":"text","text":"![观察方向上的投影面积](https://picgo09072024-1328204036.cos.ap-shanghai.myqcloud.com/image/Pasted%20image%2020260817231033.png)","x":480,"y":800,"width":304,"height":240},
+		{"id":"c2cd0e2721169f5d","type":"text","text":"# Radiance\n\n$$\n L\n$$","x":-310,"y":1060,"width":250,"height":100,"color":"5"},
+		{"id":"ed9115d14b7e2355","type":"text","text":"![观察方向上的投影面积](https://picgo09072024-1328204036.cos.ap-shanghai.myqcloud.com/image/Pasted%20image%2020260817231033.png)","x":480,"y":800,"width":304,"height":200},
 		{"id":"0352756f338a949d","type":"text","text":"$$\n\nL_{\\lambda} = \\lim_{\\Delta\\lambda\\rightarrow 0}\\frac{\\Delta L}{\\Delta\\lambda} = \\frac{\\text{d}L}{\\text{d}\\lambda}\n\n$$ \n\n---\n$$\nL = \\int_{\\lambda_0}^{\\lambda_1} L_{\\lambda}(\\lambda)\\text{d}\\lambda\n\n$$","x":-372,"y":1260,"width":375,"height":232},
 		{"id":"d66cbe45dc067aa8","type":"text","text":"$$\nI = \\lim_{\\Delta\\omega\\rightarrow 0}\\frac{\\Delta\\Phi}{\\Delta\\omega} = \\frac{\\text{d}\\Phi}{\\text{d}\\omega}\n$$\n---\n$$\n\\Phi = \\int_{\\Omega} I(\\omega)\\text{d}\\omega\n$$","x":148,"y":135,"width":380,"height":224},
 		{"id":"911e9dbd5410e51b","type":"text","text":"$$\nL(\\text{p},\\omega) = \\lim_{\\Delta\\omega\\rightarrow 0}\\frac{\\Delta E_{\\omega}(\\text{p})}{\\Delta\\omega} = \\frac{\\text{d}E_{\\omega}(\\text{p})}{\\text{d}\\omega}\n$$","x":-909,"y":820,"width":330,"height":98},
 		{"id":"a4eb21c6f43e004d","type":"text","text":"$$ \n\nL = \\frac{\\text{d}I}{\\text{d}A^{\\perp}}\n\n$$","x":213,"y":845,"width":250,"height":113},
-		{"id":"3ae8708318952fbd","type":"text","text":"# Intensity\n\n$$ I$$","x":213,"y":486,"width":250,"height":194,"color":"5"},
 		{"id":"fa97ce8b1ce38ff3","type":"text","text":"# Emergy\n\n$$ \nQ = \\frac{hc}{λ}\n$$","x":-292,"y":-920,"width":220,"height":220},
 		{"id":"2110c1d049e29bd6","type":"text","text":"$$\n\\Phi = \\lim_{\\Delta t \\rightarrow 0}\\frac{\\Delta Q}{\\Delta t} = \\frac{\\text{d}Q}{\\text{d}t}\n$$\n---\n$$\nQ = \\int_{t_0}^{t_1} \\Phi(t)\\text{d}t\n$$","x":-314,"y":-540,"width":265,"height":260},
 		{"id":"85b57cf4de366599","type":"text","text":"朗伯定律（Lambert’s law）","x":-1226,"y":105,"width":250,"height":60},
 		{"id":"f808a7ebe487e8aa","type":"text","text":"![image-20260819204301512](https://picgo09072024-1328204036.cos.ap-shanghai.myqcloud.com/image/image-20260819204301512.png)","x":-1320,"y":185,"width":344,"height":235},
-		{"id":"d3288a9e10a5a78c","type":"text","text":"# _光谱辐射亮度（spectral radiance）_ \n$$\nL_{\\lambda}\n\n$$\n\n两个光谱可能具有相同的总辐射亮度，却有完全不同的颜色。例如总能量相同的一束绿光和一束蓝光，辐射亮度可以相同\n\n光谱辐射亮度是“按波长划分的辐射亮度**密度**”，辐射亮度是它在指定波长范围内的积分总量。","x":-430,"y":1600,"width":492,"height":240,"color":"4"},
+		{"id":"d3288a9e10a5a78c","type":"text","text":"# _光谱辐射亮度（spectral radiance）_ \n$$\nL_{\\lambda}\n\n$$\n\n两个光谱可能具有相同的总辐射亮度，却有完全不同的颜色。例如总能量相同的一束绿光和一束蓝光，辐射亮度可以相同\n\n光谱辐射亮度是“按波长划分的辐射亮度**密度**”，辐射亮度是它在指定波长范围内的积分总量。","x":-430,"y":1600,"width":492,"height":280,"color":"4"},
 		{"id":"9bd51691e7c05ec3","type":"text","text":"# _亮度（Luminance）_\n\n$$\nY\n$$\n---\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$","x":-20,"y":2100,"width":332,"height":260,"color":"4"},
 		{"id":"00ce875fe6575ebd","type":"text","text":"# 光谱响应曲线 $V(\\lambda)$ ","x":784,"y":1670,"width":300,"height":90,"color":"4"},
-		{"id":"9e2b96da7e19d12b","type":"text","text":"## 光度学 和 辐射度量学 的 联系\n\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$ \n\n---\n$$\nL = \\int_{\\lambda_0}^{\\lambda_1} L_{\\lambda}(\\lambda)\\text{d}\\lambda\n\n$$\n\n---\n$$\ndY=V(\\lambda)\\,dL\n$$","x":213,"y":1376,"width":353,"height":348,"color":"1"}
+		{"id":"9e2b96da7e19d12b","type":"text","text":"## 光度学 和 辐射度量学 的 联系\n\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$ \n\n---\n$$\nL = \\int_{\\lambda_0}^{\\lambda_1} L_{\\lambda}(\\lambda)\\text{d}\\lambda\n\n$$\n\n---\n$$\ndY=V(\\lambda)\\,dL\n$$","x":213,"y":1376,"width":353,"height":348,"color":"1"},
+		{"id":"3ae8708318952fbd","type":"text","text":"# Intensity\n\n$$ \nI\n$$","x":213,"y":520,"width":250,"height":134,"color":"5"}
 	],
 	"edges":[
 		{"id":"7c8ed00ff0acdc50","fromNode":"fa97ce8b1ce38ff3","fromSide":"bottom","toNode":"2110c1d049e29bd6","toSide":"top"},
