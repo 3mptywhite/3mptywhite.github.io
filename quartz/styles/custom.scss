@@ -624,14 +624,19 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
   margin: 0;
 }
 
-// 与 Obsidian Canvas 对齐：默认不显示左键拖拽手势，只在按住中键时平移。
+// 与 Obsidian Canvas 对齐：中键或 Space + 左键拖动平移，普通左键保留给卡片内容。
 .canvas-page .canvas-container,
 .canvas-page .canvas-container:active {
   cursor: default;
+  overscroll-behavior: contain;
 }
 
-.canvas-page .canvas-container.is-middle-panning,
-.canvas-page .canvas-container.is-middle-panning:active {
+.canvas-page .canvas-container.is-space-panning:not(.is-canvas-panning) {
+  cursor: grab;
+}
+
+.canvas-page .canvas-container.is-canvas-panning,
+.canvas-page .canvas-container.is-canvas-panning:active {
   cursor: grabbing;
 }
 
