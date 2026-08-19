@@ -640,6 +640,170 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
   cursor: grabbing;
 }
 
+// Canvas 节点详情侧栏：节点内容按正常字号展示，不受画布缩放影响。
+.canvas-page .canvas-container {
+  --canvas-node-inspector-width: clamp(340px, 38vw, 620px);
+}
+
+.canvas-page .canvas-node-inspector {
+  position: absolute;
+  z-index: 20;
+  inset: 0 0 0 auto;
+  display: flex;
+  width: var(--canvas-node-inspector-width);
+  min-width: 0;
+  flex-direction: column;
+  border-left: 1px solid color-mix(in srgb, var(--lightgray) 78%, transparent);
+  background: color-mix(in srgb, var(--light) 96%, transparent);
+  box-shadow: -14px 0 36px rgb(0 0 0 / 18%);
+  color: var(--darkgray);
+  cursor: auto;
+  opacity: 0;
+  transform: translateX(100%);
+  transition:
+    transform 180ms ease,
+    opacity 140ms ease;
+  pointer-events: none;
+  user-select: text;
+  backdrop-filter: blur(16px);
+}
+
+.canvas-page .canvas-container.is-node-inspector-open .canvas-node-inspector {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.canvas-page .canvas-node-inspector-header {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
+  color: var(--gray);
+  font-family: var(--bodyFont);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+}
+
+.canvas-page .canvas-node-inspector-close,
+.canvas-page .canvas-node-inspector-toggle {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--lightgray) 80%, transparent);
+  background: color-mix(in srgb, var(--light) 94%, var(--lightgray));
+  color: var(--darkgray);
+  cursor: pointer;
+}
+
+.canvas-page .canvas-node-inspector-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.canvas-page .canvas-node-inspector-toggle {
+  position: absolute;
+  z-index: 22;
+  top: 50%;
+  right: 0;
+  width: 30px;
+  height: 62px;
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+  font-size: 1.3rem;
+  transform: translateY(-50%);
+  transition:
+    right 180ms ease,
+    background 120ms ease;
+}
+
+.canvas-page .canvas-node-inspector-toggle[hidden] {
+  display: none;
+}
+
+.canvas-page .canvas-container.is-node-inspector-open .canvas-node-inspector-toggle {
+  right: var(--canvas-node-inspector-width);
+}
+
+.canvas-page .canvas-node-inspector-close:hover,
+.canvas-page .canvas-node-inspector-toggle:hover {
+  background: var(--lightgray);
+}
+
+.canvas-page .canvas-node-inspector-content {
+  min-height: 0;
+  flex: 1;
+  padding: 30px clamp(24px, 4vw, 48px) 64px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.canvas-page .canvas-node-inspector-document {
+  display: block;
+  height: auto;
+  padding: 0;
+  overflow: visible;
+  color: var(--darkgray);
+  font-size: 1rem;
+  line-height: 1.7;
+  white-space: normal;
+}
+
+.canvas-page .canvas-node-inspector-document h1 {
+  margin: 0 0 1.35rem;
+  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  line-height: 1.22;
+}
+
+.canvas-page .canvas-node-inspector-document h2 {
+  font-size: 1.45rem;
+}
+
+.canvas-page .canvas-node-inspector-document h3 {
+  font-size: 1.2rem;
+}
+
+.canvas-page .canvas-node-inspector-document p,
+.canvas-page .canvas-node-inspector-document li {
+  line-height: 1.72;
+}
+
+.canvas-page .canvas-node-inspector-document .math-display {
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.canvas-page .canvas-node-inspector-content > img,
+.canvas-page .canvas-node-inspector-document img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: none;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.canvas-page .canvas-node.is-selected:not(.canvas-node-group) {
+  outline: 2px solid color-mix(
+    in srgb,
+    var(--canvas-node-color, var(--secondary)) 82%,
+    white
+  );
+  outline-offset: 3px;
+}
+
+.canvas-page .canvas-container.is-node-inspector-open .canvas-controls {
+  right: calc(var(--canvas-node-inspector-width) + 12px);
+}
+
 // Canvas 卡片使用轻微的节点色染色，接近 Obsidian 的层次感而不是纯黑色块。
 .canvas-page .canvas-node:not(.canvas-node-group) {
   border-color: color-mix(
@@ -676,6 +840,17 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
   opacity: 0.78;
   transform: scale(0.9);
   transform-origin: 5px 5px;
+}
+
+@media (max-width: 800px) {
+  .canvas-page .canvas-container {
+    --canvas-node-inspector-width: min(88vw, 440px);
+  }
+
+  .canvas-page .canvas-container.is-node-inspector-open .canvas-controls {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 @media all and ($mobile) {

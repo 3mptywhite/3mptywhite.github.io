@@ -30,6 +30,8 @@ const patchedPanListeners = `u=e=>{Y&&(e.preventDefault(),c=e.clientX-D,a=e.clie
 const originalPanCleanup = `t.removeEventListener("pointerup",r),t.removeEventListener("touchstart",U)`
 const legacyPatchedPanCleanup = `t.removeEventListener("pointerup",r),t.removeEventListener("pointercancel",r),t.removeEventListener("auxclick",Q),t.removeEventListener("touchstart",U)`
 const patchedPanCleanup = `t.removeEventListener("pointerup",r),t.removeEventListener("pointercancel",r),t.removeEventListener("auxclick",Q),document.removeEventListener("keydown",A),document.removeEventListener("keyup",X),window.removeEventListener("blur",P),t.removeEventListener("touchstart",U)`
+const originalInspectorHook = `let C=t.closest(\\'.page[data-frame="canvas"]\\'),R=C?.querySelector(".canvas-sidebar-toggle");`
+const patchedInspectorHook = `let C=t.closest(".page[data-frame=canvas]"),R=C?.querySelector(".canvas-sidebar-toggle"),ee=null;if(C){let e=document.createElement("aside"),s=document.createElement("button");e.className="canvas-node-inspector",e.setAttribute("aria-hidden","true"),e.innerHTML="<div class=canvas-node-inspector-header><span>节点详情</span><button class=canvas-node-inspector-close type=button aria-label=折叠节点详情>×</button></div><div class=canvas-node-inspector-content></div>",s.className="canvas-node-inspector-toggle",s.type="button",s.hidden=!0,s.setAttribute("aria-expanded","false"),s.setAttribute("aria-label","展开节点详情"),s.textContent="‹",t.append(e,s);let i=e.querySelector(".canvas-node-inspector-content"),T=e.querySelector(".canvas-node-inspector-close"),p=()=>{t.classList.remove("is-node-inspector-open"),e.setAttribute("aria-hidden","true"),s.setAttribute("aria-expanded","false"),s.setAttribute("aria-label","展开节点详情"),s.textContent="‹"},g=n=>{ee&&ee.classList.remove("is-selected"),ee=n,ee.classList.add("is-selected"),i.replaceChildren();let l=n.querySelector(".canvas-node-content"),u=n.querySelector(":scope > img");if(l){let r=l.cloneNode(!0);r.classList.add("canvas-node-inspector-document"),i.append(r)}else if(u)i.append(u.cloneNode(!0));else{let r=n.querySelector(".canvas-group-label")?.textContent?.trim();r&&(i.textContent=r)}s.hidden=!1,t.classList.add("is-node-inspector-open"),e.setAttribute("aria-hidden","false"),s.setAttribute("aria-expanded","true"),s.setAttribute("aria-label","折叠节点详情"),s.textContent="›"},X=n=>{let l=n.currentTarget;n.target instanceof Element&&n.target.closest("a,button")||g(l)},P=n=>{n.target instanceof Element&&!n.target.closest(".canvas-node,.canvas-node-inspector,.canvas-node-inspector-toggle,.canvas-controls")&&(ee?.classList.remove("is-selected"),ee=null,s.hidden=!0,i.replaceChildren(),p())},be=n=>{n.key==="Escape"&&t.classList.contains("is-node-inspector-open")&&p()},xe=Array.from(t.querySelectorAll(".canvas-node:not(.canvas-node-group)"));for(let n of xe)n.addEventListener("click",X);T?.addEventListener("click",p),s.addEventListener("click",()=>{ee&&(t.classList.contains("is-node-inspector-open")?p():g(ee))}),t.addEventListener("click",P),document.addEventListener("keydown",be),f.push(()=>{for(let n of xe)n.removeEventListener("click",X);t.removeEventListener("click",P),document.removeEventListener("keydown",be),e.remove(),s.remove()})}`
 
 let source = readFileSync(canvasPageEntry, "utf8")
 const hasPatchedImport = source.includes(patchedImport)
@@ -85,6 +87,16 @@ if (hasOriginalPanPatch && !hasPatchedPanPatch) {
 } else if (!hasPatchedPanPatch) {
   throw new Error(
     "Canvas pan interaction patch is missing or partially applied; review scripts/patch-canvas-page-math.mjs",
+  )
+}
+
+const hasPatchedInspector = source.includes(patchedInspectorHook)
+if (!hasPatchedInspector && source.includes(originalInspectorHook)) {
+  source = source.replace(originalInspectorHook, patchedInspectorHook)
+  changed = true
+} else if (!hasPatchedInspector) {
+  throw new Error(
+    "Canvas node inspector patch is missing or partially applied; review scripts/patch-canvas-page-math.mjs",
   )
 }
 
