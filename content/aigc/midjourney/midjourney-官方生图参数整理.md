@@ -6,19 +6,6 @@ parent: "[[aigc/midjourney/index|Midjourney]]"
 grand_parent: "[[aigc/index|AIGC]]"
 nav_order: 1
 ---
-
-整理当前静态图片生成中常用的 Midjourney 参数、版本兼容性和网页功能。
-
-> 更新日期：2026-07-23
->
-> 资料范围：仅使用 Midjourney 官方文档与官方更新日志。
->
-> 范围：只包含静态图片生成；不包含视频参数。
->
-> 当前默认模型：Midjourney V8.1。
->
-> 重要：官方的 Parameter List 会同时列出多个模型版本的参数，并不代表每个参数都能在 V8.1 中使用。
-
 官方依据：[Parameter List](https://docs.midjourney.com/hc/en-us/articles/32859204029709-Parameter-List) · [Version / Compatibility](https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version) · [Legacy Features](https://docs.midjourney.com/hc/en-us/articles/33329788681101-Legacy-Features)
 
 ---
