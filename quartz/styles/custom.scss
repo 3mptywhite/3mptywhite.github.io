@@ -182,6 +182,25 @@
   opacity: 1;
 }
 
+// 像 Obsidian 文件树一样标记 Canvas 文件，便于和普通笔记快速区分。
+.explorer-content ul li > a[href$=".canvas"] {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.explorer-content ul li > a[href$=".canvas"]::after {
+  content: "CANVAS";
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: var(--gray);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
 .explorer-content .folder-outer > ul {
   border-left-color: color-mix(in srgb, var(--lightgray) 78%, transparent);
 }
@@ -646,8 +665,8 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
   background-color: color-mix(in srgb, var(--light) 86%, var(--lightgray));
   background-image: radial-gradient(
     circle,
-    color-mix(in srgb, var(--gray) 46%, transparent) 0.8px,
-    transparent 0.9px
+    color-mix(in srgb, var(--gray) 18%, transparent) 0.65px,
+    transparent 0.8px
   );
 }
 
