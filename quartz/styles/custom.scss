@@ -635,6 +635,44 @@ body[data-slug="index"] article .markdown-preview-view > p:empty {
   cursor: grabbing;
 }
 
+// Canvas 卡片使用轻微的节点色染色，接近 Obsidian 的层次感而不是纯黑色块。
+.canvas-page .canvas-node:not(.canvas-node-group) {
+  border-color: color-mix(
+    in srgb,
+    var(--canvas-node-color, var(--lightgray)) 74%,
+    var(--light)
+  );
+  border-radius: 8px;
+  background: color-mix(
+    in srgb,
+    var(--canvas-node-color, var(--lightgray)) 12%,
+    var(--light)
+  );
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 18%),
+    inset 0 1px rgb(255 255 255 / 3%);
+}
+
+.canvas-page .canvas-node:not(.canvas-node-group):hover {
+  box-shadow:
+    0 3px 10px rgb(0 0 0 / 22%),
+    inset 0 1px rgb(255 255 255 / 4%);
+}
+
+// 连线降低亮度并使用圆角端点；箭头尖端略微缩小，避免压住卡片边框。
+.canvas-page .canvas-edge > path {
+  opacity: 0.6;
+  stroke-width: 1.7px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.canvas-page .canvas-edge marker path {
+  opacity: 0.78;
+  transform: scale(0.9);
+  transform-origin: 5px 5px;
+}
+
 @media all and ($mobile) {
   .about-profile {
     grid-template-columns: minmax(0, 1fr);
