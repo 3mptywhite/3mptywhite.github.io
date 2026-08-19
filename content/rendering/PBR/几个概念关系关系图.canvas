@@ -18,7 +18,7 @@
 		{"id":"d3288a9e10a5a78c","type":"text","text":"# _光谱辐射亮度（spectral radiance）_ \n$$\nL_{\\lambda}\n\n$$\n\n两个光谱可能具有相同的总辐射亮度，却有完全不同的颜色。例如总能量相同的一束绿光和一束蓝光，辐射亮度可以相同\n\n光谱辐射亮度是“按波长划分的辐射亮度**密度**”，辐射亮度是它在指定波长范围内的积分总量。","x":-430,"y":1600,"width":492,"height":240,"color":"4"},
 		{"id":"9bd51691e7c05ec3","type":"text","text":"# _亮度（Luminance）_\n\n$$\nY\n$$\n---\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$","x":-20,"y":2100,"width":332,"height":260,"color":"4"},
 		{"id":"00ce875fe6575ebd","type":"text","text":"# 光谱响应曲线 $V(\\lambda)$ ","x":784,"y":1670,"width":300,"height":90,"color":"4"},
-		{"id":"9e2b96da7e19d12b","type":"text","text":"## 光度学 和 辐射度量学 的 联系\n\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$ \n\n---\n$$\nL = \\int_{\\lambda_0}^{\\lambda_1} L_{\\lambda}(\\lambda)\\text{d}\\lambda\n\n$$\n\n---\n$$\ndY=V(\\lambda)\\,dL\\\n$$","x":213,"y":1376,"width":353,"height":348,"color":"1"}
+		{"id":"9e2b96da7e19d12b","type":"text","text":"## 光度学 和 辐射度量学 的 联系\n\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$ \n\n---\n$$\nL = \\int_{\\lambda_0}^{\\lambda_1} L_{\\lambda}(\\lambda)\\text{d}\\lambda\n\n$$\n\n---\n$$\ndY=V(\\lambda)\\,dL\n$$","x":213,"y":1376,"width":353,"height":348,"color":"1"}
 	],
 	"edges":[
 		{"id":"7c8ed00ff0acdc50","fromNode":"fa97ce8b1ce38ff3","fromSide":"bottom","toNode":"2110c1d049e29bd6","toSide":"top"},
