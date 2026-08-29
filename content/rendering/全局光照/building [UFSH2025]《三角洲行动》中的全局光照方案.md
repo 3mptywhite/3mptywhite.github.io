@@ -115,3 +115,4 @@ Volume 大小需要定到比墙厚度小 ，这点在PC端可行，且前期有�
 # 阅读清单
 
 https://research.activision.com/publications/archives/volumetric-global-illumination-at-treyarch 
+https://drivers.amd.com/developer/gdc/D3DTutorial10_Half-Life2_Shading.pdf
