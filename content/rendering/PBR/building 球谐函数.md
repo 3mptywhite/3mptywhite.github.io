@@ -20,6 +20,8 @@ Cubemap其实就是球面函数的纹理化存储：
 
 和离散傅里叶变化模拟函数变化类似 。用一组球谐函数来近似一个球面函数
 
+![img](https://www.patapom.com/blog/images/SH/SHSignalReconstruction.png)
+
 ```
 普通声音信号 → 用多个正弦波表示
 球面光照信号 → 用多个球谐函数表示
@@ -31,6 +33,8 @@ Cubemap其实就是球面函数的纹理化存储：
 【SH函数公式推导非常复杂，目前的我是看不懂，~~问了下ai 前置知识大概需要 懂完整的勒让德多项式和球面拉普拉斯推导~~】 
 
 但不影响我们利用它，既然是基函数 ，有些性质就是一样的
+
+![img](https://www.patapom.com/blog/images/SH/Spherical_Harmonics.png)
 
 ## 利用与目标球面函数做内积来得到系数
 
