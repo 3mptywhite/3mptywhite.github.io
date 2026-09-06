@@ -10,7 +10,7 @@
 		{"id":"d66cbe45dc067aa8","type":"text","text":"$$\nI = \\lim_{\\Delta\\omega\\rightarrow 0}\\frac{\\Delta\\Phi}{\\Delta\\omega} = \\frac{\\text{d}\\Phi}{\\text{d}\\omega}\n$$\n---\n$$\n\\Phi = \\int_{\\Omega} I(\\omega)\\text{d}\\omega\n$$","x":148,"y":135,"width":380,"height":224},
 		{"id":"911e9dbd5410e51b","type":"text","text":"$$\nL(\\text{p},\\omega) = \\lim_{\\Delta\\omega\\rightarrow 0}\\frac{\\Delta E_{\\omega}(\\text{p})}{\\Delta\\omega} = \\frac{\\text{d}E_{\\omega}(\\text{p})}{\\text{d}\\omega}\n$$","x":-909,"y":820,"width":330,"height":98},
 		{"id":"a4eb21c6f43e004d","type":"text","text":"$$ \n\nL = \\frac{\\text{d}I}{\\text{d}A^{\\perp}}\n\n$$","x":213,"y":845,"width":250,"height":113},
-		{"id":"fa97ce8b1ce38ff3","type":"text","text":"# Emergy\n\n$$ \nQ = \\frac{hc}{λ}\n$$","x":-292,"y":-920,"width":220,"height":220},
+		{"id":"fa97ce8b1ce38ff3","type":"text","text":"# Energy\n\n$$ \nQ = \\frac{hc}{λ}\n$$","x":-292,"y":-920,"width":220,"height":220},
 		{"id":"2110c1d049e29bd6","type":"text","text":"$$\n\\Phi = \\lim_{\\Delta t \\rightarrow 0}\\frac{\\Delta Q}{\\Delta t} = \\frac{\\text{d}Q}{\\text{d}t}\n$$\n---\n$$\nQ = \\int_{t_0}^{t_1} \\Phi(t)\\text{d}t\n$$","x":-314,"y":-540,"width":265,"height":260},
 		{"id":"85b57cf4de366599","type":"text","text":"朗伯定律（Lambert’s law）","x":-1226,"y":105,"width":250,"height":60},
 		{"id":"f808a7ebe487e8aa","type":"text","text":"![image-20260819204301512](https://picgo09072024-1328204036.cos.ap-shanghai.myqcloud.com/image/image-20260819204301512.png)","x":-1320,"y":185,"width":344,"height":235},
@@ -19,7 +19,7 @@
 		{"id":"00ce875fe6575ebd","type":"text","text":"# 光谱响应曲线 $V(\\lambda)$ ","x":784,"y":1670,"width":300,"height":90,"color":"4"},
 		{"id":"9e2b96da7e19d12b","type":"text","text":"## 光度学 和 辐射度量学 的 联系\n\n$$\nY = \\int_{\\lambda}L_{\\lambda}(\\lambda)V(\\lambda)\\text{d}\\lambda\n$$ \n\n---\n$$\nL = \\int_{\\lambda_0}^{\\lambda_1} L_{\\lambda}(\\lambda)\\text{d}\\lambda\n\n$$\n\n---\n$$\ndY=V(\\lambda)\\,dL\n$$","x":213,"y":1376,"width":353,"height":348,"color":"1"},
 		{"id":"3ae8708318952fbd","type":"text","text":"# Intensity\n\n$$ \nI\n$$","x":213,"y":520,"width":250,"height":134,"color":"5"},
-		{"id":"78f78f1fe6d733ef","x":480,"y":1047,"width":381,"height":213,"type":"text","text":"> 计算机图形学通常依赖于这些模型中最简单的一种，即**射线光学**或**几何光学**。该模型对光的行为做了若干简化。从根本上讲，在该模型中，光只能发射、反射和透射。相反，更高层次光学所描述的复杂效应，例如衍射和干涉（**波动光学**）、偏振和色散（**电磁光学**）以及荧光和磷光（**量子光学**）都被完全忽略"}
+		{"id":"78f78f1fe6d733ef","type":"text","text":"> 计算机图形学通常依赖于这些模型中最简单的一种，即**射线光学**或**几何光学**。该模型对光的行为做了若干简化。从根本上讲，在该模型中，光只能发射、反射和透射。相反，更高层次光学所描述的复杂效应，例如衍射和干涉（**波动光学**）、偏振和色散（**电磁光学**）以及荧光和磷光（**量子光学**）都被完全忽略","x":480,"y":1047,"width":381,"height":213}
 	],
 	"edges":[
 		{"id":"7c8ed00ff0acdc50","fromNode":"fa97ce8b1ce38ff3","fromSide":"bottom","toNode":"2110c1d049e29bd6","toSide":"top"},
