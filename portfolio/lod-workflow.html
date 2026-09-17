@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="googlebot" content="noindex,nofollow,noarchive" />
+    <meta name="description" content="UE 资产导出、AO 烘焙、Houdini LOD2 生成与参数说明。" />
+    <meta name="theme-color" content="#090b0e" />
+    <title>Houdini LOD2 制作流程 · emteehu</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="./">emteehu<span>.</span></a>
+        <nav aria-label="作品集导航">
+          <a href="./#projects">作品</a><a href="./#notes">技术笔记</a><a href="/">返回博客 ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <article class="article">
+        <a class="back-link" href="./#vegetation">← 返回植被项目</a>
+        <p class="eyebrow">TECHNICAL NOTE / 02</p>
+        <h1>Houdini LOD2 制作流程</h1>
+        <p class="lede">
+          从 UE 导出原有树木资产，经 AO 烘焙与 Houdini 处理，生成可调整的各级 LOD 模型。
+        </p>
+        <nav class="article-toc" aria-label="文章目录">
+          <a href="#export">导出资产</a><a href="#houdini">Houdini 操作</a
+          ><a href="#ao">烘焙与导入</a><a href="#parameters">参数说明</a
+          ><a href="#result">导出结果</a>
+        </nav>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：UE、Houdini 与 3ds Max 之间的资产处理流程">
+            <img
+              src="assets/lod-3-0.webp"
+              alt="UE、Houdini 与 3ds Max 之间的资产处理流程"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>整体流程：UE 导出、Houdini 拆分、AO 烘焙、LOD 生成，再回到 UE。</figcaption>
+        </figure>
+        <h2 id="export">1. 从 UE 导出资产</h2>
+        <p>导出树木资产到独立文件夹，勾选导出 LOD 选项，保留后续生成所需的层级数据。</p>
+        <figure class="media-frame">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="media/ue-export.webp"
+            aria-label="UE 资产导出"
+          >
+            <source src="media/ue-export.mp4" type="video/mp4" />
+            你的浏览器不支持视频播放。<a href="media/ue-export.mp4">打开视频</a>
+          </video>
+          <figcaption><strong>UE 资产导出</strong>操作演示 / 15 秒</figcaption>
+        </figure>
+        <h2 id="houdini">2. Houdini 基本操作与叶片导出</h2>
+        <p>
+          使用 CreateTreeTools 工具文件。点击节点的蓝色眼睛切换显示，在视图中按 F
+          聚焦物体。选中节点后，可在参数面板中调整对应参数。
+        </p>
+        <ul>
+          <li>file 节点负责导入 FBX。路径不正确时，需要先修正路径。</li>
+          <li>rop fbx 节点负责导出模型。设置路径后，点击 Save to Disk。</li>
+          <li>
+            在 UE 模型导入节点读取刚导出的 FBX，再设置 LOD0 树叶模型导出节点，导出叶片用于 AO 烘焙。
+          </li>
+        </ul>
+        <div class="media-grid">
+          <figure class="media-frame">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster="media/houdini-controls.webp"
+              aria-label="节点与参数操作"
+            >
+              <source src="media/houdini-controls.mp4" type="video/mp4" />
+              你的浏览器不支持视频播放。<a href="media/houdini-controls.mp4">打开视频</a>
+            </video>
+            <figcaption><strong>节点与参数操作</strong>28 秒</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster="media/houdini-import-export.webp"
+              aria-label="模型导入与导出"
+            >
+              <source src="media/houdini-import-export.mp4" type="video/mp4" />
+              你的浏览器不支持视频播放。<a href="media/houdini-import-export.mp4">打开视频</a>
+            </video>
+            <figcaption><strong>模型导入与导出</strong>58 秒</figcaption>
+          </figure>
+        </div>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：Houdini 工具节点概览">
+            <img
+              src="assets/lod-5-0.webp"
+              alt="Houdini 工具节点概览"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>工具节点与各步骤之间的关系。</figcaption>
+        </figure>
+        <h2 id="ao">3. AO 烘焙与模型导入</h2>
+        <p>
+          在 3ds Max 中，将天光结果烘焙到 LOD0 树冠的顶点色。导入和导出时，检查系统单位保持一致。
+        </p>
+        <p>
+          将烘焙后的树叶模型导入 Houdini，再导入美术制作的单个叶片模型。单个叶片需要准备好形状与
+          UV，UV 使用通道 0。
+        </p>
+        <div class="media-grid">
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：导入烘焙后的树叶模型">
+              <img
+                src="assets/lod-7-0.webp"
+                alt="导入烘焙后的树叶模型"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>导入烘焙后的树叶。</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：导入用于生成的单个叶片模型">
+              <img
+                src="assets/lod-7-1.webp"
+                alt="导入用于生成的单个叶片模型"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>导入用于生成的单个叶片。</figcaption>
+          </figure>
+        </div>
+        <h2 id="parameters">4. 调试视图与参数</h2>
+        <p>
+          点击 debug_mode 节点的蓝色眼睛查看模型效果，通过 Control_set 面板调节 LOD2 的 Billboard
+          叶片与插片叶片。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：五种调试视图">
+            <img src="assets/lod-9-2.webp" alt="五种调试视图" loading="lazy" decoding="async" />
+          </button>
+          <figcaption>Select Input 的 0–4 五种显示模式。</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Select Input</th>
+                <th>显示内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>LOD2 最终效果</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>生成的 VDB 与原树叶范围对比</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Billboard 模型及对应轴心点</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Billboard 模型与 VDB 对比</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>红色为保留的插片树叶，绿色为将要删除的范围</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>CreateTreeMesh 参数</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>参数</th>
+                <th>作用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Recal pivot</td>
+                <td>
+                  是否重新计算单个叶片模型的轴心。0 为重新计算，1 为使用 FBX
+                  原始效果，通常无需修改。
+                </td>
+              </tr>
+              <tr>
+                <td>Single Billboard Scale</td>
+                <td>整体 Billboard 面片大小，与后续缩放参数相乘决定最终大小。</td>
+              </tr>
+              <tr>
+                <td>PointSeparation</td>
+                <td>控制 Billboard 面片的间距和疏密。</td>
+              </tr>
+              <tr>
+                <td>Base Voxel Size</td>
+                <td>控制 VDB 对树叶细节的保留程度。数值越大，细节越少、模型越光滑。</td>
+              </tr>
+              <tr>
+                <td>Base Surface add</td>
+                <td>控制 VDB 模型的鼓胀程度。</td>
+              </tr>
+              <tr>
+                <td>Peak Distance</td>
+                <td>控制 Billboard 点的扰动范围。</td>
+              </tr>
+              <tr>
+                <td>NormalDir Min/Max Value</td>
+                <td>控制面片随机朝向的范围。</td>
+              </tr>
+              <tr>
+                <td>pscale Min/Max Value</td>
+                <td>控制面片随机缩放范围，与整体缩放参数共同作用。</td>
+              </tr>
+              <tr>
+                <td>Delete Range Offset</td>
+                <td>控制 LOD2 插片树叶的保留范围。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="result">5. 导出各级 LOD 并重新导入 UE</h2>
+        <p>
+          依次设置各级模型的输出路径，导出 FBX 后重新导入 UE。检查材质、Billboard 颜色与 LOD
+          切换效果，避免沿用测试材质造成颜色不一致。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：各级 LOD 的输出节点">
+            <img
+              src="assets/lod-11-0.webp"
+              alt="各级 LOD 的输出节点"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>各级 LOD 输出节点。</figcaption>
+        </figure>
+        <p class="note">
+          本页整理自原始《LOD2
+          制作流程》，展示工具使用方法。当前页面提供已下载的步骤演示，不提供工具工程文件。
+        </p>
+        <div class="article-end"><a href="./#vegetation">返回作品集 →</a></div>
+      </article>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>胡洺滔 / emteehu · 技术美术作品集</span><span>2024—2026 · 项目说明见各作品</span>
+      </div>
+    </footer>
+    <dialog id="image-viewer" aria-label="图片大图">
+      <button class="close" aria-label="关闭大图">关闭 ×</button><img alt="" />
+    </dialog>
+  </body>
+</html>

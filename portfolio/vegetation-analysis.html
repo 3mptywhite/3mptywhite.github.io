@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="googlebot" content="noindex,nofollow,noarchive" />
+    <meta name="description" content="树木 LOD、AO 烘焙与法线处理的项目分析笔记。" />
+    <meta name="theme-color" content="#090b0e" />
+    <title>风格化树木分析 · emteehu</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="./">emteehu<span>.</span></a>
+        <nav aria-label="作品集导航">
+          <a href="./#projects">作品</a><a href="./#notes">技术笔记</a><a href="/">返回博客 ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <article class="article">
+        <a class="back-link" href="./#vegetation">← 返回植被项目</a>
+        <p class="eyebrow">TECHNICAL NOTE / 01</p>
+        <h1>风格化树木分析</h1>
+        <p class="lede">
+          以《原神》的树木表现为参考，梳理 LOD、AO 和法线处理方式，并记录项目中的适配方案。
+        </p>
+        <nav class="article-toc" aria-label="文章目录">
+          <a href="#lod">LOD 规范</a><a href="#channels">顶点通道</a><a href="#ao">AO 烘焙</a
+          ><a href="#normals">法线处理</a>
+        </nav>
+        <h2 id="lod">LOD 规范</h2>
+        <p>
+          项目 PC 端使用 LOD0–LOD3，移动端使用 LOD1–LOD3。LOD2 采用插片树与 Billboard
+          树混合的方式，在保持中远景效果的同时节省顶点。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：PC 与移动端的树木 LOD 规范">
+            <img
+              src="assets/tree-3-0.webp"
+              alt="PC 与移动端的树木 LOD 规范"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>LOD2 使用内部掏空的插片树与 Billboard 树组合。</figcaption>
+        </figure>
+        <h2 id="channels">顶点通道</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>资产类型</th>
+                <th>通道</th>
+                <th>用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>插片树</td>
+                <td>Alpha</td>
+                <td>AO</td>
+              </tr>
+              <tr>
+                <td>插片树</td>
+                <td>R</td>
+                <td>风的强度遮罩</td>
+              </tr>
+              <tr>
+                <td>Billboard 树</td>
+                <td>Alpha</td>
+                <td>AO</td>
+              </tr>
+              <tr>
+                <td>Billboard 树</td>
+                <td>RGB</td>
+                <td>Billboard 计算</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="ao">AO 烘焙</h2>
+        <p>
+          在 3ds Max 中将天光的光照结果烘焙到 LOD0 树冠的顶点色，再在 Houdini
+          中通过属性传递，让后续各级 LOD 获得一致的 AO。
+        </p>
+        <p>
+          原项目部分树木的 AO 数值差异较大，需要在资产生产时统一，避免同一场景中出现明显不一致。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：参考树木与项目树木 AO 表现比较">
+            <img
+              src="assets/tree-4-0.webp"
+              alt="参考树木与项目树木 AO 表现比较"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>参考与项目树木的分层观察。</figcaption>
+        </figure>
+        <h2 id="normals">法线处理</h2>
+        <p>
+          树叶通过法线重映射，得到更干净的阴影范围。项目已有类似处理，因此重点是统一不同资产的法线角度范围。
+        </p>
+        <p>
+          观察参考树木时，法线角度大致从平行水平线过渡到接近垂直方向。对于叶片明显分成多团的树，法线反向延长线不会全部交汇于同一点。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：树叶法线角度与方向分析">
+            <img
+              src="assets/tree-4-1.webp"
+              alt="树叶法线角度与方向分析"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>树冠不同区域的法线角度范围。</figcaption>
+        </figure>
+        <h3>项目通道占用下的适配</h3>
+        <p>
+          笔记记录的参考做法是将重映射前的法线编码到 RGB
+          通道，用于计算接近垂直视角的树叶剔除。项目的 R 通道已用于顶点飘动遮罩，因此采用 ddx
+          重建法线的方式适配。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：参考方案与项目法线处理对照">
+            <img
+              src="assets/tree-5-0.webp"
+              alt="参考方案与项目法线处理对照"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>参考与项目方案的观察对照。</figcaption>
+        </figure>
+        <p class="note">
+          本文整理自原始《原神树分析》笔记。参考游戏的技术判断来自分析与复现，不代表其官方实现说明。
+        </p>
+        <div class="article-end">
+          <a href="lod-workflow.html">继续阅读：Houdini LOD2 制作流程 →</a>
+        </div>
+      </article>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>胡洺滔 / emteehu · 技术美术作品集</span><span>2024—2026 · 项目说明见各作品</span>
+      </div>
+    </footer>
+    <dialog id="image-viewer" aria-label="图片大图">
+      <button class="close" aria-label="关闭大图">关闭 ×</button><img alt="" />
+    </dialog>
+  </body>
+</html>

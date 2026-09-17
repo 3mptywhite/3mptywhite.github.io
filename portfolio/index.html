@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="googlebot" content="noindex,nofollow,noarchive" />
+    <meta
+      name="description"
+      content="胡洺滔的技术美术作品集：植被与 LOD 工具、瀑布材质、程序化建筑、水体和 AIGC 评测。"
+    />
+    <meta name="theme-color" content="#090b0e" />
+    <title>胡洺滔 · 技术美术作品集 · emteehu</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="./">emteehu<span>.</span></a>
+        <nav aria-label="作品集导航">
+          <a href="./#projects">作品</a><a href="./#notes">技术笔记</a><a href="/">返回博客 ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">TECHNICAL ART PORTFOLIO / 2024—2026</p>
+          <h1>胡洺滔<span>技术美术作品集</span></h1>
+          <p class="intro">
+            从实时画面到资产生产流程。这里展示我在植被优化、程序化工具、材质与光照，以及 AIGC
+            评测方向的实践。
+          </p>
+          <div class="hero-bottom">
+            <a class="primary-link" href="#projects">浏览作品 <span>↓</span></a
+            ><a class="secondary-link" href="#notes">阅读技术笔记</a>
+          </div>
+        </div>
+        <figure class="hero-image">
+          <img
+            src="assets/image1.webp"
+            alt="个人瀑布场景练习：岩壁、瀑布与水面的实时渲染效果"
+            fetchpriority="high"
+            width="1280"
+            height="1000"
+          />
+          <figcaption>个人练习 / 瀑布场景与光照复现</figcaption>
+        </figure>
+      </section>
+      <nav class="project-nav" id="projects" aria-label="项目目录">
+        <a href="#vegetation"><span>01</span>植被与工具</a
+        ><a href="#waterfall"><span>02</span>瀑布场景</a><a href="#pcg"><span>03</span>程序化建筑</a
+        ><a href="#water"><span>04</span>水体效果</a
+        ><a href="#flashlight"><span>05</span>手电筒组件</a
+        ><a href="#qualis"><span>06</span>Qualis 3D</a>
+      </nav>
+      <section class="section" id="vegetation">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">01 / SELECTED WORK</p>
+            <h2>风格化植被优化<br />与生产提效</h2>
+            <p class="tools">Houdini / Unreal Engine / 3ds Max</p>
+            <p>围绕树冠体积感、中远景 LOD 和资产生产效率，梳理 AO 烘焙与面片生成流程。</p>
+          </div>
+          <div class="role">
+            <strong>我的工作</strong>
+            <p>
+              接手项目植被优化，分析并复现参考树木的 AO 烘焙方法，指导美术生产。使用 Houdini 从 LOD1
+              数据生成 LOD2，减少重复手工制作。
+            </p>
+            <div class="statline">
+              <div><b>约 1 周</b><small>原手工制作 / 单棵 LOD2</small></div>
+              <div><b>约 20 分钟</b><small>工具流程 / 含美术调参</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="media-grid">
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：植被优化前后效果对比">
+              <img
+                src="assets/image8.webp"
+                alt="植被优化前后效果对比"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>AO 烘焙优化前后：改善树冠体积与暗部层次。</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：第二组植被优化前后效果对比">
+              <img
+                src="assets/image11.webp"
+                alt="第二组植被优化前后效果对比"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>不同植被资产的优化效果。</figcaption>
+          </figure>
+        </div>
+        <div class="media-grid media-wide">
+          <figure class="media-frame">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster="media/lod-generation.webp"
+              aria-label="Houdini LOD2 面片生成"
+            >
+              <source src="media/lod-generation.mp4" type="video/mp4" />
+              你的浏览器不支持视频播放。<a href="media/lod-generation.mp4">打开视频</a>
+            </video>
+            <figcaption>
+              <strong>Houdini LOD2 面片生成</strong>21 秒 · 从树冠数据生成面片的操作演示。
+            </figcaption>
+          </figure>
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：LOD2 生成过程五种调试视图">
+              <img
+                src="assets/image9.webp"
+                alt="LOD2 生成过程五种调试视图"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>调试视图：生成结果、体积范围、Billboard 与插片范围。</figcaption>
+          </figure>
+        </div>
+        <div class="links-row">
+          <a href="vegetation-analysis.html">阅读：风格化树木分析 ↗</a
+          ><a href="lod-workflow.html">阅读：LOD2 制作流程 ↗</a>
+        </div>
+      </section>
+      <section class="section" id="waterfall">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">02 / SELECTED WORK</p>
+            <h2>瀑布场景复现</h2>
+            <p class="tools">RenderDoc / Houdini / Unreal Engine</p>
+            <p>
+              基于《死亡搁浅》的场景与材质研究进行个人练习，串联面片生成、材质拆解与引擎中的光照调整。
+            </p>
+          </div>
+          <div class="role">
+            <strong>我的工作</strong>
+            <p>
+              使用 RenderDoc
+              研究参考效果，复现场景资产与瀑布面片生成方法。调整光照、曝光和雾气，让迎光与背光方向保留可读细节。
+            </p>
+            <p>性质：个人学习与复现练习。</p>
+          </div>
+        </div>
+        <figure class="media-frame">
+          <div class="compare" style="--split: 50%">
+            <img
+              src="assets/image20.webp"
+              alt="光照调整前，岩壁与瀑布暗部较深"
+              loading="lazy"
+            /><img
+              class="after"
+              src="assets/image19.webp"
+              alt="光照调整后，岩壁和瀑布细节更清晰"
+              loading="lazy"
+            /><label class="before-label" for="lighting-slider">调整前</label
+            ><label class="after-label" for="lighting-slider">调整后</label
+            ><span class="divider"></span
+            ><input
+              id="lighting-slider"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              aria-label="拖动比较光照调整前后"
+              aria-valuetext="左侧调整前 50%，右侧调整后 50%"
+            />
+          </div>
+          <figcaption>光照与曝光调整前后。拖动分隔线查看同一视角的变化。</figcaption>
+        </figure>
+        <div class="media-grid three media-wide">
+          <figure class="media-frame">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster="media/waterfall-material.webp"
+              aria-label="瀑布材质拆解"
+            >
+              <source src="media/waterfall-material.mp4" type="video/mp4" />
+              你的浏览器不支持视频播放。<a href="media/waterfall-material.mp4">打开视频</a>
+            </video>
+            <figcaption><strong>瀑布材质拆解</strong>26 秒 · 分层查看材质构成。</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster="media/waterfall-iteration.webp"
+              aria-label="顶点色遮罩迭代"
+            >
+              <source src="media/waterfall-iteration.mp4" type="video/mp4" />
+              你的浏览器不支持视频播放。<a href="media/waterfall-iteration.mp4">打开视频</a>
+            </video>
+            <figcaption><strong>顶点色遮罩迭代</strong>25 秒 · 观察遮罩调整后的变化。</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster="media/lighting-comparison.webp"
+              aria-label="光照前后对比"
+            >
+              <source src="media/lighting-comparison.mp4" type="video/mp4" />
+              你的浏览器不支持视频播放。<a href="media/lighting-comparison.mp4">打开视频</a>
+            </video>
+            <figcaption>
+              <strong>光照前后对比</strong>28 秒 · 连续视角下的曝光与明暗表现。
+            </figcaption>
+          </figure>
+        </div>
+        <details class="technical-details">
+          <summary>展开面片生成与光照思路</summary>
+          <div class="media-grid">
+            <figure class="media-frame">
+              <button class="zoom" aria-label="放大：Houdini 瀑布面片生成步骤">
+                <img
+                  src="assets/image15.webp"
+                  alt="Houdini 瀑布面片生成步骤"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>Houdini 面片生成过程。</figcaption>
+            </figure>
+            <figure class="media-frame">
+              <button class="zoom" aria-label="放大：瀑布面片 UV 分布">
+                <img
+                  src="assets/image17.webp"
+                  alt="瀑布面片 UV 分布"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>用于材质表现的 UV 分布。</figcaption>
+            </figure>
+          </div>
+          <p style="margin-top: 22px">
+            光照流程：先设置符合物理尺度的光照参数并确定表现主体，使用自动曝光测光，再固定手动曝光。根据场景需要调整曝光补偿曲线和雾气。
+          </p>
+        </details>
+      </section>
+      <section class="section" id="pcg">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">03 / SELECTED WORK</p>
+            <h2>程序化建筑与关卡</h2>
+            <p class="tools">BDF / Unreal Engine PCG / Houdini 协作</p>
+            <p>
+              在 Ancient City 项目中制作可配置建筑资产，并参与元梦资产的迁移
+              Demo，验证工具在不同美术风格下的使用。
+            </p>
+          </div>
+          <div class="role">
+            <strong>我的工作</strong>
+            <p>
+              制作项目约 60% 的 BDF 资产，向编辑器开发同学反馈使用问题。在元梦 Demo
+              中筛选资产，负责美术效果、表现逻辑与部分配饰的 UE PCG 制作。
+            </p>
+            <p>协作边界：同事提供 Houdini 部分支持。</p>
+          </div>
+        </div>
+        <div class="media-grid">
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：元梦关卡 PCG 工具画面">
+              <img
+                src="assets/image3.webp"
+                alt="元梦关卡 PCG 工具画面"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>元梦 Demo 的关卡 PCG 流程。</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：BDF 建筑资产配置编辑界面">
+              <img
+                src="assets/image4.webp"
+                alt="BDF 建筑资产配置编辑界面"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>以可配置模块与组合规则组织 BDF 建筑资产。</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section" id="water">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">04 / SELECTED WORK</p>
+            <h2>水体效果</h2>
+            <p class="tools">Unreal Engine / 实时渲染</p>
+            <p>包含 Ancient City 河流，以及元梦奇迹之岛的水面和水下效果。</p>
+          </div>
+          <div class="role">
+            <strong>我的工作</strong>
+            <p>作品展示：AC 河流、元梦奇迹之岛水体效果。奇迹之岛水体已上线。</p>
+          </div>
+        </div>
+        <figure class="media-frame">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="media/island-water.webp"
+            aria-label="元梦奇迹之岛 · 水体效果"
+          >
+            <source src="media/island-water.mp4" type="video/mp4" />
+            你的浏览器不支持视频播放。<a href="media/island-water.mp4">打开视频</a>
+          </video>
+          <figcaption>
+            <strong>元梦奇迹之岛 · 水体效果</strong>55 秒 · 水面与水下视角演示。
+          </figcaption>
+        </figure>
+        <div class="media-grid three media-wide">
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：元梦奇迹之岛水面效果">
+              <img
+                src="assets/image24.webp"
+                alt="元梦奇迹之岛水面效果"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>奇迹之岛 / 水面</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：元梦奇迹之岛水下效果">
+              <img
+                src="assets/image23.webp"
+                alt="元梦奇迹之岛水下效果"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>奇迹之岛 / 水下</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <button class="zoom" aria-label="放大：Ancient City 河流场景">
+              <img
+                src="assets/image5.webp"
+                alt="Ancient City 河流场景"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <figcaption>Ancient City / 河流</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section" id="flashlight">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">05 / SELECTED WORK</p>
+            <h2>手电筒组件改造</h2>
+            <p class="tools">元梦 ChestPVE / Unreal Engine</p>
+            <p>场景中的手电筒组件改造效果，展示光束在室内环境中的实际表现。</p>
+          </div>
+          <div class="role">
+            <strong>我的工作</strong>
+            <p>作品展示：元梦 ChestPVE 手电筒组件改造。</p>
+          </div>
+        </div>
+        <figure class="media-frame">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="media/flashlight.webp"
+            aria-label="手电筒组件 · 引擎演示"
+          >
+            <source src="media/flashlight.mp4" type="video/mp4" />
+            你的浏览器不支持视频播放。<a href="media/flashlight.mp4">打开视频</a>
+          </video>
+          <figcaption>
+            <strong>手电筒组件 · 引擎演示</strong>46 秒 · 室内环境中的组件效果。
+          </figcaption>
+        </figure>
+      </section>
+      <section class="section" id="qualis">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">06 / SELECTED WORK</p>
+            <h2>Qualis 3D</h2>
+            <p class="tools">AIGC / 3D 评测平台</p>
+            <p>AIGC 评测平台的界面与交互演示。</p>
+          </div>
+          <div class="role">
+            <strong>我的工作</strong>
+            <p>作品展示：Qualis 3D 评测平台。</p>
+          </div>
+        </div>
+        <figure class="media-frame">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="media/qualis.webp"
+            aria-label="Qualis 3D · 平台演示"
+          >
+            <source src="media/qualis.mp4" type="video/mp4" />
+            你的浏览器不支持视频播放。<a href="media/qualis.mp4">打开视频</a>
+          </video>
+          <figcaption>
+            <strong>Qualis 3D · 平台演示</strong>1 分 26 秒 · 评测界面与 3D 预览。
+          </figcaption>
+        </figure>
+      </section>
+      <section class="notes" id="notes">
+        <p class="eyebrow">TECHNICAL NOTES</p>
+        <h2>技术笔记</h2>
+        <a class="note-link" href="vegetation-analysis.html"
+          ><span>01</span>
+          <div>
+            <h3>风格化树木分析</h3>
+            <p>LOD 规范、插片与 Billboard、AO 烘焙、法线处理。</p>
+          </div>
+          <span>↗</span></a
+        ><a class="note-link" href="lod-workflow.html"
+          ><span>02</span>
+          <div>
+            <h3>Houdini LOD2 制作流程</h3>
+            <p>UE 资产导出、Houdini 操作、AO 传递与参数说明。</p>
+          </div>
+          <span>↗</span></a
+        >
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>胡洺滔 / emteehu · 技术美术作品集</span><span>2024—2026 · 项目说明见各作品</span>
+      </div>
+    </footer>
+    <dialog id="image-viewer" aria-label="图片大图">
+      <button class="close" aria-label="关闭大图">关闭 ×</button><img alt="" />
+    </dialog>
+  </body>
+</html>
