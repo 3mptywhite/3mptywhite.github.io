@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#090b0e" />
     <title>手电筒双锥衰减改造 · emteehu</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="flashlight-study.css?v=2" />
+    <link rel="stylesheet" href="flashlight-study.css?v=3" />
     <script src="site.js" defer></script>
     <script src="flashlight-study.js?v=2" defer></script>
   </head>
@@ -147,12 +147,45 @@
           <button type="button">恢复示例参数</button>
           <p class="note">横轴为离轴半角，纵轴为线性角度倍率；不含距离、阴影与曝光。</p>
         </section>
-        <pre><code class="language-text">A = saturate((cosθ − cosOuter) / (cosInner − cosOuter))²
-</code></pre>
-        <p>
-          θ 是偏离灯轴的半角。<code>saturate</code> 限制到 0～1，平方会把 0.5 压到
-          0.25。图中只比较角度衰减。
-        </p>
+        <div class="math-formula">
+          <math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block"
+            aria-label="原生角度衰减：余弦差之比截断到零至一，再平方"
+            ><msub><mi>A</mi><mi mathvariant="normal">native</mi></msub
+            ><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo
+            ><msup
+              ><mrow
+                ><mo>[</mo><mi mathvariant="normal">sat</mi><mo>⁡</mo><mo stretchy="false">(</mo
+                ><mfrac
+                  ><mrow
+                    ><mi mathvariant="normal">cos</mi><mo>⁡</mo><mi>θ</mi><mo>−</mo
+                    ><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                    ><msub><mi>θ</mi><mi mathvariant="normal">out</mi></msub></mrow
+                  ><mrow
+                    ><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                    ><msub><mi>θ</mi><mi mathvariant="normal">in</mi></msub
+                    ><mo>−</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                    ><msub><mi>θ</mi><mi mathvariant="normal">out</mi></msub></mrow
+                  ></mfrac
+                ><mo stretchy="false">)</mo><mo>]</mo></mrow
+              ><mn>2</mn></msup
+            ></math
+          >
+        </div>
+        <p class="math-key">θ 为离轴半角；θ<sub>in</sub>、θ<sub>out</sub> 对应 Inner、Outer。</p>
+        <div class="math-definition">
+          <math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block"
+            aria-label="sat(x) 等于 min(1, max(0, x))"
+            ><mi mathvariant="normal">sat</mi><mo stretchy="false">(</mo><mi>x</mi
+            ><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">min</mi
+            ><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">max</mi
+            ><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo
+            ><mo stretchy="false">)</mo></math
+          ><span>将数值限制在 0～1。</span>
+        </div>
         <h2 id="dual-cone">想法过程</h2>
         <p>
           我需要一个集中的亮核心，同时保留较弱的宽外围：核心突出目标，外围让玩家看清周边。之前做
@@ -164,11 +197,61 @@
           实现增加了两个控制量：<strong>Mid 决定核心的衰减范围，K 控制宽分量的权重。</strong>
           当前公式如下：
         </p>
-        <pre><code class="language-text">w = (cosθ − cosOuter) / (cosInner − cosOuter)
-c = (cosθ − cosMid)   / (cosInner − cosMid)
-
-A = saturate(max(K × w, c))²
-</code></pre>
+        <div class="math-formula math-stack">
+          <math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block"
+            aria-label="宽分量 w：cosθ 减 cosθout，除以 cosθin 减 cosθout"
+            ><mi>w</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo
+            ><mfrac
+              ><mrow
+                ><mi mathvariant="normal">cos</mi><mo>⁡</mo><mi>θ</mi><mo>−</mo
+                ><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                ><msub><mi>θ</mi><mi mathvariant="normal">out</mi></msub></mrow
+              ><mrow
+                ><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                ><msub><mi>θ</mi><mi mathvariant="normal">in</mi></msub
+                ><mo>−</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                ><msub><mi>θ</mi><mi mathvariant="normal">out</mi></msub></mrow
+              ></mfrac
+            ></math
+          >
+          <math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block"
+            aria-label="核心分量 c：cosθ 减 cosθmid，除以 cosθin 减 cosθmid"
+            ><mi>c</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo
+            ><mfrac
+              ><mrow
+                ><mi mathvariant="normal">cos</mi><mo>⁡</mo><mi>θ</mi><mo>−</mo
+                ><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                ><msub><mi>θ</mi><mi mathvariant="normal">mid</mi></msub></mrow
+              ><mrow
+                ><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                ><msub><mi>θ</mi><mi mathvariant="normal">in</mi></msub
+                ><mo>−</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo
+                ><msub><mi>θ</mi><mi mathvariant="normal">mid</mi></msub></mrow
+              ></mfrac
+            ></math
+          >
+          <math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block"
+            aria-label="双锥角度衰减：K 乘宽分量与核心分量取较大值，截断到零至一，再平方"
+            ><msub><mi>A</mi><mi mathvariant="normal">dual</mi></msub
+            ><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo
+            ><msup
+              ><mrow
+                ><mo>[</mo><mi mathvariant="normal">sat</mi><mo>⁡</mo><mo stretchy="false">(</mo
+                ><mi mathvariant="normal">max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>K</mi
+                ><mi>w</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>,</mo
+                ><mi>c</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo
+                ><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>]</mo></mrow
+              ><mn>2</mn></msup
+            ></math
+          >
+        </div>
+        <p class="math-key">w 为宽分量，c 为核心分量；θ<sub>mid</sub> 对应 Mid，K 为宽分量权重。</p>
         <noscript
           ><img src="assets/flashlight/dual.png" alt="dual 静态衰减曲线" />
           <p>启用 JavaScript 可拖动参数。</p></noscript
