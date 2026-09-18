@@ -33,12 +33,10 @@
         <h1>手电筒双锥衰减改造</h1>
         <nav class="article-toc" aria-label="文章目录">
           <a href="#options">方案对比</a><a href="#original">原生曲线</a
-          ><a href="#dual-cone">双锥改造</a><a href="#parameters">参数传递</a>
+          ><a href="#dual-cone">想法过程</a><a href="#parameters">参数传递</a>
         </nav>
-        <h2 id="options">1. 考虑过的三种方案</h2>
-        <p>
-          下面是复习时搭建的 UE5.4.4 对照场景，用来观察原生聚光灯、Light Function 和 IES 的光斑。
-        </p>
+        <h2 id="options">考虑过的三种方案</h2>
+
         <figure class="media-frame">
           <button
             class="zoom"
@@ -108,7 +106,7 @@
             >UE 官方文档：Spot Lights</a
           >
         </p>
-        <h2 id="original">2. 原生聚光灯的曲线</h2>
+        <h2 id="original">原生聚光灯的曲线</h2>
         <p>
           <strong>Inner 内保持全亮，Inner 到 Outer 逐渐衰减，Outer 外归零。</strong>
           拖动下面的锥角，看光斑的过渡范围如何变化。
@@ -155,7 +153,7 @@
           θ 是偏离灯轴的半角。<code>saturate</code> 限制到 0～1，平方会把 0.5 压到
           0.25。图中只比较角度衰减。
         </p>
-        <h2 id="dual-cone">3. 为什么修改衰减函数</h2>
+        <h2 id="dual-cone">想法过程</h2>
         <p>
           我需要一个集中的亮核心，同时保留较弱的宽外围：核心突出目标，外围让玩家看清周边。之前做
           fake light 材质时，我知道可以用函数控制这种亮度分布，于是想到：<strong
@@ -235,55 +233,22 @@ A = saturate(max(K × w, c))²
         </p>
         <p>
           <strong>选择它的主要理由是保持单灯，只在原有计算中增加简单运算。</strong>
-          不额外放第二盏灯，不为这个效果生成传统 Light Function 遮罩，也不读取 IES
-          配光纹理。具体快多少需要 GPU 测试，这里没有实测数字。
+          不额外放第二盏灯，不为这个效果生成传统 Light Function 遮罩，也不读取 IES 配光纹理。
         </p>
-        <p>
-          K 在平方前生效，因此不能直接当作外围亮度百分比；<code>max</code>
-          的交接也不保证斜率连续。这套方案适合核心与外围分层，复杂图案仍更适合 Light Function。
-        </p>
-        <h2 id="parameters">4. 参数怎样传进 Shader</h2>
-        <p>
-          代码由 AI 辅助实现，实际数据分两路传入：<strong
-            >灯的角度走逐灯参数，K 走视图参数。</strong
-          >
-        </p>
-        <section class="parameter-flow" aria-label="参数传递流程">
-          <div class="flow-heading">
-            <span class="eyebrow">DATA FLOW</span><span>两路参数，在 Shader 汇合</span>
-          </div>
-          <div class="flow-lane">
-            <div class="flow-label"><b>01 / 逐灯参数</b><span>每盏灯单独调整</span></div>
-            <ol>
-              <li>
-                <small>设置</small><strong>SpotLight 组件</strong><span>Inner / Outer / Mid</span>
-              </li>
-              <li>
-                <small>CPU</small><strong>SceneProxy</strong><span>计算余弦与余弦差倒数</span>
-              </li>
-              <li>
-                <small>GPU 参数</small><strong>原有角度参数 + z、w</strong
-                ><code>LightSourceRadiusAndLength</code>
-              </li>
-            </ol>
-          </div>
-          <div class="flow-lane">
-            <div class="flow-label"><b>02 / 视图参数</b><span>采用该逻辑的灯共享</span></div>
-            <ol>
-              <li><small>设置</small><strong>后处理设置</strong><span>K · 宽分量权重</span></li>
-              <li>
-                <small>CPU</small><strong>最终后处理设置</strong><span>写入 View 统一参数</span>
-              </li>
-              <li>
-                <small>GPU 参数</small><strong>View</strong><code>SpotlightDualAttenuationK</code>
-              </li>
-            </ol>
-          </div>
-          <div class="flow-result">
-            <span aria-hidden="true">↳</span><strong>灯光 Shader</strong
-            ><span>读取角度与 K → 计算双锥衰减 → 继续计算照明</span>
-          </div>
-        </section>
+
+        <h2 id="parameters">参数怎样传进 Shader</h2>
+        <p>实际数据分两路传入：<strong>灯的角度走逐灯参数，K 走视图参数。</strong></p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：双锥参数传递流程">
+            <img
+              src="assets/flashlight/parameter-flow-v3.svg"
+              alt="灯光角度与 K 分两路传入 Shader"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>灯光角度走逐灯参数，K 走视图参数。点击放大。</figcaption>
+        </figure>
         <div class="table-wrap">
           <table>
             <thead>
