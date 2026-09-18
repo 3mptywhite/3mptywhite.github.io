@@ -1,16 +1,24 @@
+.flashlight-article {
+  --study-bg: #090909;
+  --study-line: #292929;
+  --study-muted: #a3a3a3;
+  --study-blue: #60a5fa;
+}
 .flashlight-article strong {
   color: var(--text);
 }
 .flashlight-article pre {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  padding: 20px;
+  background: #101010;
+  border: 0;
+  border-left: 2px solid #343434;
+  padding: 18px 22px;
   overflow-x: auto;
   line-height: 1.8;
+  margin: 26px 0;
 }
 .flashlight-article code {
   font-family: Consolas, monospace;
-  font-size: 0.92em;
+  font-size: 0.9em;
 }
 .flashlight-article td {
   overflow-wrap: anywhere;
@@ -30,78 +38,254 @@
   margin: 36px 0 20px;
 }
 .demo {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  padding: 24px;
-  margin: 28px 0;
+  border-block: 1px solid var(--study-line);
+  background: transparent;
+  padding: 24px 0;
+  margin: 30px 0;
 }
 .article .demo h3 {
-  margin: 0 0 22px;
-  font-size: 19px;
+  margin: 0 0 24px;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--study-muted);
 }
 .demo .controls {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px 32px;
+  gap: 20px 40px;
 }
 .demo label {
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--study-muted);
+  font-size: 13px;
 }
 .demo output {
   float: right;
-  color: var(--blue);
+  color: var(--study-blue);
+  font-family: Consolas, monospace;
   font-variant-numeric: tabular-nums;
 }
 .demo input {
   display: block;
   width: 100%;
-  height: 26px;
-  accent-color: var(--blue);
-  margin: 8px 0 0;
+  height: 3px;
+  appearance: none;
+  background: linear-gradient(to right, var(--study-blue) var(--fill), #333 var(--fill));
+  margin: 16px 0 10px;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+.demo input::-webkit-slider-thumb {
+  appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--study-blue);
+  border: 2px solid var(--study-bg);
+}
+.demo input::-moz-range-thumb {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--study-blue);
+  border: 2px solid var(--study-bg);
 }
 .curve-scroll {
-  overflow-x: auto;
-  margin: 18px 0;
-}
-.demo svg {
+  margin: 12px 0 16px;
   width: 100%;
-  min-width: 660px;
-  height: auto;
+}
+.curve-scroll svg {
   display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
   font-family: inherit;
+  font-size: 11px;
+  fill: var(--study-muted);
+}
+.curve-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin-top: 28px;
+}
+.curve-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--study-muted);
+}
+.curve-legend svg {
+  width: 28px;
+  height: 12px;
+  flex-shrink: 0;
 }
 .article .demo .readout {
   font-size: 13px;
-  line-height: 1.9;
-  margin: 0 0 18px;
+  line-height: 1.8;
+  margin: 0 0 12px;
+  color: var(--study-muted);
 }
 .article .demo .note {
   font-size: 12px;
-  color: var(--muted);
-  padding: 0;
+  color: #737373;
   border: 0;
   background: none;
+  padding: 0;
   margin: 16px 0 0;
 }
 .demo button {
-  color: var(--text);
-  background: #1b2633;
-  border: 1px solid #40546d;
-  padding: 6px 14px;
+  border: 0;
+  border-bottom: 1px solid #444;
+  background: none;
+  padding: 3px 0;
+  color: var(--study-blue);
+  font-size: 12px;
   cursor: pointer;
-  font-size: 13px;
 }
 .demo button:hover {
-  border-color: var(--blue);
+  border-color: var(--study-blue);
+}
+.parameter-flow {
+  margin: 30px 0;
+  border-block: 1px solid var(--study-line);
+  padding: 22px 0;
+}
+.flow-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--study-muted);
+}
+.flow-heading .eyebrow {
+  margin: 0;
+  font-size: 11px;
+  color: var(--study-blue);
+}
+.flow-lane {
+  display: grid;
+  grid-template-columns: 145px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--study-line);
+}
+.flow-label b {
+  display: block;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--study-blue);
+}
+.flow-label > span {
+  display: block;
+  color: #737373;
+  font-size: 11px;
+  margin-top: 8px;
+}
+.article .flow-lane ol {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.25fr;
+  gap: 26px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.article .flow-lane li {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.flow-lane li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -20px;
+  top: 26px;
+  color: #666;
+}
+.flow-lane small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #737373;
+  margin-bottom: 8px;
+}
+.flow-lane strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+.flow-lane li span,
+.flow-lane code {
+  display: block;
+  color: var(--study-muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.flow-result {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--study-muted);
+}
+.flow-result > span:first-child {
+  color: var(--study-blue);
+  font-size: 20px;
+}
+.flow-result strong {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 @media (max-width: 680px) {
-  .demo {
-    padding: 16px;
-  }
   .demo .controls {
+    gap: 18px 24px;
+  }
+  .curve-legend {
+    gap: 8px 16px;
+  }
+  .flow-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .flow-lane {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 18px;
+  }
+  .article .flow-lane ol {
+    grid-template-columns: 1fr;
+    padding-left: 12px;
+    border-left: 1px solid #333;
+    gap: 26px;
+  }
+  .flow-lane li:not(:last-child)::after {
+    content: "↓";
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: -24px;
+  }
+  .flow-label > span {
+    display: inline;
+    margin-left: 12px;
+  }
+  .flow-label b {
+    display: inline;
+  }
+  .flow-result {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+  .flow-result > span:last-child {
+    flex-basis: 100%;
+    padding-left: 25px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

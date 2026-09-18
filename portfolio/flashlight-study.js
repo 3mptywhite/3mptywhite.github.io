@@ -15,9 +15,10 @@
       sum: s.k * s.k * sat(w) ** 2 + C,
     }
   }
+
   function draw(el, changed) {
-    let s = el.state
-    const dual = el.dataset.kind === "dual"
+    const s = el.state,
+      dual = el.dataset.kind === "dual"
     if (changed === "inner") {
       s.outer = Math.max(s.outer, s.inner + 2)
       s.mid = Math.max(s.mid, s.inner + 1)
@@ -31,50 +32,63 @@
       i.value = s[i.dataset.key]
       el.querySelector(`[data-value="${i.dataset.key}"]`).textContent =
         i.dataset.key === "k" ? s.k.toFixed(2) : s[i.dataset.key] + "°"
+      i.style.setProperty("--fill", (100 * (+i.value - +i.min)) / (+i.max - +i.min) + "%")
     })
     const series = dual
       ? [
-          ["old", "原生宽灯", "#8eabc7", "7 6"],
-          ["wide", "宽分量", "#64b5ff", "3 5"],
-          ["core", "核心分量", "#d2a2ff", "10 5"],
-          ["sum", "两灯相加", "#ffb85b", ""],
-          ["dual", "当前双锥 max", "#66e0bd", ""],
+          ["old", "原生宽灯", "#7a7a7a", "8 5"],
+          ["wide", "宽分量", "#b0b0b0", "2 5"],
+          ["core", "核心分量", "#d4d4d4", "10 4 2 4"],
+          ["sum", "两灯相加", "#b9d8ff", "7 3"],
+          ["dual", "当前双锥 max", "#60a5fa", ""],
         ]
       : [
-          ["raw", "截断后、平方前", "#8eabc7", "7 5"],
-          ["old", "最终衰减（平方后）", "#66e0bd", ""],
+          ["raw", "平方前", "#929292", "7 5"],
+          ["old", "平方后", "#60a5fa", ""],
         ]
-    const maxY = dual ? 2 : 1,
-      X = (t) => 78 + (t / 65) * 974,
-      Y = (v) => 418 - (v / maxY) * 296
-    let z =
-      '<rect width="1100" height="530" fill="#11151b"/><text x="32" y="34" fill="#f2f7fb" font-size="22">' +
-      (dual ? "组合规则对比：相加抬高峰值，max 取较大者" : "原生曲线：余弦空间插值，再平方") +
-      "</text>"
-    series.forEach((a, i) => {
-      let x = 35 + (dual ? 210 : 370) * i
-      z += `<line x1="${x}" y1="72" x2="${x + 30}" y2="72" stroke="${a[2]}" stroke-width="3" stroke-dasharray="${a[3]}"/><text x="${x + 38}" y="78" fill="${a[2]}" font-size="16">${a[1]}</text>`
-    })
-    for (let t = 0; t <= 60; t += 10)
-      z += `<line x1="${X(t)}" y1="122" x2="${X(t)}" y2="418" stroke="#262d36"/><text x="${X(t)}" y="449" text-anchor="middle" fill="#bccbd8" font-size="17">${t}°</text>`
+    let legend = el.querySelector(".curve-legend")
+    if (!legend) {
+      legend = document.createElement("div")
+      legend.className = "curve-legend"
+      el.querySelector(".curve-scroll").before(legend)
+    }
+    legend.innerHTML = series
+      .map(
+        (a) =>
+          `<span><svg viewBox="0 0 28 12" aria-hidden="true"><line x1="0" x2="28" y1="6" y2="6" stroke="${a[2]}" stroke-width="2" stroke-dasharray="${a[3]}"/></svg>${a[1]}</span>`,
+      )
+      .join("")
+    const width = Math.max(300, Math.round(el.querySelector(".curve-scroll").clientWidth)),
+      mobile = width < 520,
+      height = mobile ? 260 : 340,
+      left = 46,
+      right = 14,
+      top = 28,
+      bottom = 38,
+      maxY = dual ? 2 : 1
+    const X = (t) => left + (t / 65) * (width - left - right),
+      Y = (v) => height - bottom - (v / maxY) * (height - top - bottom)
+    let z = ""
+    for (let t = 0; t <= 60; t += mobile ? 20 : 10)
+      z += `<line x1="${X(t)}" x2="${X(t)}" y1="${top}" y2="${height - bottom}" stroke="#242424"/><text x="${X(t)}" y="${height - 13}" text-anchor="middle">${t}°</text>`
     for (let v = 0; v <= maxY + 0.001; v += maxY / 4)
-      z += `<line x1="78" y1="${Y(v)}" x2="1052" y2="${Y(v)}" stroke="#262d36"/><text x="64" y="${Y(v) + 6}" text-anchor="end" fill="#bccbd8" font-size="16">${v.toFixed(2)}</text>`
+      z += `<line x1="${left}" x2="${width - right}" y1="${Y(v)}" y2="${Y(v)}" stroke="#242424"/><text x="${left - 9}" y="${Y(v) + 4}" text-anchor="end">${v.toFixed(2)}</text>`
     for (let n of dual ? ["inner", "mid", "outer"] : ["inner", "outer"])
-      z += `<line x1="${X(s[n])}" y1="109" x2="${X(s[n])}" y2="418" stroke="#6a7986" stroke-dasharray="3 6"/><text x="${X(s[n])}" y="107" fill="#e0e8ee" font-size="14" text-anchor="middle">${n} ${s[n]}°</text>`
+      z += `<line x1="${X(s[n])}" x2="${X(s[n])}" y1="${top}" y2="${height - bottom}" stroke="#444" stroke-dasharray="3 5"/>`
     series.forEach((a) => {
       let d = ""
       for (let j = 0; j <= 650; j++) {
         let t = j / 10
         d += (j ? "L" : "M") + X(t).toFixed(2) + "," + Y(values(t, s)[a[0]]).toFixed(2)
       }
-      z += `<path data-series="${a[0]}" d="${d}" fill="none" stroke="${a[2]}" stroke-width="${a[0] === "dual" ? 4 : 2.6}" stroke-dasharray="${a[3]}"/>`
+      z += `<path data-series="${a[0]}" d="${d}" fill="none" stroke="${a[2]}" stroke-width="${a[0] === "dual" || (!dual && a[0] === "old") ? 2.6 : 1.6}" stroke-dasharray="${a[3]}"/>`
     })
-    z +=
-      '<text x="540" y="489" text-anchor="middle" fill="#bccbd8" font-size="18">偏离灯轴的半角 θ · 度</text><text x="32" y="516" fill="#9bafc0" font-size="15">线性角度倍率；不含距离、阴影与曝光。示例曲线，不是实测亮度。</text>'
-    el.querySelector("svg").innerHTML = z
+    const svg = el.querySelector(".curve-scroll svg")
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`)
+    svg.innerHTML = z
     el.querySelector(".readout").textContent = dual
-      ? "当前宽分量 = saturate(Kw)²；核心 = saturate(c)²；两灯相加 = K²·saturate(w)² + 核心；双锥 = max(当前宽分量, 核心)。注意内锥内乘 K 与截断的顺序差异。"
-      : "拖动锥角观察过渡范围。平方使 0.5 变为 0.25，但 0 和 1 不变。"
+      ? "两灯相加会抬高重叠区；max 保留较强的一项。"
+      : "平方保留 0 和 1，将中间值压低。"
   }
   document.querySelectorAll(".demo").forEach((el) => {
     el.state = { inner: 10, mid: 22, outer: 35, k: 0.55 }
@@ -90,5 +104,6 @@
       draw(el)
     }
     draw(el)
+    new ResizeObserver(() => draw(el)).observe(el.querySelector(".curve-scroll"))
   })
 })()

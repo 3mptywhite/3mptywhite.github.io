@@ -12,9 +12,9 @@
     <meta name="theme-color" content="#090b0e" />
     <title>手电筒双锥衰减改造 · emteehu</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="flashlight-study.css" />
+    <link rel="stylesheet" href="flashlight-study.css?v=2" />
     <script src="site.js" defer></script>
-    <script src="flashlight-study.js" defer></script>
+    <script src="flashlight-study.js?v=2" defer></script>
   </head>
   <body>
     <a class="skip" href="#main">跳到正文</a>
@@ -142,15 +142,12 @@
                 value="35"
             /></label>
           </div>
-          <div class="curve-scroll" tabindex="0" role="region" aria-label="曲线图，可横向滚动">
+          <div class="curve-scroll" role="region" aria-label="角度衰减曲线">
             <svg role="img" aria-label="角度衰减曲线" viewBox="0 0 1100 530"></svg>
           </div>
           <p class="readout"></p>
           <button type="button">恢复示例参数</button>
-          <p class="note">
-            横轴：离轴半角 θ（度）。纵轴：线性角度倍率。自动维持 Inner &lt; Mid &lt;
-            Outer；不包含距离、阴影、曝光或色调映射。手机上可横向滑动查看完整曲线。
-          </p>
+          <p class="note">横轴为离轴半角，纵轴为线性角度倍率；不含距离、阴影与曝光。</p>
         </section>
         <pre><code class="language-text">A = saturate((cosθ − cosOuter) / (cosInner − cosOuter))²
 </code></pre>
@@ -223,15 +220,12 @@ A = saturate(max(K × w, c))²
                 value="0.55"
             /></label>
           </div>
-          <div class="curve-scroll" tabindex="0" role="region" aria-label="曲线图，可横向滚动">
+          <div class="curve-scroll" role="region" aria-label="角度衰减曲线">
             <svg role="img" aria-label="角度衰减曲线" viewBox="0 0 1100 530"></svg>
           </div>
           <p class="readout"></p>
           <button type="button">恢复示例参数</button>
-          <p class="note">
-            横轴：离轴半角 θ（度）。纵轴：线性角度倍率。自动维持 Inner &lt; Mid &lt;
-            Outer；不包含距离、阴影、曝光或色调映射。手机上可横向滑动查看完整曲线。
-          </p>
+          <p class="note">横轴为离轴半角，纵轴为线性角度倍率；不含距离、阴影与曝光。</p>
         </section>
         <p>
           两盏灯是把贡献相加；这里用
@@ -254,22 +248,42 @@ A = saturate(max(K × w, c))²
             >灯的角度走逐灯参数，K 走视图参数。</strong
           >
         </p>
-        <figure class="media-frame">
-          <button
-            class="zoom"
-            aria-label="放大：双锥参数传递：灯组件角度与后处理 K 分别进入 GPU，最后在灯光 Shader 汇合"
-          >
-            <img
-              alt="双锥参数传递：灯组件角度与后处理 K 分别进入 GPU，最后在灯光 Shader 汇合"
-              src="assets/flashlight/parameter-flow.png"
-              loading="lazy"
-              decoding="async"
-            />
-          </button>
-          <figcaption>
-            双锥参数传递：灯组件角度与后处理 K 分别进入 GPU，最后在灯光 Shader 汇合 · 点击放大
-          </figcaption>
-        </figure>
+        <section class="parameter-flow" aria-label="参数传递流程">
+          <div class="flow-heading">
+            <span class="eyebrow">DATA FLOW</span><span>两路参数，在 Shader 汇合</span>
+          </div>
+          <div class="flow-lane">
+            <div class="flow-label"><b>01 / 逐灯参数</b><span>每盏灯单独调整</span></div>
+            <ol>
+              <li>
+                <small>设置</small><strong>SpotLight 组件</strong><span>Inner / Outer / Mid</span>
+              </li>
+              <li>
+                <small>CPU</small><strong>SceneProxy</strong><span>计算余弦与余弦差倒数</span>
+              </li>
+              <li>
+                <small>GPU 参数</small><strong>原有角度参数 + z、w</strong
+                ><code>LightSourceRadiusAndLength</code>
+              </li>
+            </ol>
+          </div>
+          <div class="flow-lane">
+            <div class="flow-label"><b>02 / 视图参数</b><span>采用该逻辑的灯共享</span></div>
+            <ol>
+              <li><small>设置</small><strong>后处理设置</strong><span>K · 宽分量权重</span></li>
+              <li>
+                <small>CPU</small><strong>最终后处理设置</strong><span>写入 View 统一参数</span>
+              </li>
+              <li>
+                <small>GPU 参数</small><strong>View</strong><code>SpotlightDualAttenuationK</code>
+              </li>
+            </ol>
+          </div>
+          <div class="flow-result">
+            <span aria-hidden="true">↳</span><strong>灯光 Shader</strong
+            ><span>读取角度与 K → 计算双锥衰减 → 继续计算照明</span>
+          </div>
+        </section>
         <div class="table-wrap">
           <table>
             <thead>
