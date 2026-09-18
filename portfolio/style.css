@@ -386,6 +386,12 @@ p {
   padding: 18px 0;
   border-top: 1px solid var(--line);
 }
+.technical-details-title {
+  margin: 0 0 22px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #b6cce8;
+}
 summary {
   cursor: pointer;
   font-size: 15px;
