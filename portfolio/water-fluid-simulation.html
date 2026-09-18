@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="googlebot" content="noindex,nofollow,noarchive" />
+    <meta name="description" content="Houdini SOP FLIP 瀑布模拟：节点结构、水源与碰撞、精度、张力、黏度及子步设置。" />
+    <meta name="theme-color" content="#090b0e" />
+    <title>水体模拟 · emteehu</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="./">emteehu<span>.</span></a>
+        <nav aria-label="作品集导航">
+          <a href="./#projects">作品</a><a href="./#notes">技术笔记</a><a href="/">返回博客 ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <article class="article">
+<a class="back-link" href="./#waterfall">← 返回瀑布项目</a>
+<p class="eyebrow">WATERFALL / TECHNICAL NOTE</p>
+<h1>水体模拟部分</h1>
+<nav class="article-toc" aria-label="文章目录"><a href="#references">基本教程参考</a><a href="#nodes">节点解释</a><a href="#parameters">参数调整</a></nav>
+<h2 id="references">基本教程参考</h2>
+<p>官方：<a href="https://www.sidefx.com/docs/houdini/fluid/sopminimalsetup.html" target="_blank" rel="noopener noreferrer">Minimal fluid setups — 最小流体搭建 ↗</a>。了解容器、水源、碰撞与解算器的连接方式。</p>
+<p>官方：<a href="https://www.sidefx.com/docs/houdini/fluid/sopfilling.html" target="_blank" rel="noopener noreferrer">Filling a glass — 向玻璃杯中注水 ↗</a>。参考持续注水与碰撞设置。</p>
+<h2 id="nodes">节点解释</h2>
+<p>整体houdini 的FilP 模块入门还是很简单的 ，一个简单的结构即可完成</p>
+<p>主链从上往下读取：FLIP Container（属性与精度）→ FLIP Boundary（注水）→ FLIP Collide（碰撞）→ FLIP Solver（逐帧求解）。水源模型和河床模型从侧面接入。</p>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 1｜瀑布模拟节点结构"><img src="assets/water-fluid/01-node-network.png" alt="图 1｜瀑布模拟节点结构" loading="lazy" decoding="async"></button><figcaption>图 1｜瀑布模拟节点结构</figcaption></figure>
+<p>水源分支中的 Wrangle 根据河床调整注水体的形状；河床模型同时作为碰撞代理，让水流沿地形下落、绕开凸起。</p>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 2｜上游的水源范围"><img src="assets/water-fluid/05-source-volume.png" alt="图 2｜上游的水源范围" loading="lazy" decoding="async"></button><figcaption>图 2｜上游的水源范围</figcaption></figure>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 3｜河床与岩石的碰撞代理预览"><img src="assets/water-fluid/06-collision-proxy.png" alt="图 3｜河床与岩石的碰撞代理预览" loading="lazy" decoding="async"></button><figcaption>图 3｜河床与岩石的碰撞代理预览</figcaption></figure>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 4｜解算后的流体粒子，后续再用于生成水面网格"><img src="assets/water-fluid/07-fluid-particles.png" alt="图 4｜解算后的流体粒子，后续再用于生成水面网格" loading="lazy" decoding="async"></button><figcaption>图 4｜解算后的流体粒子，后续再用于生成水面网格</figcaption></figure>
+<h2 id="parameters">参数调整</h2>
+<p>下表是本次瀑布工程的设置。张力与黏度数值用于记录当前效果，换场景尺度后需要重新比较。</p>
+<div class="table-wrap"><table><thead><tr><th>要找的参数</th><th>选中哪个节点</th><th>参数面板里的位置</th><th>当前值</th></tr></thead><tbody><tr><td>粒子间距</td><td>FLUID_PHYSICS_060m</td><td>Particle Separation</td><td>0.6 m</td></tr><tr><td>网格比例</td><td>FLUID_PHYSICS_060m</td><td>Grid Scale</td><td>3</td></tr><tr><td>表面张力</td><td>FLUID_PHYSICS_060m</td><td>启用 Surface Tension 分组 → Surface Tension</td><td>100</td></tr><tr><td>黏度</td><td>FLUID_PHYSICS_060m</td><td>启用 Viscosity 分组 → Viscosity</td><td>200</td></tr><tr><td>入流速度</td><td>continuous_inflow</td><td>Velocity → Additional Velocity</td><td>X = 0，Y = 0，Z = 3.5 m/s</td></tr><tr><td>全局子步</td><td>FLIP_OFFLINE_ONLY</td><td>Setup → Simulation → Global Substeps</td><td>1</td></tr><tr><td>最少／最多子步</td><td>FLIP_OFFLINE_ONLY</td><td>Setup → Simulation → Min / Max Substeps</td><td>1 / 2</td></tr></tbody></table></div>
+<h3>精度、表面张力与黏度</h3>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 5｜FLIP Container：精度与流体属性"><img src="assets/water-fluid/02-fluid-properties.png" alt="图 5｜FLIP Container：精度与流体属性" loading="lazy" decoding="async"></button><figcaption>图 5｜FLIP Container：精度与流体属性</figcaption></figure>
+<p>粒子间距越小，细节越多、计算量越大；Grid Scale 控制网格相对粒子间距的尺寸。表面张力让液面趋于收拢，黏度抑制流体内部的相对运动。</p>
+<h3>入流速度</h3>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 6｜FLIP Boundary：入流沿 +Z 方向，速度为 3.5 m/s"><img src="assets/water-fluid/03-inflow-velocity.png" alt="图 6｜FLIP Boundary：入流沿 +Z 方向，速度为 3.5 m/s" loading="lazy" decoding="async"></button><figcaption>图 6｜FLIP Boundary：入流沿 +Z 方向，速度为 3.5 m/s</figcaption></figure>
+<p>Additional Velocity 设置新注入流体的附加速度。注水量还受水源范围等设置影响。</p>
+<h3>子步</h3>
+<figure class="media-frame"><button class="zoom" aria-label="放大：图 7｜FLIP Solver：全局子步 1，内部子步范围 1–2"><img src="assets/water-fluid/04-substeps.png" alt="图 7｜FLIP Solver：全局子步 1，内部子步范围 1–2" loading="lazy" decoding="async"></button><figcaption>图 7｜FLIP Solver：全局子步 1，内部子步范围 1–2</figcaption></figure>
+<p>子步把一帧拆成更小的时间段求解。增加子步通常有利于高速运动和碰撞的稳定性，也会增加计算时间；当前允许解算器在 1–2 个内部子步之间调整。</p>
+<div class="article-end"><a href="./#waterfall">返回瀑布项目 →</a></div></article>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>胡洺滔 / emteehu · 技术美术作品集</span><span>2024—2026 · 项目说明见各作品</span>
+      </div>
+    </footer>
+    <dialog id="image-viewer" aria-label="图片大图">
+      <button class="close" aria-label="关闭大图">关闭 ×</button><img alt="" />
+    </dialog>
+  </body>
+</html>
