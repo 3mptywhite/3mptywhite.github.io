@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="googlebot" content="noindex,nofollow,noarchive" />
+    <meta
+      name="description"
+      content="手电筒双锥衰减笔记：Light Function、IES、双灯方案对比，可交互衰减曲线与 Shader 参数传递。"
+    />
+    <meta name="theme-color" content="#090b0e" />
+    <title>手电筒双锥衰减改造 · emteehu</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="flashlight-study.css" />
+    <script src="site.js" defer></script>
+    <script src="flashlight-study.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="./">emteehu<span>.</span></a>
+        <nav aria-label="作品集导航">
+          <a href="./#projects">作品</a><a href="./#notes">技术笔记</a><a href="/">返回博客 ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <article class="article flashlight-article">
+        <a class="back-link" href="./#flashlight">← 返回手电筒项目</a>
+        <p class="eyebrow">TECHNICAL NOTE / 03</p>
+        <h1>手电筒双锥衰减改造</h1>
+        <nav class="article-toc" aria-label="文章目录">
+          <a href="#options">方案对比</a><a href="#original">原生曲线</a
+          ><a href="#dual-cone">双锥改造</a><a href="#parameters">参数传递</a>
+        </nav>
+        <h2 id="options">1. 考虑过的三种方案</h2>
+        <p>
+          下面是复习时搭建的 UE5.4.4 对照场景，用来观察原生聚光灯、Light Function 和 IES 的光斑。
+        </p>
+        <figure class="media-frame">
+          <button
+            class="zoom"
+            aria-label="放大：UE 对照场景：从左到右为原生聚光灯、核心与外围 Light Function、圆环与缺口 Light Function、IES 配光"
+          >
+            <img
+              alt="UE 对照场景：从左到右为原生聚光灯、核心与外围 Light Function、圆环与缺口 Light Function、IES 配光"
+              src="assets/flashlight/ue-demo.png"
+              loading="eager"
+              decoding="async"
+            />
+          </button>
+          <figcaption>
+            UE 对照场景：从左到右为原生聚光灯、核心与外围 Light Function、圆环与缺口 Light
+            Function、IES 配光 · 点击放大
+          </figcaption>
+        </figure>
+        <h3>Light Function：给灯光加一个材质遮罩</h3>
+        <p>
+          材质输出一个数值，控制灯光哪些地方亮、哪些地方暗。可以用贴图，也可以直接用数学节点生成光斑。图中第二组控制核心与外围，第三组加了圆环和缺口。
+        </p>
+        <p>
+          <strong>优点：</strong> 形状自由，方便调参和做动画。<strong>取舍：</strong>
+          传统路径需要先绘制遮罩，再用于照明；只做简单径向分层时，可以考虑更直接的实现。
+        </p>
+        <p>
+          <a
+            href="https://dev.epicgames.com/documentation/unreal-engine/using-light-functions-in-unreal-engine"
+            >UE 官方文档：Light Functions</a
+          >
+        </p>
+        <h3>IES：按出光方向查配光表</h3>
+        <p>
+          IES 记录“朝这个方向发出多少光”。UE
+          把数据导入为专用纹理，灯光计算时按方向读取。图中第四组的亮环，就是某一圈方向的光强较高。
+        </p>
+        <figure class="media-frame">
+          <button class="zoom" aria-label="放大：IES 设置：在灯的 Light Profiles 中指定配光资产">
+            <img
+              alt="IES 设置：在灯的 Light Profiles 中指定配光资产"
+              src="assets/flashlight/ies-settings.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>IES 设置：在灯的 Light Profiles 中指定配光资产 · 点击放大</figcaption>
+        </figure>
+        <p>
+          <strong>优点：</strong> 适合还原具体灯具的配光。<strong>取舍：</strong>
+          修改光斑通常要换配光文件，不能像材质实例一样直接拖动核心半径。图中的两份 IES 是教学数据。
+        </p>
+        <p>
+          <a
+            href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/ies-light-profiles?application_version=4.27"
+            >UE 官方文档：IES Light Profiles</a
+          >
+        </p>
+        <h3>两盏聚光灯：一盏照核心，一盏照外围</h3>
+        <p>把两盏 SpotLight 放在同一位置、朝向：一盏窄而亮，一盏宽而弱，照明贡献相加。</p>
+        <p>
+          <strong>优点：</strong> 直观，核心与外围可以分别调整。<strong>取舍：</strong>
+          增加一盏灯的计算；都开阴影会增加成本，外围关阴影则可能出现漏光感。
+        </p>
+        <p>
+          <a
+            href="https://dev.epicgames.com/documentation/unreal-engine/spot-lights-in-unreal-engine?lang=en-US"
+            >UE 官方文档：Spot Lights</a
+          >
+        </p>
+        <h2 id="original">2. 原生聚光灯的曲线</h2>
+        <p>
+          <strong>Inner 内保持全亮，Inner 到 Outer 逐渐衰减，Outer 外归零。</strong>
+          拖动下面的锥角，看光斑的过渡范围如何变化。
+        </p>
+        <noscript
+          ><img src="assets/flashlight/original.png" alt="original 静态衰减曲线" />
+          <p>启用 JavaScript 可拖动参数。</p></noscript
+        >
+        <section class="demo" id="demo-original" data-kind="original">
+          <h3>演示一 · 原生角度衰减</h3>
+          <div class="controls">
+            <label
+              >Inner / 内锥半角 <output data-value="inner"></output
+              ><input
+                aria-label="Inner / 内锥半角"
+                data-key="inner"
+                type="range"
+                min="1"
+                max="20"
+                step="1"
+                value="10" /></label
+            ><label
+              >Outer / 外锥半角 <output data-value="outer"></output
+              ><input
+                aria-label="Outer / 外锥半角"
+                data-key="outer"
+                type="range"
+                min="3"
+                max="60"
+                step="1"
+                value="35"
+            /></label>
+          </div>
+          <div class="curve-scroll" tabindex="0" role="region" aria-label="曲线图，可横向滚动">
+            <svg role="img" aria-label="角度衰减曲线" viewBox="0 0 1100 530"></svg>
+          </div>
+          <p class="readout"></p>
+          <button type="button">恢复示例参数</button>
+          <p class="note">
+            横轴：离轴半角 θ（度）。纵轴：线性角度倍率。自动维持 Inner &lt; Mid &lt;
+            Outer；不包含距离、阴影、曝光或色调映射。手机上可横向滑动查看完整曲线。
+          </p>
+        </section>
+        <pre><code class="language-text">A = saturate((cosθ − cosOuter) / (cosInner − cosOuter))²
+</code></pre>
+        <p>
+          θ 是偏离灯轴的半角。<code>saturate</code> 限制到 0～1，平方会把 0.5 压到
+          0.25。图中只比较角度衰减。
+        </p>
+        <h2 id="dual-cone">3. 为什么修改衰减函数</h2>
+        <p>
+          我需要一个集中的亮核心，同时保留较弱的宽外围：核心突出目标，外围让玩家看清周边。之前做
+          fake light 材质时，我知道可以用函数控制这种亮度分布，于是想到：<strong
+            >把核心和外围一起写进已有的角度衰减，能否在一盏灯里做出类似双灯的层次？</strong
+          >
+        </p>
+        <p>
+          实现增加了两个控制量：<strong>Mid 决定核心的衰减范围，K 控制宽分量的权重。</strong>
+          当前公式如下：
+        </p>
+        <pre><code class="language-text">w = (cosθ − cosOuter) / (cosInner − cosOuter)
+c = (cosθ − cosMid)   / (cosInner − cosMid)
+
+A = saturate(max(K × w, c))²
+</code></pre>
+        <noscript
+          ><img src="assets/flashlight/dual.png" alt="dual 静态衰减曲线" />
+          <p>启用 JavaScript 可拖动参数。</p></noscript
+        >
+        <section class="demo" id="demo-dual" data-kind="dual">
+          <h3>演示二 · 双灯相加与双锥包络</h3>
+          <div class="controls">
+            <label
+              >Inner / 内锥半角 <output data-value="inner"></output
+              ><input
+                aria-label="Inner / 内锥半角"
+                data-key="inner"
+                type="range"
+                min="1"
+                max="20"
+                step="1"
+                value="10" /></label
+            ><label
+              >Mid / 核心外边界 <output data-value="mid"></output
+              ><input
+                aria-label="Mid / 核心外边界"
+                data-key="mid"
+                type="range"
+                min="2"
+                max="44"
+                step="1"
+                value="22" /></label
+            ><label
+              >Outer / 外锥半角 <output data-value="outer"></output
+              ><input
+                aria-label="Outer / 外锥半角"
+                data-key="outer"
+                type="range"
+                min="3"
+                max="60"
+                step="1"
+                value="35" /></label
+            ><label
+              >K / 宽分量系数 <output data-value="k"></output
+              ><input
+                aria-label="K / 宽分量系数"
+                data-key="k"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.55"
+            /></label>
+          </div>
+          <div class="curve-scroll" tabindex="0" role="region" aria-label="曲线图，可横向滚动">
+            <svg role="img" aria-label="角度衰减曲线" viewBox="0 0 1100 530"></svg>
+          </div>
+          <p class="readout"></p>
+          <button type="button">恢复示例参数</button>
+          <p class="note">
+            横轴：离轴半角 θ（度）。纵轴：线性角度倍率。自动维持 Inner &lt; Mid &lt;
+            Outer；不包含距离、阴影、曝光或色调映射。手机上可横向滑动查看完整曲线。
+          </p>
+        </section>
+        <p>
+          两盏灯是把贡献相加；这里用
+          <code>max</code> 取较大值，让核心与外围分别主导不同区域，中心峰值保持为
+          1。两者能形成相似的分层，但数学结果不同。图中双灯参照采用宽灯强度 K²、核心强度
+          1，保留相加后的峰值，不做归一化。
+        </p>
+        <p>
+          <strong>选择它的主要理由是保持单灯，只在原有计算中增加简单运算。</strong>
+          不额外放第二盏灯，不为这个效果生成传统 Light Function 遮罩，也不读取 IES
+          配光纹理。具体快多少需要 GPU 测试，这里没有实测数字。
+        </p>
+        <p>
+          K 在平方前生效，因此不能直接当作外围亮度百分比；<code>max</code>
+          的交接也不保证斜率连续。这套方案适合核心与外围分层，复杂图案仍更适合 Light Function。
+        </p>
+        <h2 id="parameters">4. 参数怎样传进 Shader</h2>
+        <p>
+          代码由 AI 辅助实现，实际数据分两路传入：<strong
+            >灯的角度走逐灯参数，K 走视图参数。</strong
+          >
+        </p>
+        <figure class="media-frame">
+          <button
+            class="zoom"
+            aria-label="放大：双锥参数传递：灯组件角度与后处理 K 分别进入 GPU，最后在灯光 Shader 汇合"
+          >
+            <img
+              alt="双锥参数传递：灯组件角度与后处理 K 分别进入 GPU，最后在灯光 Shader 汇合"
+              src="assets/flashlight/parameter-flow.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>
+            双锥参数传递：灯组件角度与后处理 K 分别进入 GPU，最后在灯光 Shader 汇合 · 点击放大
+          </figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>数据</th>
+                <th>从哪里设置</th>
+                <th>CPU 做什么</th>
+                <th>Shader 从哪里读取</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Inner / Outer</td>
+                <td>SpotLight 原有属性</td>
+                <td>计算外锥余弦、内外锥余弦差的倒数</td>
+                <td>原有 SpotAngles 参数</td>
+              </tr>
+              <tr>
+                <td>Mid</td>
+                <td>新增 MidConeAngle</td>
+                <td>计算 cosMid 与 1/(cosInner−cosMid)</td>
+                <td>LightSourceRadiusAndLength 的 z、w</td>
+              </tr>
+              <tr>
+                <td>K</td>
+                <td>后处理设置 SpotlightDualAttenuationK</td>
+                <td>写入 View 的统一参数</td>
+                <td>View.SpotlightDualAttenuationK</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          灯组件的设置先进入渲染侧的
+          <strong>SceneProxy</strong>，由它准备灯光参数；渲染器将这些数值打包传给 GPU。Shader
+          取出角度参数和 K，代入双锥公式，再继续参与原来的距离衰减、阴影和表面照明计算。
+        </p>
+        <p>
+          因此，Mid 可以逐灯调整，当前实现的 K
+          则作用于同一视图中采用这段逻辑的灯。核心改动位于项目定制的移动端灯光路径。
+        </p>
+        <hr />
+        <p>
+          曲线依据原项目代码整理；上方 UE5.4.4 场景用于比较 Light Function 与
+          IES，未移植原项目双锥代码。Light Function 的具体开销取决于引擎版本和是否采用 Atlas。
+        </p>
+        <div class="article-end"><a href="./#flashlight">返回手电筒组件演示 →</a></div>
+      </article>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>胡洺滔 / emteehu · 技术美术作品集</span><span>2024—2026 · 项目说明见各作品</span>
+      </div>
+    </footer>
+    <dialog id="image-viewer" aria-label="图片大图">
+      <button class="close" aria-label="关闭大图">关闭 ×</button><img alt="" />
+    </dialog>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+.flashlight-article strong {
+  color: var(--text);
+}
+.flashlight-article pre {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 20px;
+  overflow-x: auto;
+  line-height: 1.8;
+}
+.flashlight-article code {
+  font-family: Consolas, monospace;
+  font-size: 0.92em;
+}
+.flashlight-article td {
+  overflow-wrap: anywhere;
+}
+.flashlight-article td:first-child {
+  white-space: normal;
+}
+.flashlight-article .media-frame {
+  border-radius: 0;
+}
+.flashlight-article .media-frame figcaption {
+  padding: 12px 16px;
+}
+.flashlight-article hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 36px 0 20px;
+}
+.demo {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 24px;
+  margin: 28px 0;
+}
+.article .demo h3 {
+  margin: 0 0 22px;
+  font-size: 19px;
+}
+.demo .controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 32px;
+}
+.demo label {
+  color: var(--muted);
+  font-size: 14px;
+}
+.demo output {
+  float: right;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+}
+.demo input {
+  display: block;
+  width: 100%;
+  height: 26px;
+  accent-color: var(--blue);
+  margin: 8px 0 0;
+}
+.curve-scroll {
+  overflow-x: auto;
+  margin: 18px 0;
+}
+.demo svg {
+  width: 100%;
+  min-width: 660px;
+  height: auto;
+  display: block;
+  font-family: inherit;
+}
+.article .demo .readout {
+  font-size: 13px;
+  line-height: 1.9;
+  margin: 0 0 18px;
+}
+.article .demo .note {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0;
+  border: 0;
+  background: none;
+  margin: 16px 0 0;
+}
+.demo button {
+  color: var(--text);
+  background: #1b2633;
+  border: 1px solid #40546d;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.demo button:hover {
+  border-color: var(--blue);
+}
+@media (max-width: 680px) {
+  .demo {
+    padding: 16px;
+  }
+  .demo .controls {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+}
