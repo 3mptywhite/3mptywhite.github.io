@@ -236,6 +236,42 @@ A = saturate(max(K × w, c))²
           不额外放第二盏灯，不为这个效果生成传统 Light Function 遮罩，也不读取 IES 配光纹理。
         </p>
 
+        <h3>性能测试</h3>
+        <p>荣耀 20i · PerfDog 实测</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>测试组</th>
+                <th>平均 FPS</th>
+                <th>平均帧时间</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>原生（origin）</td>
+                <td>20.8</td>
+                <td>48.0 ms</td>
+              </tr>
+              <tr>
+                <td>改造（AllOn）</td>
+                <td>20.1</td>
+                <td>49.8 ms</td>
+              </tr>
+              <tr>
+                <td>改造（HalfOn）</td>
+                <td>20.1</td>
+                <td>49.9 ms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          本次记录中，改造后平均帧时间增加约 1.8～1.9 ms。<a
+            href="https://perfdog.qq.com/compare?query=MzMzODc0LDk5Mzc2MTcsOTkzNzY1OSw5OTM3Njkz"
+            >查看测试记录 ↗</a
+          >
+        </p>
         <h2 id="parameters">参数怎样传进 Shader</h2>
         <p>实际数据分两路传入：<strong>灯的角度走逐灯参数，K 走视图参数。</strong></p>
         <figure class="media-frame">
